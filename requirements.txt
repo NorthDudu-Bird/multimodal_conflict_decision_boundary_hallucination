@@ -1,0 +1,22 @@
+﻿# Verified working package set for the Qwen2-VL experiment scripts in this repo.
+# Verified on Windows + NVIDIA GPU with Python 3.11.2.
+# If your CUDA stack differs, adjust the torch / torchvision lines accordingly.
+--extra-index-url https://download.pytorch.org/whl/cu126
+
+torch==2.6.0+cu126
+torchvision==0.21.0+cu126
+numpy==1.26.4
+pandas==2.2.2
+pillow==11.1.0
+tqdm==4.67.1
+sentencepiece==0.2.1
+huggingface_hub==0.34.4
+requests==2.32.3
+PyYAML==6.0.2
+transformers==4.51.3
+accelerate==1.8.1
+safetensors==0.6.2
+tokenizers==0.21.4
+bitsandbytes==0.49.2
+qwen-vl-utils==0.0.14
+av==17.0.0
