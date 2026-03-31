@@ -10,3 +10,5 @@ data/selected_images/
 data/previews/
 
 logs/
+models/
+vendor/
