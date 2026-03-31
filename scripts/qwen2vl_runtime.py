@@ -7,7 +7,7 @@ import csv
 import logging
 import sys
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 
 from _local_deps import ensure_local_deps
 
@@ -102,6 +102,25 @@ class Qwen2VLRunner:
         self.load_mode = ""
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+    def _resolve_image_path(self, image_path: str | Path) -> Path:
+        resolved = Path(image_path)
+        if not resolved.is_absolute():
+            resolved = ROOT / resolved
+        return resolved
+
+    def _build_generate_kwargs(self, max_new_tokens: int, temperature: float) -> dict[str, Any]:
+        generate_kwargs: dict[str, Any] = {
+            "max_new_tokens": max_new_tokens,
+            "do_sample": temperature > 0,
+        }
+        if temperature > 0:
+            generate_kwargs["temperature"] = temperature
+        else:
+            generate_kwargs["temperature"] = None
+            generate_kwargs["top_p"] = None
+            generate_kwargs["top_k"] = None
+        return generate_kwargs
+
     def load(self, logger: logging.Logger | None = None) -> None:
         if self.model is not None and self.processor is not None:
             return
@@ -135,6 +154,79 @@ class Qwen2VLRunner:
         self.processor = AutoProcessor.from_pretrained(self.model_dir, use_fast=False)
         if logger:
             logger.info("Model and processor loaded successfully.")
+
+    def generate_from_messages(
+        self,
+        messages: list[dict[str, Any]],
+        max_new_tokens: int = 256,
+        temperature: float = 0.0,
+    ) -> str:
+        if self.model is None or self.processor is None:
+            raise RuntimeError("Model has not been loaded.")
+
+        chat_messages: list[dict[str, Any]] = []
+        images: list[Image.Image] = []
+        image_handles: list[Image.Image] = []
+        try:
+            for message in messages:
+                raw_content = message.get("content", [])
+                if isinstance(raw_content, str):
+                    raw_content = [{"type": "text", "text": raw_content}]
+
+                content_items: list[dict[str, str]] = []
+                for item in raw_content:
+                    item_type = item.get("type")
+                    if item_type == "text":
+                        content_items.append({"type": "text", "text": item["text"]})
+                        continue
+                    if item_type in {"image", "image_path"}:
+                        image_path = item.get("image_path") or item.get("path") or item.get("image")
+                        if not image_path:
+                            raise ValueError("Image content item is missing an image path.")
+                        resolved_path = self._resolve_image_path(str(image_path))
+                        image = Image.open(resolved_path).convert("RGB")
+                        image_handles.append(image)
+                        images.append(image)
+                        content_items.append({"type": "image"})
+                        continue
+                    raise ValueError(f"Unsupported content type: {item_type}")
+
+                chat_messages.append(
+                    {
+                        "role": message["role"],
+                        "content": content_items,
+                    }
+                )
+
+            text = self.processor.apply_chat_template(
+                chat_messages,
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+            processor_kwargs: dict[str, Any] = {
+                "text": [text],
+                "return_tensors": "pt",
+                "padding": True,
+            }
+            if images:
+                processor_kwargs["images"] = images
+
+            inputs = self.processor(**processor_kwargs)
+            inputs = inputs.to(self.device)
+            generated_ids = self.model.generate(
+                **inputs,
+                **self._build_generate_kwargs(max_new_tokens=max_new_tokens, temperature=temperature),
+            )
+            trimmed_ids = generated_ids[:, inputs.input_ids.shape[1] :]
+            outputs = self.processor.batch_decode(
+                trimmed_ids,
+                skip_special_tokens=True,
+                clean_up_tokenization_spaces=False,
+            )
+            return outputs[0]
+        finally:
+            for image in image_handles:
+                image.close()
 
     def generate_batch(
         self,
@@ -175,15 +267,10 @@ class Qwen2VLRunner:
 
             inputs = self.processor(text=texts, images=images, return_tensors="pt", padding=True)
             inputs = inputs.to(self.device)
-
-            generate_kwargs = {
-                "max_new_tokens": max_new_tokens,
-                "do_sample": temperature > 0,
-            }
-            if temperature > 0:
-                generate_kwargs["temperature"] = temperature
-
-            generated_ids = self.model.generate(**inputs, **generate_kwargs)
+            generated_ids = self.model.generate(
+                **inputs,
+                **self._build_generate_kwargs(max_new_tokens=max_new_tokens, temperature=temperature),
+            )
             trimmed_ids = [output_ids[len(input_ids) :] for input_ids, output_ids in zip(inputs.input_ids, generated_ids)]
             return self.processor.batch_decode(
                 trimmed_ids,
