@@ -20,7 +20,7 @@ from transformers import AutoProcessor, BitsAndBytesConfig, Qwen2VLForConditiona
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MODEL_DIR = ROOT / "models" / "qwen2_vl_7b"
-DEFAULT_MODEL_NAME = "Qwen/Qwen2-VL-7B-Instruct"
+DEFAULT_MODEL_NAME = "Qwen2-VL-7B-Instruct"
 RESULT_FIELDS = [
     "sample_id",
     "image_id",
@@ -300,3 +300,4 @@ def make_result_row(source_row: dict[str, str], model_name: str, raw_output: str
         "status": status,
         "error": error,
     }
+

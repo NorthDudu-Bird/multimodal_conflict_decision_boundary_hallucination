@@ -50,6 +50,11 @@ ANNOTATIONS_DIR = COCO_DIR / "annotations"
 SELECTED_DIR = DATA_DIR / "selected_images" / "no_dog_sample_50"
 PREVIEWS_DIR = DATA_DIR / "previews"
 METADATA_DIR = DATA_DIR / "metadata"
+SAMPLES_DIR = METADATA_DIR / "samples"
+PROMPTS_DIR = METADATA_DIR / "prompts"
+OUTPUTS_RAW_DIR = METADATA_DIR / "outputs_raw"
+OUTPUTS_LABELED_DIR = METADATA_DIR / "outputs_labeled"
+ANALYSIS_DIR = METADATA_DIR / "analysis"
 REPORTS_DIR = ROOT / "reports"
 LOGS_DIR = ROOT / "logs"
 
@@ -57,9 +62,9 @@ VAL2017_ZIP = RAW_DIR / "val2017.zip"
 ANNOTATIONS_ZIP = RAW_DIR / "annotations_trainval2017.zip"
 INSTANCES_JSON = ANNOTATIONS_DIR / "instances_val2017.json"
 
-NO_DOG_ALL_CSV = METADATA_DIR / "no_dog_all.csv"
-NO_DOG_FILTERED_CSV = METADATA_DIR / "no_dog_filtered_candidates.csv"
-NO_DOG_SAMPLE_CSV = METADATA_DIR / "no_dog_sample_50.csv"
+NO_DOG_ALL_CSV = SAMPLES_DIR / "no_dog_all.csv"
+NO_DOG_FILTERED_CSV = SAMPLES_DIR / "no_dog_filtered_candidates.csv"
+NO_DOG_SAMPLE_CSV = SAMPLES_DIR / "no_dog_sample_50.csv"
 PREVIEW_HTML = REPORTS_DIR / "no_dog_sample_50_preview.html"
 CONTACT_SHEET = PREVIEWS_DIR / "no_dog_sample_50_contact_sheet.jpg"
 REPORT_MD = REPORTS_DIR / "dataset_preparation_report.md"
@@ -73,6 +78,11 @@ def ensure_directories() -> None:
         SELECTED_DIR,
         PREVIEWS_DIR,
         METADATA_DIR,
+        SAMPLES_DIR,
+        PROMPTS_DIR,
+        OUTPUTS_RAW_DIR,
+        OUTPUTS_LABELED_DIR,
+        ANALYSIS_DIR,
         REPORTS_DIR,
         LOGS_DIR,
     ]:
@@ -390,7 +400,7 @@ def generate_report(stats: Dict[str, object], download_notes: Dict[str, str], co
 
 ## 5. 不含 dog 图片数量
 - 不含 `dog` 标注的图片数量：**{stats['no_dog_count']}**
-- 完整清单：`data/metadata/no_dog_all.csv`
+- 完整清单：`data/metadata/samples/no_dog_all.csv`
 
 ## 6. 经过轻量筛选后的候选数量
 - 轻量筛选条件：
@@ -398,13 +408,13 @@ def generate_report(stats: Dict[str, object], download_notes: Dict[str, str], co
   - 高度 >= {MIN_DIMENSION}
   - `num_annotations` <= {MAX_ANNOTATIONS}
 - 通过轻量筛选的候选数量：**{stats['filtered_count']}**
-- 候选清单：`data/metadata/no_dog_filtered_candidates.csv`
+- 候选清单：`data/metadata/samples/no_dog_filtered_candidates.csv`
 
 ## 7. 最终抽样 50 张的说明
 - 抽样来源：轻量筛选后的候选池
 - 抽样数量：**{SAMPLE_SIZE}**
 - 随机种子：**{RANDOM_SEED}**
-- 样本元数据：`data/metadata/no_dog_sample_50.csv`
+- 样本元数据：`data/metadata/samples/no_dog_sample_50.csv`
 - 样本图片目录：`data/selected_images/no_dog_sample_50/`
 - HTML 预览页：`reports/no_dog_sample_50_preview.html`
 - Contact sheet：`data/previews/no_dog_sample_50_contact_sheet.jpg`
@@ -419,7 +429,7 @@ def generate_report(stats: Dict[str, object], download_notes: Dict[str, str], co
 ## 9. 建议的人工复核步骤
 1. 打开 `reports/no_dog_sample_50_preview.html`，逐张确认图像中确实不存在狗。
 2. 优先剔除背景过于复杂、主体不清晰、难以构造稳定冲突提示的图像。
-3. 在 `data/metadata/no_dog_sample_50.csv` 的 `notes` 列中记录保留/剔除理由。
+3. 在 `data/metadata/samples/no_dog_sample_50.csv` 的 `notes` 列中记录保留/剔除理由。
 4. 若发现隐藏狗、疑似狗、玩具狗、卡通狗或局部狗元素，建议直接剔除。
 5. 完成人工复核后，冻结一版“最终实验样本清单”，避免后续实验中样本漂移。
 """

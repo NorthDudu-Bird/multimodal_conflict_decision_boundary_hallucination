@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from metadata_paths import BASELINE_PROMPTS_CSV, LEGACY_BASELINE_PROMPTS_CSV, SMOKE_RAW_CSV, resolve_existing_path
 from qwen2vl_runtime import (
     DEFAULT_MODEL_DIR,
     DEFAULT_MODEL_NAME,
@@ -19,13 +20,14 @@ from qwen2vl_runtime import (
 
 
 ROOT = Path(__file__).resolve().parent.parent
-INPUT_CSV = ROOT / "data" / "metadata" / "no_dog_sample_50_prompt_levels.csv"
-OUTPUT_CSV = ROOT / "data" / "metadata" / "qwen2vl_smoke_test_results.csv"
+INPUT_CSV = resolve_existing_path(BASELINE_PROMPTS_CSV, LEGACY_BASELINE_PROMPTS_CSV)
+OUTPUT_CSV = SMOKE_RAW_CSV
 LOG_PATH = ROOT / "logs" / "qwen2vl_smoke_test.log"
 LIMIT = 20
 BATCH_SIZE = 1
 MAX_NEW_TOKENS = 96
 TEMPERATURE = 0.0
+USE_4BIT = False
 
 
 def main() -> int:
@@ -44,7 +46,7 @@ def main() -> int:
         logger.info("Smoke test already completed. Nothing to do.")
         return 0
 
-    runner = Qwen2VLRunner(model_dir=DEFAULT_MODEL_DIR, model_name=DEFAULT_MODEL_NAME, use_4bit=True)
+    runner = Qwen2VLRunner(model_dir=DEFAULT_MODEL_DIR, model_name=DEFAULT_MODEL_NAME, use_4bit=USE_4BIT)
     runner.load(logger=logger)
     logger.info("Final load mode: %s", runner.load_mode)
 

@@ -3,7 +3,7 @@
 ## 当前状态
 - 已完成 `dog` 目标对象的 no-dog 基础样本池构建。
 - 已人工确认 50 张候选图片中均不存在狗。
-- 已生成四级存在性冲突实验输入表：`data/metadata/no_dog_sample_50_prompt_levels.csv`
+- 已生成四级存在性冲突实验输入表：`data/metadata/prompts/baseline_existence_conflict_50x4.csv`
 
 ## 四级 prompt 设计
 - `S0`：无冲突。要求模型客观描述并判断是否有狗。
@@ -13,10 +13,10 @@
 
 ## 推荐实验流程
 1. 对每张图片分别运行 `S0`、`S1`、`S2`、`S3` 四级 prompt。
-2. 对每个模型，将输出写回 `model_name`、`model_output`。
-3. 在 `decision_label` 中记录最终判断，例如：`correct_no_dog`、`false_dog_claim`、`uncertain`。
-4. 在 `error_type` 中记录错误类型，例如：`hallucinated_object`、`hedged_bias`、`instruction_following_overtruth`。
-5. 在 `is_language_led_bias` 中记录是否属于语言主导偏置，建议用 `0/1` 标记。
+2. 对每个模型，将输出写回 `model_name`、`model_output` 或正式归档表中的 `raw_output`。
+3. 使用当前正式标注字段完成判定：`label`、`language_consistent`、`vision_consistent`、`ambiguous`、`notes`。
+4. 优先抽取 `ambiguous` 与 `needs_manual_review` 记录做人审复核。
+5. 以人工最终确认后的标注表作为统计分析主表。
 
 ## 建议的统计指标
 - 每个 prompt level 下的误报率：模型错误声称存在狗的比例。
@@ -30,6 +30,6 @@
 - 第一轮只保留单次推理结果，不做多轮追问，先建立基线。
 
 ## 输出文件
-- 样本基础表：`data/metadata/no_dog_sample_50.csv`
-- 四级实验表：`data/metadata/no_dog_sample_50_prompt_levels.csv`
+- 样本基础表：`data/metadata/samples/no_dog_sample_50.csv`
+- 四级实验表：`data/metadata/prompts/baseline_existence_conflict_50x4.csv`
 - 数据准备报告：`reports/dataset_preparation_report.md`

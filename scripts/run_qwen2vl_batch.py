@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from metadata_paths import BASELINE_PROMPTS_CSV, BASELINE_RUNTIME_CSV, LEGACY_BASELINE_PROMPTS_CSV, resolve_existing_path
 from qwen2vl_runtime import (
     DEFAULT_MODEL_DIR,
     DEFAULT_MODEL_NAME,
@@ -20,8 +21,8 @@ from qwen2vl_runtime import (
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INPUT_CSV = ROOT / "data" / "metadata" / "no_dog_sample_50_prompt_levels.csv"
-DEFAULT_OUTPUT_CSV = ROOT / "data" / "metadata" / "qwen2vl_batch_results.csv"
+DEFAULT_INPUT_CSV = resolve_existing_path(BASELINE_PROMPTS_CSV, LEGACY_BASELINE_PROMPTS_CSV)
+DEFAULT_OUTPUT_CSV = BASELINE_RUNTIME_CSV
 DEFAULT_LOG_PATH = ROOT / "logs" / "qwen2vl_batch.log"
 
 
@@ -33,7 +34,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-dir", type=Path, default=DEFAULT_MODEL_DIR)
     parser.add_argument("--model-name", default=DEFAULT_MODEL_NAME)
     parser.add_argument("--batch-size", type=int, default=1, help="Increase cautiously; larger batches use much more VRAM.")
-    parser.add_argument("--max-new-tokens", type=int, default=96, help="Raise for longer answers, lower for faster/cheaper decoding.")
+    parser.add_argument(
+        "--use-4bit",
+        action="store_true",
+        help="Enable 4-bit loading. Disabled by default because the local 4-bit path produced severe visual mismatches in the main experiment.",
+    )
+    parser.add_argument(
+        "--max-new-tokens",
+        type=int,
+        default=128,
+        help="Use >=128 for the existence-conflict main run to avoid truncating descriptive S0 responses.",
+    )
     parser.add_argument("--temperature", type=float, default=0.0, help="Set >0 for sampling. Keep 0.0 for deterministic baseline runs.")
     parser.add_argument("--limit", type=int, default=None, help="Optional cap for debugging a subset before the full 200 rows.")
     return parser.parse_args()
@@ -46,7 +57,14 @@ def main() -> int:
     logger.info("Input CSV: %s", args.input_csv)
     logger.info("Output CSV: %s", args.output_csv)
     logger.info("Model dir: %s", args.model_dir)
-    logger.info("batch_size=%s | max_new_tokens=%s | temperature=%s | limit=%s", args.batch_size, args.max_new_tokens, args.temperature, args.limit)
+    logger.info(
+        "batch_size=%s | max_new_tokens=%s | temperature=%s | limit=%s | use_4bit=%s",
+        args.batch_size,
+        args.max_new_tokens,
+        args.temperature,
+        args.limit,
+        args.use_4bit,
+    )
 
     rows = read_rows(args.input_csv, limit=args.limit)
     completed_ids = read_completed_ids(args.output_csv)
@@ -57,7 +75,7 @@ def main() -> int:
         logger.info("No pending rows. Batch run already complete.")
         return 0
 
-    runner = Qwen2VLRunner(model_dir=args.model_dir, model_name=args.model_name, use_4bit=True)
+    runner = Qwen2VLRunner(model_dir=args.model_dir, model_name=args.model_name, use_4bit=args.use_4bit)
     runner.load(logger=logger)
     logger.info("Final load mode: %s", runner.load_mode)
 

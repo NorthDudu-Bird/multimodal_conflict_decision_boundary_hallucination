@@ -57,7 +57,7 @@
 - 成功。
 - 已运行脚本: `scripts/run_qwen2vl_smoke_test.py`
 - 成功完成前 `20` 条样本推理。
-- 结果文件已写入 `data/metadata/qwen2vl_smoke_test_results.csv`
+- 结果文件已写入 `data/metadata/outputs_raw/qwen2vl7b_smoke_raw.csv`
 - 运行日志已写入 `logs/qwen2vl_smoke_test.log`
 
 ## 7. 成功推理了多少条
@@ -103,7 +103,7 @@ $env:PYTHONIOENCODING='utf-8'
 - `logs/qwen2vl_smoke_test.log`
 - `reports/vlm_env_check_report.md`
 - `reports/qwen2vl_setup_and_smoke_test_report.md`
-- `data/metadata/qwen2vl_smoke_test_results.csv`
+- `data/metadata/outputs_raw/qwen2vl7b_smoke_raw.csv`
 - `models/qwen2_vl_7b/`
 
 ## 11. 当前结论
