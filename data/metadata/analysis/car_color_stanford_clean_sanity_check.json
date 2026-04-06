@@ -1,0 +1,25 @@
+{
+  "sample_count": 30,
+  "prompt_count": 240,
+  "runtime_count": 240,
+  "raw_count": 240,
+  "final_labeled_count": 240,
+  "missing_image_count": 0,
+  "missing_images": [],
+  "runtime_status_counts": {
+    "ok": 240
+  },
+  "empty_output_count": 0,
+  "empty_output_sample_ids": [],
+  "abnormal_output_count": 0,
+  "abnormal_output_sample_ids": [],
+  "incomplete_prompt_images": [],
+  "incomplete_runtime_images": [],
+  "label_counts": {
+    "needs_manual_review": 68,
+    "hallucination": 60,
+    "faithful": 112
+  },
+  "levels_complete_in_prompts": true,
+  "levels_complete_in_runtime": true
+}

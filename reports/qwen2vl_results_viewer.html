@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Qwen2-VL CSV Viewer</title>
+  <title>Qwen2-VL Results Viewer</title>
   <style>
     :root {
       --bg: #f4f1ea;
@@ -121,16 +121,18 @@
 <body>
   <div class="page">
     <section class="hero">
-      <h1>Qwen2-VL CSV Viewer</h1>
-      <p class="subtitle">?? HTML ???????????????????????????????? CSV??? <code>image_id</code> ???????prompt?raw_output?label?notes ????</p>
-      <p class="subtle">?????1. ??????? CSV??2. ???????????????????????? CSV ????</p>
+      <h1>Qwen2-VL Results Viewer</h1>
+      <p class="subtitle">用于预览 Qwen2-VL 结果 CSV。当前已适配 Stanford Cars 复核后的精简表，会根据 <code>sample_id</code> 自动解析图片分组和 S0-S7 prompt。</p>
+      <p class="subtle">推荐直接加载 <code>qwen2vl7b_stanford_clean_final_labeled_reviewed.csv</code>。页面会显示图像、prompt、模型输出、复核后的 true color 与最终 label。</p>
       <div class="stats" id="stats"></div>
-      <div class="status" id="statusBox">???? CSV?</div>
+      <div class="status" id="statusBox">等待加载 CSV...</div>
     </section>
 
     <section class="toolbar">
-      <label>?? CSV
+      <label>预设 CSV
         <select id="presetSelect">
+          <option value="../data/metadata/outputs_labeled/qwen2vl7b_stanford_clean_final_labeled_reviewed.csv">stanford clean reviewed</option>
+          <option value="../data/metadata/outputs_labeled/qwen2vl7b_stanford_clean_final_labeled.csv">stanford clean original final labeled</option>
           <option value="../data/metadata/outputs_labeled/qwen2vl7b_baseline_final_labeled.csv">baseline final labeled</option>
           <option value="../data/metadata/outputs_labeled/qwen2vl7b_baseline_prelabeled.csv">baseline prelabeled</option>
           <option value="../data/metadata/outputs_raw/qwen2vl7b_baseline_raw.csv">baseline raw</option>
@@ -139,22 +141,22 @@
           <option value="../data/metadata/outputs_raw/qwen2vl7b_stress_raw.csv">stress raw</option>
         </select>
       </label>
-      <button id="loadPresetBtn">???? CSV</button>
-      <label class="grow">???? CSV ????
-        <input id="pathInput" type="text" value="../data/metadata/outputs_labeled/qwen2vl7b_baseline_final_labeled.csv">
+      <button id="loadPresetBtn">加载预设</button>
+      <label class="grow">自定义 CSV 路径
+        <input id="pathInput" type="text" value="../data/metadata/outputs_labeled/qwen2vl7b_stanford_clean_final_labeled_reviewed.csv">
       </label>
-      <button id="loadPathBtn">?????</button>
-      <label>???? CSV ??
+      <button id="loadPathBtn">按路径加载</button>
+      <label>本地 CSV 文件
         <input id="fileInput" type="file" accept=".csv,text/csv">
       </label>
-      <label>Prompt Level
-        <select id="levelFilter"><option value="all">??</option></select>
+      <label>Prompt
+        <select id="levelFilter"><option value="all">全部</option></select>
       </label>
       <label>Label
-        <select id="labelFilter"><option value="all">??</option></select>
+        <select id="labelFilter"><option value="all">全部</option></select>
       </label>
-      <label>Status
-        <select id="statusFilter"><option value="all">??</option></select>
+      <label>True Color
+        <select id="colorFilter"><option value="all">全部</option></select>
       </label>
       <div class="count" id="visibleCount"></div>
     </section>
@@ -165,7 +167,7 @@
   <script>
     const levelFilter = document.getElementById('levelFilter');
     const labelFilter = document.getElementById('labelFilter');
-    const statusFilter = document.getElementById('statusFilter');
+    const colorFilter = document.getElementById('colorFilter');
     const groupsEl = document.getElementById('groups');
     const visibleCount = document.getElementById('visibleCount');
     const statsEl = document.getElementById('stats');
@@ -191,6 +193,25 @@
     };
 
     let currentRows = [];
+
+    function deriveImageId(row) {
+      const explicit = String(row.image_id || row.file_name || '').trim();
+      if (explicit) return explicit.replace(/\.[^.]+$/, '');
+      const sampleId = String(row.sample_id || '').trim();
+      const matched = sampleId.match(/^(.*)_S\d+$/);
+      return matched ? matched[1] : (sampleId || 'unknown');
+    }
+
+    function derivePromptCode(row) {
+      const explicit = String(row.prompt_code || '').trim();
+      if (explicit) return explicit;
+      const level = String(row.prompt_level || '').trim();
+      if (/^\d+$/.test(level)) return `S${level}`;
+      if (/^S\d+$/i.test(level)) return level.toUpperCase();
+      const sampleId = String(row.sample_id || '').trim();
+      const matched = sampleId.match(/_(S\d+)$/i);
+      return matched ? matched[1].toUpperCase() : '';
+    }
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -276,8 +297,8 @@
     }
 
     function sortRecords(a, b) {
-      const aCode = String(a.prompt_code || a.prompt_level || '');
-      const bCode = String(b.prompt_code || b.prompt_level || '');
+      const aCode = derivePromptCode(a);
+      const bCode = derivePromptCode(b);
       const aRank = LEVEL_RANK.hasOwnProperty(aCode) ? LEVEL_RANK[aCode] : 999;
       const bRank = LEVEL_RANK.hasOwnProperty(bCode) ? LEVEL_RANK[bCode] : 999;
       if (aRank !== bRank) return aRank - bRank;
@@ -287,7 +308,7 @@
     function groupRows(rows) {
       const groups = new Map();
       rows.forEach((row) => {
-        const key = String(row.image_id || row.file_name || row.sample_id || 'unknown');
+        const key = deriveImageId(row);
         if (!groups.has(key)) groups.set(key, []);
         groups.get(key).push(row);
       });
@@ -296,11 +317,10 @@
           const records = [...groupRows].sort(sortRecords);
           return {
             image_id: imageId,
-            file_name: records[0]?.file_name || '',
             image_path: records[0]?.image_path || '',
-            width: records[0]?.width || '',
-            height: records[0]?.height || '',
-            experiment_type: records[0]?.experiment_type || '',
+            true_color: records[0]?.true_color || '',
+            conflict_color: records[0]?.conflict_color || '',
+            review_confidence: records[0]?.review_confidence || '',
             records,
           };
         })
@@ -310,21 +330,21 @@
     function renderStats(rows, sourceLabel) {
       const groups = groupRows(rows);
       const labelSummary = counter(rows, 'label', 'unlabeled').map(([k, v]) => `${k}: ${v}`).join(' / ') || '-';
-      const levelSummary = counter(rows, 'prompt_code', 'unknown').map(([k, v]) => `${k}: ${v}`).join(' / ') || '-';
-      const experimentSummary = counter(rows, 'experiment_type', 'unknown').map(([k, v]) => `${k}: ${v}`).join(' / ') || '-';
+      const levelSummary = counter(rows.map((row) => ({ prompt_bucket: derivePromptCode(row) || 'unknown' })), 'prompt_bucket', 'unknown').map(([k, v]) => `${k}: ${v}`).join(' / ') || '-';
+      const colorSummary = counter(rows, 'true_color', 'unknown').map(([k, v]) => `${k}: ${v}`).join(' / ') || '-';
       statsEl.innerHTML = `
-        <div class="stat"><div class="k">???</div><div class="v">${escapeHtml(sourceLabel)}</div></div>
-        <div class="stat"><div class="k">????</div><div class="v">${rows.length} ?</div></div>
-        <div class="stat"><div class="k">?????</div><div class="v">${groups.length} ?</div></div>
-        <div class="stat"><div class="k">??????</div><div class="v">${escapeHtml(experimentSummary)}</div></div>
-        <div class="stat"><div class="k">Prompt Code ??</div><div class="v">${escapeHtml(levelSummary)}</div></div>
-        <div class="stat"><div class="k">??????</div><div class="v">${escapeHtml(labelSummary)}</div></div>
+        <div class="stat"><div class="k">数据源</div><div class="v">${escapeHtml(sourceLabel)}</div></div>
+        <div class="stat"><div class="k">记录数</div><div class="v">${rows.length} 条</div></div>
+        <div class="stat"><div class="k">图片组数</div><div class="v">${groups.length} 组</div></div>
+        <div class="stat"><div class="k">Prompt 分布</div><div class="v">${escapeHtml(levelSummary)}</div></div>
+        <div class="stat"><div class="k">True Color 分布</div><div class="v">${escapeHtml(colorSummary)}</div></div>
+        <div class="stat"><div class="k">Label 分布</div><div class="v">${escapeHtml(labelSummary)}</div></div>
       `;
     }
 
     function fillSelect(select, values) {
       const current = select.value;
-      select.innerHTML = '<option value="all">??</option>';
+      select.innerHTML = '<option value="all">全部</option>';
       values.forEach((value) => {
         const option = document.createElement('option');
         option.value = value;
@@ -342,26 +362,26 @@
       groups.forEach((group) => {
         const imageSrc = buildImageSrc(group.image_path);
         const labelSummary = counter(group.records, 'label', 'unlabeled').map(([k, v]) => `${k}: ${v}`).join(' / ') || '-';
-        const levelSummary = group.records.map((row) => row.prompt_code || row.prompt_level || '').join(', ');
+        const levelSummary = group.records.map((row) => derivePromptCode(row)).join(', ');
         const recordHtml = group.records.map((row) => {
           const label = String(row.label || '').trim() || 'unlabeled';
-          const promptCode = escapeHtml(row.prompt_code || row.prompt_level || '');
-          const status = escapeHtml(row.status || '-');
-          const confidence = escapeHtml(row.auto_label_confidence || '-');
+          const promptCode = escapeHtml(derivePromptCode(row) || '-');
+          const confidence = escapeHtml(row.review_confidence || row.auto_label_confidence || '-');
           const sampleId = escapeHtml(row.sample_id || '');
           const prompt = escapeHtml(row.prompt_text || '');
           const rawOutput = escapeHtml(row.raw_output || row.model_output || '');
-          const notes = escapeHtml(row.notes || '-');
-          const expectedAnswer = escapeHtml(row.expected_answer || '-');
+          const notes = escapeHtml(row.review_notes || row.notes || '-');
+          const trueColor = escapeHtml(row.true_color || '-');
+          const conflictColor = escapeHtml(row.conflict_color || '-');
           return `
-            <section class="record" data-level="${escapeHtml(row.prompt_code || row.prompt_level || '')}" data-label="${escapeHtml(label)}" data-status="${escapeHtml(row.status || '')}">
+            <section class="record" data-level="${escapeHtml(derivePromptCode(row) || '')}" data-label="${escapeHtml(label)}" data-color="${trueColor}">
               <div class="record-head">
                 <div class="record-left">
                   <span class="badge level">${promptCode}</span>
                   ${labelBadge(label)}
                   <span class="sample-id">${sampleId}</span>
                 </div>
-                <div class="record-right">status: ${status} | confidence: ${confidence}</div>
+                <div class="record-right">true: ${trueColor} | conflict: ${conflictColor} | confidence: ${confidence}</div>
               </div>
               <div class="record-grid">
                 <div>
@@ -375,11 +395,11 @@
               </div>
               <div class="record-grid">
                 <div>
-                  <div class="section-title">Expected Answer</div>
-                  <div class="block notes">${expectedAnswer}</div>
+                  <div class="section-title">Reviewed Color</div>
+                  <div class="block notes">true_color: ${trueColor}\nconflict_color: ${conflictColor}</div>
                 </div>
                 <div>
-                  <div class="section-title">Notes</div>
+                  <div class="section-title">Review Notes</div>
                   <div class="block notes">${notes}</div>
                 </div>
               </div>
@@ -392,15 +412,19 @@
         article.innerHTML = `
           <div class="group-top">
             <div class="thumb-wrap">
-              ${imageSrc ? `<img class="thumb" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(group.file_name || 'image')}" loading="lazy">` : '<div class="thumb-missing">?????</div>'}
+              ${imageSrc ? `<img class="thumb" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(group.image_id || 'image')}" loading="lazy">` : '<div class="thumb-missing">图片路径缺失</div>'}
             </div>
             <div class="group-meta">
               <div class="group-title">image_id: ${escapeHtml(group.image_id)}</div>
-              <div class="meta-line">file_name: ${escapeHtml(group.file_name)}</div>
-              <div class="meta-line">size: ${escapeHtml(group.width)} x ${escapeHtml(group.height)}</div>
-              <div class="meta-line">experiment_type: ${escapeHtml(group.experiment_type || '-')}</div>
+              <div class="meta-line">reviewed true_color: ${escapeHtml(group.true_color || '-')}</div>
+              <div class="meta-line">conflict_color: ${escapeHtml(group.conflict_color || '-')}</div>
+              <div class="meta-line">review confidence: ${escapeHtml(group.review_confidence || '-')}</div>
               <div class="meta-line">records: ${group.records.length} | levels: ${escapeHtml(levelSummary)}</div>
               <div class="meta-line">group labels: ${escapeHtml(labelSummary)}</div>
+              <div>
+                <div class="section-title">Image Path</div>
+                <div class="block notes">${escapeHtml(group.image_path || '-')}</div>
+              </div>
             </div>
           </div>
           <div class="records-wrap">${recordHtml}</div>
@@ -408,16 +432,16 @@
         groupsEl.appendChild(article);
       });
 
-      fillSelect(levelFilter, [...new Set(rows.map((r) => String(r.prompt_code || r.prompt_level || '').trim()).filter(Boolean))].sort((a, b) => (LEVEL_RANK[a] ?? 999) - (LEVEL_RANK[b] ?? 999) || a.localeCompare(b, 'zh-CN')));
+      fillSelect(levelFilter, [...new Set(rows.map((r) => derivePromptCode(r)).filter(Boolean))].sort((a, b) => (LEVEL_RANK[a] ?? 999) - (LEVEL_RANK[b] ?? 999) || a.localeCompare(b, 'zh-CN')));
       fillSelect(labelFilter, [...new Set(rows.map((r) => String(r.label || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN')));
-      fillSelect(statusFilter, [...new Set(rows.map((r) => String(r.status || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN')));
+      fillSelect(colorFilter, [...new Set(rows.map((r) => String(r.true_color || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN')));
       applyFilters();
     }
 
     function applyFilters() {
       const selectedLevel = levelFilter.value;
       const selectedLabel = labelFilter.value;
-      const selectedStatus = statusFilter.value;
+      const selectedColor = colorFilter.value;
       const groups = Array.from(document.querySelectorAll('.group-card'));
       let visibleGroups = 0;
       let visibleRecords = 0;
@@ -428,8 +452,8 @@
         records.forEach((record) => {
           const levelOk = selectedLevel === 'all' || record.dataset.level === selectedLevel;
           const labelOk = selectedLabel === 'all' || record.dataset.label === selectedLabel;
-          const statusOk = selectedStatus === 'all' || record.dataset.status === selectedStatus;
-          const show = levelOk && labelOk && statusOk;
+          const colorOk = selectedColor === 'all' || record.dataset.color === selectedColor;
+          const show = levelOk && labelOk && colorOk;
           record.classList.toggle('hidden', !show);
           if (show) {
             groupHasVisible = true;
@@ -439,21 +463,21 @@
         group.classList.toggle('hidden', !groupHasVisible);
         if (groupHasVisible) visibleGroups += 1;
       });
-      visibleCount.textContent = `???? ${visibleGroups} ???? / ${visibleRecords} ???`;
+      visibleCount.textContent = `当前显示 ${visibleGroups} 个图片组 / ${visibleRecords} 条记录`;
     }
 
     async function loadFromText(text, sourceLabel) {
       const rows = parseCSV(text);
-      if (!rows.length) throw new Error('CSV ????????');
+      if (!rows.length) throw new Error('CSV 没有可用记录');
       renderStats(rows, sourceLabel);
       renderRows(rows);
-      statusBox.textContent = `????${sourceLabel} | ${rows.length} ???`;
+      statusBox.textContent = `已加载 ${sourceLabel} | ${rows.length} 条记录`;
     }
 
     async function loadFromFetch(path) {
-      statusBox.textContent = `?????${path}`;
+      statusBox.textContent = `正在加载 ${path}`;
       const response = await fetch(path);
-      if (!response.ok) throw new Error(`?????${response.status} ${response.statusText}`);
+      if (!response.ok) throw new Error(`加载失败：${response.status} ${response.statusText}`);
       const text = await response.text();
       await loadFromText(text, path);
     }
@@ -464,7 +488,7 @@
       try {
         await loadFromFetch(path);
       } catch (error) {
-        statusBox.textContent = `???????${error.message}??????????? HTML????????? CSV ????`;
+        statusBox.textContent = `预设加载失败：${error.message}。如果浏览器拦截本地 fetch，请改用“本地 CSV 文件”方式。`;
       }
     });
 
@@ -474,7 +498,7 @@
       try {
         await loadFromFetch(path);
       } catch (error) {
-        statusBox.textContent = `????????${error.message}?????????? CSV ????`;
+        statusBox.textContent = `路径加载失败：${error.message}。你也可以直接选择本地 CSV 文件。`;
       }
     });
 
@@ -487,7 +511,7 @@
 
     levelFilter.addEventListener('change', applyFilters);
     labelFilter.addEventListener('change', applyFilters);
-    statusFilter.addEventListener('change', applyFilters);
+    colorFilter.addEventListener('change', applyFilters);
 
     loadPresetBtn.click();
   </script>

@@ -1,0 +1,24 @@
+{
+  "raw_record_count": 16185,
+  "candidate_pool_count": 1600,
+  "clean_subset_count": 320,
+  "experiment_sample_count": 30,
+  "prompt_row_count": 240,
+  "split_counts": {
+    "test": 160,
+    "train": 160
+  },
+  "selected_color_distribution": {
+    "blue": 6,
+    "red": 7,
+    "black": 6,
+    "yellow": 1,
+    "white": 6,
+    "green": 2,
+    "orange": 2
+  },
+  "manifest_csv": "data/processed/stanford_cars/clean_subset_manifest.csv",
+  "samples_csv": "data/metadata/samples/car_color_stanford_clean_sample_30.csv",
+  "review_csv": "data/metadata/samples/car_color_stanford_clean_review.csv",
+  "prompts_csv": "data/metadata/prompts/car_color_attribute_conflict_stanford_clean_s0_s7_30x8.csv"
+}

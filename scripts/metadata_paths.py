@@ -42,6 +42,18 @@ STRESS_RAW_CSV = OUTPUTS_RAW_DIR / "qwen2vl7b_stress_raw.csv"
 BASELINE_PRELABELED_CSV = OUTPUTS_LABELED_DIR / "qwen2vl7b_baseline_prelabeled.csv"
 BASELINE_MANUAL_REVIEW_CSV = OUTPUTS_LABELED_DIR / "qwen2vl7b_baseline_manual_review.csv"
 BASELINE_FINAL_LABELED_CSV = OUTPUTS_LABELED_DIR / "qwen2vl7b_baseline_final_labeled.csv"
+STANFORD_CARS_SAMPLE_CSV = SAMPLES_DIR / "car_color_stanford_clean_sample_30.csv"
+STANFORD_CARS_REVIEW_CSV = SAMPLES_DIR / "car_color_stanford_clean_review.csv"
+STANFORD_CARS_PROMPTS_CSV = PROMPTS_DIR / "car_color_attribute_conflict_stanford_clean_s0_s7_30x8.csv"
+STANFORD_CARS_SMOKE_RUNTIME_CSV = OUTPUTS_RAW_DIR / "qwen2vl7b_stanford_clean_smoke_runtime.csv"
+STANFORD_CARS_RUNTIME_CSV = OUTPUTS_RAW_DIR / "qwen2vl7b_stanford_clean_runtime.csv"
+STANFORD_CARS_RAW_CSV = OUTPUTS_RAW_DIR / "qwen2vl7b_stanford_clean_raw.csv"
+STANFORD_CARS_PRELABELED_CSV = OUTPUTS_LABELED_DIR / "qwen2vl7b_stanford_clean_prelabeled.csv"
+STANFORD_CARS_MANUAL_REVIEW_CSV = OUTPUTS_LABELED_DIR / "qwen2vl7b_stanford_clean_manual_review.csv"
+STANFORD_CARS_FINAL_LABELED_CSV = OUTPUTS_LABELED_DIR / "qwen2vl7b_stanford_clean_final_labeled.csv"
+STANFORD_CARS_AUTOLABEL_SUMMARY_MD = ANALYSIS_DIR / "car_color_stanford_clean_autolabel_summary.md"
+STANFORD_CARS_SANITY_JSON = ANALYSIS_DIR / "car_color_stanford_clean_sanity_check.json"
+STANFORD_CARS_RUN_SUMMARY_MD = ANALYSIS_DIR / "car_color_stanford_clean_run_summary.md"
 
 
 def ensure_metadata_dirs() -> None:

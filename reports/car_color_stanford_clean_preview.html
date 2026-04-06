@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Stanford Cars Clean Preview</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 24px;
+      background: linear-gradient(180deg, #f7f4ee 0%, #eef2f5 100%);
+      color: #1f2933;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(15,23,42,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.09);
+    }
+    img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+      background: #dce3ea;
+    }
+    .meta {
+      padding: 14px 16px 16px;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stanford Cars Clean Preview</h1>
+  <p>The experiment input uses bbox-guided main-car crops resized to a moderate resolution so body-color judgments focus on the car instead of the background.</p>
+  <div class="grid">
+    
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_00601.jpg" alt="test_00601.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_00601</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: blue</div>
+                <div><strong>conflict_color</strong>: red</div>
+                <div><strong>quality</strong>: 0.8109</div>
+                <div><strong>class</strong>: Chrysler PT Cruiser Convertible 2008</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_01069.jpg" alt="test_01069.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_01069</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: red</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.8255</div>
+                <div><strong>class</strong>: Volvo C30 Hatchback 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_01311.jpg" alt="test_01311.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_01311</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: black</div>
+                <div><strong>conflict_color</strong>: white</div>
+                <div><strong>quality</strong>: 0.8551</div>
+                <div><strong>class</strong>: BMW M3 Coupe 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_02182.jpg" alt="test_02182.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_02182</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: yellow</div>
+                <div><strong>conflict_color</strong>: red</div>
+                <div><strong>quality</strong>: 0.7616</div>
+                <div><strong>class</strong>: Acura Integra Type R 2001</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_03302.jpg" alt="test_03302.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_03302</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: red</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.8531</div>
+                <div><strong>class</strong>: HUMMER H3T Crew Cab 2010</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_03751.jpg" alt="test_03751.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_03751</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: white</div>
+                <div><strong>conflict_color</strong>: black</div>
+                <div><strong>quality</strong>: 0.8591</div>
+                <div><strong>class</strong>: BMW 1 Series Coupe 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_03801.jpg" alt="test_03801.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_03801</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: blue</div>
+                <div><strong>conflict_color</strong>: red</div>
+                <div><strong>quality</strong>: 0.8073</div>
+                <div><strong>class</strong>: Land Rover LR2 SUV 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_05126.jpg" alt="test_05126.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_05126</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: blue</div>
+                <div><strong>conflict_color</strong>: red</div>
+                <div><strong>quality</strong>: 0.9028</div>
+                <div><strong>class</strong>: Hyundai Azera Sedan 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_05992.jpg" alt="test_05992.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_05992</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: red</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.809</div>
+                <div><strong>class</strong>: Volvo 240 Sedan 1993</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_06328.jpg" alt="test_06328.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_06328</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: blue</div>
+                <div><strong>conflict_color</strong>: red</div>
+                <div><strong>quality</strong>: 0.8313</div>
+                <div><strong>class</strong>: Rolls-Royce Ghost Sedan 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_06382.jpg" alt="test_06382.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_06382</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: black</div>
+                <div><strong>conflict_color</strong>: white</div>
+                <div><strong>quality</strong>: 0.8699</div>
+                <div><strong>class</strong>: Bentley Arnage Sedan 2009</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_06383.jpg" alt="test_06383.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_06383</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: white</div>
+                <div><strong>conflict_color</strong>: black</div>
+                <div><strong>quality</strong>: 0.8239</div>
+                <div><strong>class</strong>: Bentley Continental Flying Spur Sedan 2007</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_06787.jpg" alt="test_06787.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_06787</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: red</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.8111</div>
+                <div><strong>class</strong>: Jaguar XK XKR 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_07040.jpg" alt="test_07040.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_07040</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: green</div>
+                <div><strong>conflict_color</strong>: yellow</div>
+                <div><strong>quality</strong>: 0.8001</div>
+                <div><strong>class</strong>: Cadillac Escalade EXT Crew Cab 2007</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_07372.jpg" alt="test_07372.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_07372</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: black</div>
+                <div><strong>conflict_color</strong>: white</div>
+                <div><strong>quality</strong>: 0.824</div>
+                <div><strong>class</strong>: BMW M6 Convertible 2010</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_07373.jpg" alt="test_07373.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_07373</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: black</div>
+                <div><strong>conflict_color</strong>: white</div>
+                <div><strong>quality</strong>: 0.8276</div>
+                <div><strong>class</strong>: Jeep Compass SUV 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/test_07699.jpg" alt="test_07699.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: test_07699</div>
+                <div><strong>split</strong>: test</div>
+                <div><strong>true_color</strong>: white</div>
+                <div><strong>conflict_color</strong>: black</div>
+                <div><strong>quality</strong>: 0.8038</div>
+                <div><strong>class</strong>: Chevrolet Express Cargo Van 2007</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_00114.jpg" alt="train_00114.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_00114</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: white</div>
+                <div><strong>conflict_color</strong>: black</div>
+                <div><strong>quality</strong>: 0.8038</div>
+                <div><strong>class</strong>: Chevrolet Express Van 2007</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_00211.jpg" alt="train_00211.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_00211</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: blue</div>
+                <div><strong>conflict_color</strong>: red</div>
+                <div><strong>quality</strong>: 0.801</div>
+                <div><strong>class</strong>: Rolls-Royce Ghost Sedan 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_00913.jpg" alt="train_00913.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_00913</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: green</div>
+                <div><strong>conflict_color</strong>: yellow</div>
+                <div><strong>quality</strong>: 0.7933</div>
+                <div><strong>class</strong>: Lamborghini Gallardo LP 570-4 Superleggera 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_01253.jpg" alt="train_01253.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_01253</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: orange</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.8715</div>
+                <div><strong>class</strong>: BMW X3 SUV 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_01446.jpg" alt="train_01446.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_01446</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: white</div>
+                <div><strong>conflict_color</strong>: black</div>
+                <div><strong>quality</strong>: 0.853</div>
+                <div><strong>class</strong>: Jaguar XK XKR 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_01561.jpg" alt="train_01561.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_01561</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: red</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.8325</div>
+                <div><strong>class</strong>: Nissan Juke Hatchback 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_02608.jpg" alt="train_02608.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_02608</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: red</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.8216</div>
+                <div><strong>class</strong>: Chrysler Aspen SUV 2009</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_04760.jpg" alt="train_04760.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_04760</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: black</div>
+                <div><strong>conflict_color</strong>: white</div>
+                <div><strong>quality</strong>: 0.8384</div>
+                <div><strong>class</strong>: BMW M3 Coupe 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_05311.jpg" alt="train_05311.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_05311</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: black</div>
+                <div><strong>conflict_color</strong>: white</div>
+                <div><strong>quality</strong>: 0.8317</div>
+                <div><strong>class</strong>: Jaguar XK XKR 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_05584.jpg" alt="train_05584.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_05584</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: blue</div>
+                <div><strong>conflict_color</strong>: red</div>
+                <div><strong>quality</strong>: 0.8164</div>
+                <div><strong>class</strong>: BMW M3 Coupe 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_06380.jpg" alt="train_06380.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_06380</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: orange</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.8751</div>
+                <div><strong>class</strong>: McLaren MP4-12C Coupe 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_07332.jpg" alt="train_07332.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_07332</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: red</div>
+                <div><strong>conflict_color</strong>: blue</div>
+                <div><strong>quality</strong>: 0.8211</div>
+                <div><strong>class</strong>: Dodge Durango SUV 2012</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <img src="../data/processed/stanford_cars/clean_crops/train_07828.jpg" alt="train_07828.jpg">
+              <div class="meta">
+                <div><strong>image_id</strong>: train_07828</div>
+                <div><strong>split</strong>: train</div>
+                <div><strong>true_color</strong>: white</div>
+                <div><strong>conflict_color</strong>: black</div>
+                <div><strong>quality</strong>: 0.8591</div>
+                <div><strong>class</strong>: GMC Savana Van 2012</div>
+              </div>
+            </div>
+            
+  </div>
+</body>
+</html>
