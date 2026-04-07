@@ -1,0 +1,11 @@
+{
+  "family": "primary",
+  "combined_csv": "analysis/current/primary_v3/primary_combined_parsed_results.csv",
+  "metrics_csv": "analysis/current/primary_v3/model_condition_metrics.csv",
+  "summary_metrics_csv": "analysis/current/primary_v3/summary_metrics.csv",
+  "pairwise_csv": "analysis/current/primary_v3/cross_model_pairwise.csv",
+  "model_fit_results_csv": "analysis/current/primary_v3/model_fit_results.csv",
+  "summary_md": "analysis/current/primary_v3/analysis_summary.md",
+  "model_status": "glmm",
+  "model_note": ""
+}

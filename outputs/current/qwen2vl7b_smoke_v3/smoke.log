@@ -1,0 +1,36 @@
+2026-04-07 17:47:19,304 | INFO | Starting model_key=qwen2vl7b checkpoint=Qwen/Qwen2-VL-7B-Instruct rows=14 pending=14 max_new_tokens=8 temperature=0.0 top_p=1.0
+2026-04-07 17:47:19,320 | INFO | Reusing existing model directory: D:\multimodal_conflict_decision_boundary_hallucination\models\qwen2_vl_7b
+2026-04-07 17:47:19,321 | INFO | Loading Qwen2-VL from D:\multimodal_conflict_decision_boundary_hallucination\models\qwen2_vl_7b with dtype=bfloat16
+2026-04-07 17:47:26,329 | INFO | Running sample_id=test_03234_A1_forced_choice_red_family
+2026-04-07 17:47:32,597 | INFO | Completed sample_id=test_03234_A1_forced_choice_red_family in 6.27s
+2026-04-07 17:47:32,597 | INFO | Running sample_id=test_03234_A2_counterfactual_assumption
+2026-04-07 17:47:34,634 | INFO | Completed sample_id=test_03234_A2_counterfactual_assumption in 2.04s
+2026-04-07 17:47:34,635 | INFO | Running sample_id=test_03234_C0_neutral
+2026-04-07 17:47:36,580 | INFO | Completed sample_id=test_03234_C0_neutral in 1.94s
+2026-04-07 17:47:36,580 | INFO | Running sample_id=test_03234_C1_weak_suggestion
+2026-04-07 17:47:38,529 | INFO | Completed sample_id=test_03234_C1_weak_suggestion in 1.95s
+2026-04-07 17:47:38,529 | INFO | Running sample_id=test_03234_C2_false_assertion_open
+2026-04-07 17:47:40,533 | INFO | Completed sample_id=test_03234_C2_false_assertion_open in 2.00s
+2026-04-07 17:47:40,533 | INFO | Running sample_id=test_03234_C3_presupposition_correction_allowed
+2026-04-07 17:47:42,472 | INFO | Completed sample_id=test_03234_C3_presupposition_correction_allowed in 1.94s
+2026-04-07 17:47:42,472 | INFO | Running sample_id=test_03234_C4_stronger_open_conflict
+2026-04-07 17:47:44,464 | INFO | Completed sample_id=test_03234_C4_stronger_open_conflict in 1.99s
+2026-04-07 17:47:44,464 | INFO | Running sample_id=test_03550_A1_forced_choice_red_family
+2026-04-07 17:47:46,379 | INFO | Completed sample_id=test_03550_A1_forced_choice_red_family in 1.91s
+2026-04-07 17:47:46,379 | INFO | Running sample_id=test_03550_A2_counterfactual_assumption
+2026-04-07 17:47:48,287 | INFO | Completed sample_id=test_03550_A2_counterfactual_assumption in 1.91s
+2026-04-07 17:47:48,287 | INFO | Running sample_id=test_03550_C0_neutral
+2026-04-07 17:47:50,243 | INFO | Completed sample_id=test_03550_C0_neutral in 1.95s
+2026-04-07 17:47:50,243 | INFO | Running sample_id=test_03550_C1_weak_suggestion
+2026-04-07 17:47:52,192 | INFO | Completed sample_id=test_03550_C1_weak_suggestion in 1.95s
+2026-04-07 17:47:52,192 | INFO | Running sample_id=test_03550_C2_false_assertion_open
+2026-04-07 17:47:54,208 | INFO | Completed sample_id=test_03550_C2_false_assertion_open in 2.02s
+2026-04-07 17:47:54,208 | INFO | Running sample_id=test_03550_C3_presupposition_correction_allowed
+2026-04-07 17:47:56,182 | INFO | Completed sample_id=test_03550_C3_presupposition_correction_allowed in 1.97s
+2026-04-07 17:47:56,182 | INFO | Running sample_id=test_03550_C4_stronger_open_conflict
+2026-04-07 17:47:58,149 | INFO | Completed sample_id=test_03550_C4_stronger_open_conflict in 1.97s
+2026-04-07 17:47:58,149 | INFO | Finished model_key=qwen2vl7b with 14 successful generations.
+2026-04-07 19:40:39,017 | INFO | Starting model_key=qwen2vl7b checkpoint=Qwen/Qwen2-VL-7B-Instruct rows=14 pending=0 max_new_tokens=8 temperature=0.0 top_p=1.0
+2026-04-07 19:40:39,018 | INFO | No pending rows left for qwen2vl7b.
+2026-04-07 19:45:27,103 | INFO | Starting model_key=qwen2vl7b checkpoint=Qwen/Qwen2-VL-7B-Instruct rows=14 pending=0 max_new_tokens=8 temperature=0.0 top_p=1.0
+2026-04-07 19:45:27,103 | INFO | No pending rows left for qwen2vl7b.

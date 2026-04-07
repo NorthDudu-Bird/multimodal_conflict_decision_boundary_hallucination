@@ -1,0 +1,23 @@
+{
+  "manifest_rows": 1600,
+  "clean_subset_count": 320,
+  "manual_exclusion_count": 18,
+  "duplicate_noncanonical_count": 2,
+  "main_subset_count": 120,
+  "truth_mode": "reviewed",
+  "truth_row_count": 120,
+  "primary_prompt_count": 480,
+  "auxiliary_prompt_count": 240,
+  "total_prompt_count": 720,
+  "main_subset_color_distribution": {
+    "black": 13,
+    "blue": 24,
+    "gray": 15,
+    "green": 2,
+    "other": 7,
+    "red": 44,
+    "silver": 1,
+    "white": 10,
+    "yellow": 4
+  }
+}

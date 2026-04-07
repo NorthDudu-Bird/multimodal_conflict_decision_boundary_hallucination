@@ -1,24 +1,30 @@
 {
-  "raw_record_count": 16185,
-  "candidate_pool_count": 1600,
   "clean_subset_count": 320,
-  "experiment_sample_count": 30,
-  "prompt_row_count": 240,
-  "split_counts": {
-    "test": 160,
-    "train": 160
-  },
-  "selected_color_distribution": {
-    "blue": 6,
-    "red": 7,
-    "black": 6,
-    "yellow": 1,
-    "white": 6,
-    "green": 2,
-    "orange": 2
-  },
+  "manual_exclusion_count": 18,
+  "duplicate_noncanonical_count": 2,
+  "main_subset_count": 120,
+  "truth_mode": "reviewed",
   "manifest_csv": "data/processed/stanford_cars/clean_subset_manifest.csv",
-  "samples_csv": "data/metadata/samples/car_color_stanford_clean_sample_30.csv",
-  "review_csv": "data/metadata/samples/car_color_stanford_clean_review.csv",
-  "prompts_csv": "data/metadata/prompts/car_color_attribute_conflict_stanford_clean_s0_s7_30x8.csv"
+  "main_subset_csv": "data/processed/stanford_cars/main_experiment_subset.csv",
+  "annotation_dir": "data/annotations/stanford_cars",
+  "prompt_tables": {
+    "all_conditions": "data/metadata/restructured/prompts/stanford_cars_restructured_reviewed_all_conditions.csv",
+    "primary_conditions": "data/metadata/restructured/prompts/stanford_cars_restructured_reviewed_primary_conditions.csv",
+    "auxiliary_conditions": "data/metadata/restructured/prompts/stanford_cars_restructured_reviewed_auxiliary_conditions.csv"
+  },
+  "summary_files": {
+    "prepare_json": "data/metadata/restructured/summaries/stanford_cars_restructured_prepare_reviewed.json",
+    "prepare_md": "data/metadata/restructured/summaries/stanford_cars_restructured_prepare_reviewed.md"
+  },
+  "main_subset_color_distribution": {
+    "black": 13,
+    "blue": 24,
+    "gray": 15,
+    "green": 2,
+    "other": 7,
+    "red": 44,
+    "silver": 1,
+    "white": 10,
+    "yellow": 4
+  }
 }
