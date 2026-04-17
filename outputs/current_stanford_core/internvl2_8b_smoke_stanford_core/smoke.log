@@ -1,0 +1,32 @@
+2026-04-08 17:24:02,741 | INFO | Starting model_key=internvl2_8b checkpoint=OpenGVLab/InternVL2-8B rows=14 pending=14 max_new_tokens=8 temperature=0.0 top_p=1.0
+2026-04-08 17:24:02,754 | INFO | Reusing existing model directory: D:\multimodal_conflict_decision_boundary_hallucination\models\internvl2_8b
+2026-04-08 17:24:02,754 | INFO | Loading InternVL2 from D:\multimodal_conflict_decision_boundary_hallucination\models\internvl2_8b with dtype=bfloat16
+2026-04-08 17:24:10,296 | INFO | Running sample_id=test_00209_A1_forced_choice_red_family
+2026-04-08 17:24:16,326 | INFO | Completed sample_id=test_00209_A1_forced_choice_red_family in 6.03s
+2026-04-08 17:24:16,327 | INFO | Running sample_id=test_00209_A2_counterfactual_assumption
+2026-04-08 17:24:19,130 | INFO | Completed sample_id=test_00209_A2_counterfactual_assumption in 2.80s
+2026-04-08 17:24:19,130 | INFO | Running sample_id=test_00209_C0_neutral
+2026-04-08 17:24:21,024 | INFO | Completed sample_id=test_00209_C0_neutral in 1.89s
+2026-04-08 17:24:21,024 | INFO | Running sample_id=test_00209_C1_weak_suggestion
+2026-04-08 17:24:22,914 | INFO | Completed sample_id=test_00209_C1_weak_suggestion in 1.89s
+2026-04-08 17:24:22,914 | INFO | Running sample_id=test_00209_C2_false_assertion_open
+2026-04-08 17:24:24,819 | INFO | Completed sample_id=test_00209_C2_false_assertion_open in 1.90s
+2026-04-08 17:24:24,819 | INFO | Running sample_id=test_00209_C3_presupposition_correction_allowed
+2026-04-08 17:24:26,709 | INFO | Completed sample_id=test_00209_C3_presupposition_correction_allowed in 1.89s
+2026-04-08 17:24:26,709 | INFO | Running sample_id=test_00209_C4_stronger_open_conflict
+2026-04-08 17:24:28,591 | INFO | Completed sample_id=test_00209_C4_stronger_open_conflict in 1.88s
+2026-04-08 17:24:28,591 | INFO | Running sample_id=test_00516_A1_forced_choice_red_family
+2026-04-08 17:24:31,340 | INFO | Completed sample_id=test_00516_A1_forced_choice_red_family in 2.75s
+2026-04-08 17:24:31,340 | INFO | Running sample_id=test_00516_A2_counterfactual_assumption
+2026-04-08 17:24:34,057 | INFO | Completed sample_id=test_00516_A2_counterfactual_assumption in 2.72s
+2026-04-08 17:24:34,057 | INFO | Running sample_id=test_00516_C0_neutral
+2026-04-08 17:24:35,975 | INFO | Completed sample_id=test_00516_C0_neutral in 1.92s
+2026-04-08 17:24:35,975 | INFO | Running sample_id=test_00516_C1_weak_suggestion
+2026-04-08 17:24:37,899 | INFO | Completed sample_id=test_00516_C1_weak_suggestion in 1.92s
+2026-04-08 17:24:37,899 | INFO | Running sample_id=test_00516_C2_false_assertion_open
+2026-04-08 17:24:39,757 | INFO | Completed sample_id=test_00516_C2_false_assertion_open in 1.86s
+2026-04-08 17:24:39,757 | INFO | Running sample_id=test_00516_C3_presupposition_correction_allowed
+2026-04-08 17:24:41,730 | INFO | Completed sample_id=test_00516_C3_presupposition_correction_allowed in 1.97s
+2026-04-08 17:24:41,730 | INFO | Running sample_id=test_00516_C4_stronger_open_conflict
+2026-04-08 17:24:43,649 | INFO | Completed sample_id=test_00516_C4_stronger_open_conflict in 1.92s
+2026-04-08 17:24:43,649 | INFO | Finished model_key=internvl2_8b with 14 successful generations.

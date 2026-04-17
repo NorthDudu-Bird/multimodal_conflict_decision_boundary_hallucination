@@ -1,0 +1,32 @@
+2026-04-08 16:42:39,936 | INFO | Starting model_key=qwen2vl7b checkpoint=Qwen/Qwen2-VL-7B-Instruct rows=14 pending=14 max_new_tokens=8 temperature=0.0 top_p=1.0
+2026-04-08 16:42:39,952 | INFO | Reusing existing model directory: D:\multimodal_conflict_decision_boundary_hallucination\models\qwen2_vl_7b
+2026-04-08 16:42:39,952 | INFO | Loading Qwen2-VL from D:\multimodal_conflict_decision_boundary_hallucination\models\qwen2_vl_7b with dtype=bfloat16
+2026-04-08 16:42:47,114 | INFO | Running sample_id=test_00209_A1_forced_choice_red_family
+2026-04-08 16:42:53,846 | INFO | Completed sample_id=test_00209_A1_forced_choice_red_family in 6.73s
+2026-04-08 16:42:53,846 | INFO | Running sample_id=test_00209_A2_counterfactual_assumption
+2026-04-08 16:42:55,933 | INFO | Completed sample_id=test_00209_A2_counterfactual_assumption in 2.08s
+2026-04-08 16:42:55,933 | INFO | Running sample_id=test_00209_C0_neutral
+2026-04-08 16:42:57,959 | INFO | Completed sample_id=test_00209_C0_neutral in 2.03s
+2026-04-08 16:42:57,959 | INFO | Running sample_id=test_00209_C1_weak_suggestion
+2026-04-08 16:43:00,040 | INFO | Completed sample_id=test_00209_C1_weak_suggestion in 2.08s
+2026-04-08 16:43:00,040 | INFO | Running sample_id=test_00209_C2_false_assertion_open
+2026-04-08 16:43:02,148 | INFO | Completed sample_id=test_00209_C2_false_assertion_open in 2.11s
+2026-04-08 16:43:02,148 | INFO | Running sample_id=test_00209_C3_presupposition_correction_allowed
+2026-04-08 16:43:04,216 | INFO | Completed sample_id=test_00209_C3_presupposition_correction_allowed in 2.07s
+2026-04-08 16:43:04,216 | INFO | Running sample_id=test_00209_C4_stronger_open_conflict
+2026-04-08 16:43:06,315 | INFO | Completed sample_id=test_00209_C4_stronger_open_conflict in 2.10s
+2026-04-08 16:43:06,315 | INFO | Running sample_id=test_00516_A1_forced_choice_red_family
+2026-04-08 16:43:08,354 | INFO | Completed sample_id=test_00516_A1_forced_choice_red_family in 2.04s
+2026-04-08 16:43:08,354 | INFO | Running sample_id=test_00516_A2_counterfactual_assumption
+2026-04-08 16:43:10,406 | INFO | Completed sample_id=test_00516_A2_counterfactual_assumption in 2.05s
+2026-04-08 16:43:10,406 | INFO | Running sample_id=test_00516_C0_neutral
+2026-04-08 16:43:12,420 | INFO | Completed sample_id=test_00516_C0_neutral in 2.01s
+2026-04-08 16:43:12,420 | INFO | Running sample_id=test_00516_C1_weak_suggestion
+2026-04-08 16:43:14,565 | INFO | Completed sample_id=test_00516_C1_weak_suggestion in 2.14s
+2026-04-08 16:43:14,565 | INFO | Running sample_id=test_00516_C2_false_assertion_open
+2026-04-08 16:43:16,637 | INFO | Completed sample_id=test_00516_C2_false_assertion_open in 2.07s
+2026-04-08 16:43:16,637 | INFO | Running sample_id=test_00516_C3_presupposition_correction_allowed
+2026-04-08 16:43:18,726 | INFO | Completed sample_id=test_00516_C3_presupposition_correction_allowed in 2.09s
+2026-04-08 16:43:18,726 | INFO | Running sample_id=test_00516_C4_stronger_open_conflict
+2026-04-08 16:43:20,879 | INFO | Completed sample_id=test_00516_C4_stronger_open_conflict in 2.15s
+2026-04-08 16:43:20,879 | INFO | Finished model_key=qwen2vl7b with 14 successful generations.

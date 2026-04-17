@@ -12,3 +12,8 @@ data/previews/
 logs/
 models/
 vendor/
+.vscode/
+.git_codex_stage_paths.txt
+data_external/vcor_raw/
+data_external/vcor_selected/candidate_pool/
+clean/

@@ -1,0 +1,7 @@
+﻿condition_name,left_model,right_model,estimate_left_minus_right,ci_low,ci_high
+A1_forced_choice_red_family,qwen2vl7b,llava15_7b,-0.5161290322580645,-0.6236559139784946,-0.4086021505376345
+A1_forced_choice_red_family,qwen2vl7b,internvl2_8b,-0.11827956989247318,-0.25806451612903225,0.021505376344086002
+A1_forced_choice_red_family,llava15_7b,internvl2_8b,0.3978494623655914,0.29032258064516125,0.5053763440860215
+A2_counterfactual_assumption,qwen2vl7b,llava15_7b,-0.20430107526881724,-0.29032258064516125,-0.12903225806451613
+A2_counterfactual_assumption,qwen2vl7b,internvl2_8b,-0.20430107526881724,-0.29032258064516125,-0.12903225806451613
+A2_counterfactual_assumption,llava15_7b,internvl2_8b,0.0,0.0,0.0

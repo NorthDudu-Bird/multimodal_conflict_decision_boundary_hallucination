@@ -1,58 +1,63 @@
-﻿# Environment Reproduction Guide
+# Environment Reproduction Guide
 
-This project has been verified locally with the following environment for the Qwen2-VL experiment pipeline.
+## Current Target Environment
 
-## Verified runtime
-- OS: Windows 10/11
-- Python: `3.11.2`
-- PyTorch: `2.6.0+cu126`
-- torchvision: `0.21.0+cu126`
-- CUDA available: `True`
-- GPU used in verification: `NVIDIA GeForce RTX 4080 Laptop GPU (12 GB)`
-- Recommended model loading mode on 12 GB VRAM: `4-bit NF4`
+This repository is currently organized around the VCoR-balanced multimodel rerun, with a Stanford-only control line kept for robustness checks.
 
-## Recommended setup
-1. Create the environment:
+Verified local setup:
+
+- OS: Windows
+- Python: `3.11`
+- PyTorch: CUDA-enabled build
+- Main GPU used in recent reruns: RTX 4080 Laptop GPU
+
+## Recommended Setup
 
 ```powershell
-conda create -n cv_proj python=3.11.2 -y
+conda create -n cv_proj python=3.11 -y
 conda activate cv_proj
-```
-
-2. Install the Python packages:
-
-```powershell
 pip install -r requirements.txt
 ```
 
-3. Download the model weights to the project-local path expected by the scripts:
+## Model Weights
+
+Place or download the model weights under:
+
+- `models/qwen2_vl_7b`
+- `models/llava_1_5_7b_hf`
+- `models/internvl2_8b`
+
+## Current Mainline Commands
+
+Prepare data and prompt tables:
 
 ```powershell
 $env:PYTHONIOENCODING='utf-8'
-python -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='Qwen/Qwen2-VL-7B-Instruct', local_dir='models/qwen2_vl_7b')"
+python scripts/data_prep/prepare_stanford_cars_multimodel_v2.py --config configs/current/restructured_experiment_vcor_balanced.yaml --truth-source reviewed
 ```
 
-4. Run the environment check:
-
-```powershell
-python scripts/check_vlm_env.py
-```
-
-5. Run the 20-row smoke test:
+Run the full VCoR-balanced multimodel pipeline:
 
 ```powershell
 $env:PYTHONIOENCODING='utf-8'
-python scripts/run_qwen2vl_smoke_test.py
+python scripts/inference/run_multimodel_vcor_balanced_pipeline.py --config configs/current/restructured_experiment_vcor_balanced.yaml
 ```
 
-## Full experiment command
+Run the Stanford-only robustness control:
+
 ```powershell
 $env:PYTHONIOENCODING='utf-8'
-python scripts/run_qwen2vl_batch.py --batch-size 1 --max-new-tokens 96 --temperature 0.0
+python scripts/inference/run_multimodel_vcor_balanced_pipeline.py --config configs/current/restructured_experiment_stanford_core_vcor_robustness.yaml --core-only
+```
+
+Regenerate the current results viewer:
+
+```powershell
+python scripts/analysis/generate_multimodel_results_viewer.py --viewer-mode vcor_balanced_rerun --primary-csv analysis/current/vcor_balanced_primary/primary_combined_parsed_results.csv --auxiliary-csv analysis/current/vcor_balanced_auxiliary/auxiliary_combined_parsed_results.csv --manifest-csv data/processed/stanford_cars/primary_expanded_balanced_with_vcor.csv --output-html reports/current/vcor_balanced_multimodel_results_viewer.html
 ```
 
 ## Notes
-- The smoke test and batch script expect the model directory to be `models/qwen2_vl_7b/`.
-- On a 12 GB GPU, keep `batch_size=1` unless you have verified larger values locally.
-- The verified run in this repo used `Qwen2-VL-7B-Instruct` with `bitsandbytes` 4-bit quantization.
-- In my local session, `cv_proj` itself was not writable, so I temporarily used a project-local dependency overlay. That overlay is not required for a clean reproduction. A fresh environment can install everything directly from `requirements.txt`.
+
+- The active analysis uses exact-match faithful scoring and keeps only the six-color clean subset in the primary analysis.
+- `source_dataset` distinguishes Stanford Cars core samples from VCoR supplement samples in the merged manifest and viewer.
+- Historical local cleanup archives may still exist under `clean/`, but they are not part of the current GitHub snapshot.

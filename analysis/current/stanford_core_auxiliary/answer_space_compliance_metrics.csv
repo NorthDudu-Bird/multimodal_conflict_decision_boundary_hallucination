@@ -1,0 +1,7 @@
+﻿model_key,model_name,checkpoint_name,condition_name,n,in_allowed_answer_space_n,answer_space_compliance_rate,answer_space_compliance_ci_low,answer_space_compliance_ci_high,out_of_allowed_answer_space_n,out_of_allowed_answer_space_rate,in_space_conflict_aligned_n,in_space_conflict_aligned_rate,out_of_space_faithful_n,out_of_space_faithful_rate,other_answer_space_behavior_n,other_answer_space_behavior_rate
+qwen2vl7b,Qwen2-VL-7B-Instruct,Qwen/Qwen2-VL-7B-Instruct,A1_forced_choice_red_family,93,42,0.45161290322580644,0.3481407901159264,0.5582517711712167,51,0.5483870967741935,42,0.45161290322580644,51,0.5483870967741935,0,0.0
+qwen2vl7b,Qwen2-VL-7B-Instruct,Qwen/Qwen2-VL-7B-Instruct,A2_counterfactual_assumption,93,74,0.7956989247311828,0.699489789953604,0.8722846725964376,19,0.20430107526881722,74,0.7956989247311828,19,0.20430107526881722,0,0.0
+llava15_7b,LLaVA-1.5-7B,llava-hf/llava-1.5-7b-hf,A1_forced_choice_red_family,93,90,0.967741935483871,0.9086122051697977,0.9932975594152178,3,0.03225806451612903,90,0.967741935483871,3,0.03225806451612903,0,0.0
+llava15_7b,LLaVA-1.5-7B,llava-hf/llava-1.5-7b-hf,A2_counterfactual_assumption,93,93,1.0,0.9611110014657241,1.0,0,0.0,93,1.0,0,0.0,0,0.0
+internvl2_8b,InternVL2-8B,OpenGVLab/InternVL2-8B,A1_forced_choice_red_family,93,53,0.5698924731182796,0.4630560526595564,0.6721532590159337,40,0.43010752688172044,53,0.5698924731182796,40,0.43010752688172044,0,0.0
+internvl2_8b,InternVL2-8B,OpenGVLab/InternVL2-8B,A2_counterfactual_assumption,93,93,1.0,0.9611110014657241,1.0,0,0.0,93,1.0,0,0.0,0,0.0

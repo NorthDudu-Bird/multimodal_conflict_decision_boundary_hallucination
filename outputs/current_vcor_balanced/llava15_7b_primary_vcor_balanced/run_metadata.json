@@ -1,0 +1,15 @@
+{
+  "model_key": "llava15_7b",
+  "model_name": "LLaVA-1.5-7B",
+  "checkpoint_name": "llava-hf/llava-1.5-7b-hf",
+  "precision": "float16",
+  "device": "cuda:0+cpu_offload",
+  "device_map": "auto",
+  "batch_size": "1",
+  "input_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\prompts\\current\\vcor_balanced_primary_prompts.csv",
+  "output_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\outputs\\current_vcor_balanced\\llava15_7b_primary_vcor_balanced\\primary_runtime.csv",
+  "max_new_tokens": 8,
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "limit": null
+}

@@ -1,0 +1,7 @@
+﻿color,core_count,target_per_color,deficit,requested_candidates,available_candidates,selected_candidates
+red,40,50,10,80,909,80
+blue,12,50,38,228,1060,228
+green,2,50,48,288,804,288
+yellow,2,50,48,288,824,288
+black,23,50,27,162,579,162
+white,14,50,36,216,575,216

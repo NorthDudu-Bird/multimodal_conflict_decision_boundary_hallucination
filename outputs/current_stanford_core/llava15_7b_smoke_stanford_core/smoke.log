@@ -1,0 +1,32 @@
+2026-04-08 17:07:37,619 | INFO | Starting model_key=llava15_7b checkpoint=llava-hf/llava-1.5-7b-hf rows=14 pending=14 max_new_tokens=8 temperature=0.0 top_p=1.0
+2026-04-08 17:07:37,634 | INFO | Reusing existing model directory: D:\multimodal_conflict_decision_boundary_hallucination\models\llava_1_5_7b_hf
+2026-04-08 17:07:37,634 | INFO | Loading LLaVA-1.5 from D:\multimodal_conflict_decision_boundary_hallucination\models\llava_1_5_7b_hf with dtype=float16
+2026-04-08 17:07:45,380 | INFO | Running sample_id=test_00209_A1_forced_choice_red_family
+2026-04-08 17:07:49,427 | INFO | Completed sample_id=test_00209_A1_forced_choice_red_family in 4.05s
+2026-04-08 17:07:49,428 | INFO | Running sample_id=test_00209_A2_counterfactual_assumption
+2026-04-08 17:07:50,784 | INFO | Completed sample_id=test_00209_A2_counterfactual_assumption in 1.36s
+2026-04-08 17:07:50,784 | INFO | Running sample_id=test_00209_C0_neutral
+2026-04-08 17:07:52,097 | INFO | Completed sample_id=test_00209_C0_neutral in 1.31s
+2026-04-08 17:07:52,097 | INFO | Running sample_id=test_00209_C1_weak_suggestion
+2026-04-08 17:07:53,440 | INFO | Completed sample_id=test_00209_C1_weak_suggestion in 1.34s
+2026-04-08 17:07:53,440 | INFO | Running sample_id=test_00209_C2_false_assertion_open
+2026-04-08 17:07:54,744 | INFO | Completed sample_id=test_00209_C2_false_assertion_open in 1.30s
+2026-04-08 17:07:54,744 | INFO | Running sample_id=test_00209_C3_presupposition_correction_allowed
+2026-04-08 17:07:55,991 | INFO | Completed sample_id=test_00209_C3_presupposition_correction_allowed in 1.25s
+2026-04-08 17:07:55,992 | INFO | Running sample_id=test_00209_C4_stronger_open_conflict
+2026-04-08 17:07:57,320 | INFO | Completed sample_id=test_00209_C4_stronger_open_conflict in 1.33s
+2026-04-08 17:07:57,320 | INFO | Running sample_id=test_00516_A1_forced_choice_red_family
+2026-04-08 17:07:59,133 | INFO | Completed sample_id=test_00516_A1_forced_choice_red_family in 1.81s
+2026-04-08 17:07:59,133 | INFO | Running sample_id=test_00516_A2_counterfactual_assumption
+2026-04-08 17:08:00,975 | INFO | Completed sample_id=test_00516_A2_counterfactual_assumption in 1.84s
+2026-04-08 17:08:00,975 | INFO | Running sample_id=test_00516_C0_neutral
+2026-04-08 17:08:02,312 | INFO | Completed sample_id=test_00516_C0_neutral in 1.34s
+2026-04-08 17:08:02,312 | INFO | Running sample_id=test_00516_C1_weak_suggestion
+2026-04-08 17:08:03,701 | INFO | Completed sample_id=test_00516_C1_weak_suggestion in 1.39s
+2026-04-08 17:08:03,702 | INFO | Running sample_id=test_00516_C2_false_assertion_open
+2026-04-08 17:08:05,022 | INFO | Completed sample_id=test_00516_C2_false_assertion_open in 1.32s
+2026-04-08 17:08:05,023 | INFO | Running sample_id=test_00516_C3_presupposition_correction_allowed
+2026-04-08 17:08:06,310 | INFO | Completed sample_id=test_00516_C3_presupposition_correction_allowed in 1.29s
+2026-04-08 17:08:06,310 | INFO | Running sample_id=test_00516_C4_stronger_open_conflict
+2026-04-08 17:08:07,670 | INFO | Completed sample_id=test_00516_C4_stronger_open_conflict in 1.36s
+2026-04-08 17:08:07,671 | INFO | Finished model_key=llava15_7b with 14 successful generations.

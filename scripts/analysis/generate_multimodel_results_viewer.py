@@ -79,6 +79,45 @@ VIEWER_PRESETS = {
             "designDoc": ROOT / "docs" / "current" / "EXPERIMENT_STATUS_V3.md",
         },
     },
+    "vcor_balanced_rerun": {
+        "page_title": "VCoR-Balanced Multimodel Results Viewer",
+        "page_subtitle": "Preview of the Stanford+VCoR balanced rerun, with exact-match faithful scoring, six-color clean balancing, and auxiliary answer-space compliance outputs.",
+        "links": {
+            "primarySummary": ROOT / "analysis" / "current" / "vcor_balanced_primary" / "analysis_summary.md",
+            "auxiliarySummary": ROOT / "analysis" / "current" / "vcor_balanced_auxiliary" / "analysis_summary.md",
+            "primaryPlot": ROOT / "analysis" / "current" / "vcor_balanced_primary" / "plots" / "primary_cross_model_comparison.png",
+            "primaryOutcomePlot": ROOT / "analysis" / "current" / "vcor_balanced_primary" / "plots" / "primary_outcome_distribution.png",
+            "auxiliaryPlot": ROOT / "analysis" / "current" / "vcor_balanced_auxiliary" / "plots" / "auxiliary_cross_model_comparison.png",
+            "auxiliaryOutcomePlot": ROOT / "analysis" / "current" / "vcor_balanced_auxiliary" / "plots" / "auxiliary_outcome_distribution.png",
+            "primaryMetrics": ROOT / "analysis" / "current" / "vcor_balanced_primary" / "model_condition_metrics.csv",
+            "auxiliaryMetrics": ROOT / "analysis" / "current" / "vcor_balanced_auxiliary" / "model_condition_metrics.csv",
+            "finalManifest": ROOT / "data" / "processed" / "stanford_cars" / "primary_expanded_balanced_with_vcor.csv",
+            "excludedRecords": ROOT / "data_external" / "vcor_selected" / "rejected_manifest.csv",
+            "ambiguousExcluded": ROOT / "results_summary" / "current" / "vcor_balanced_rerun" / "manual_recheck_queue.csv",
+            "methodDoc": ROOT / "results_summary" / "current" / "vcor_balanced_rerun" / "dataset_update_note.md",
+            "resultsDoc": ROOT / "results_summary" / "current" / "vcor_balanced_rerun" / "paper_ready_results_summary.md",
+            "designDoc": ROOT / "results_summary" / "current" / "vcor_balanced_rerun" / "rerun_summary.md",
+        },
+    },
+    "stanford_core_vcor_robustness": {
+        "page_title": "Stanford-Core Multimodel Results Viewer",
+        "page_subtitle": "Preview of the rebuilt Stanford-only strict clean core, used as the robustness-aligned control against the VCoR-balanced rerun.",
+        "links": {
+            "primarySummary": ROOT / "analysis" / "current" / "stanford_core_primary" / "analysis_summary.md",
+            "auxiliarySummary": ROOT / "analysis" / "current" / "stanford_core_auxiliary" / "analysis_summary.md",
+            "primaryPlot": ROOT / "analysis" / "current" / "stanford_core_primary" / "plots" / "primary_cross_model_comparison.png",
+            "primaryOutcomePlot": ROOT / "analysis" / "current" / "stanford_core_primary" / "plots" / "primary_outcome_distribution.png",
+            "auxiliaryPlot": ROOT / "analysis" / "current" / "stanford_core_auxiliary" / "plots" / "auxiliary_cross_model_comparison.png",
+            "auxiliaryOutcomePlot": ROOT / "analysis" / "current" / "stanford_core_auxiliary" / "plots" / "auxiliary_outcome_distribution.png",
+            "primaryMetrics": ROOT / "analysis" / "current" / "stanford_core_primary" / "model_condition_metrics.csv",
+            "auxiliaryMetrics": ROOT / "analysis" / "current" / "stanford_core_auxiliary" / "model_condition_metrics.csv",
+            "finalManifest": ROOT / "data" / "processed" / "stanford_cars" / "primary_core_stanford_only.csv",
+            "excludedRecords": ROOT / "data" / "processed" / "stanford_cars" / "primary_core_excluded_latest_manual_review.csv",
+            "methodDoc": ROOT / "results_summary" / "current" / "vcor_balanced_rerun" / "dataset_update_note.md",
+            "resultsDoc": ROOT / "results_summary" / "current" / "vcor_balanced_rerun" / "rerun_summary.md",
+            "designDoc": ROOT / "results_summary" / "current" / "vcor_balanced_rerun" / "expanded_subset_build_log.md",
+        },
+    },
 }
 
 
@@ -147,6 +186,8 @@ def normalize_row(
         "sample_id": clean_value(row.get("sample_id")),
         "image_id": image_id,
         "file_name": clean_value(row.get("file_name")) or clean_value(manifest_row.get("file_name")),
+        "source_dataset": clean_value(row.get("source_dataset")) or clean_value(manifest_row.get("source_dataset")),
+        "source_split": clean_value(row.get("source_split")) or clean_value(manifest_row.get("source_split")) or clean_value(manifest_row.get("split")),
         "image_path": image_path,
         "image_href": to_rel(output_html, to_root_path(image_path)) if image_path else "",
         "original_image_path": original_path,
@@ -465,6 +506,9 @@ HTML_TEMPLATE += r"""<!DOCTYPE html>
       <label>True Color
         <select id="trueColorFilter"><option value="all">all</option></select>
       </label>
+      <label>Source Dataset
+        <select id="sourceDatasetFilter"><option value="all">all</option></select>
+      </label>
       <label>Conflict Color
         <select id="conflictColorFilter"><option value="all">all</option></select>
       </label>
@@ -495,6 +539,7 @@ HTML_TEMPLATE += r"""<!DOCTYPE html>
     const conditionFilter = document.getElementById('conditionFilter');
     const outcomeFilter = document.getElementById('outcomeFilter');
     const trueColorFilter = document.getElementById('trueColorFilter');
+    const sourceDatasetFilter = document.getElementById('sourceDatasetFilter');
     const conflictColorFilter = document.getElementById('conflictColorFilter');
     const parseFilter = document.getElementById('parseFilter');
     const searchInput = document.getElementById('searchInput');
@@ -575,6 +620,7 @@ HTML_TEMPLATE += r"""
         ['Models', formatCounts(records, 'model_key')],
         ['Outcomes', formatCounts(records, 'outcome_type')],
         ['Families', formatCounts(records, 'condition_family')],
+        ['Source Datasets', formatCounts(records, 'source_dataset')],
         ['True Colors', formatCounts(records, 'true_color')],
       ].map(item => `
         <div class="stat">
@@ -591,6 +637,7 @@ HTML_TEMPLATE += r"""
       if (conditionFilter.value !== 'all' && record.condition_name !== conditionFilter.value) return false;
       if (outcomeFilter.value !== 'all' && record.outcome_type !== outcomeFilter.value) return false;
       if (trueColorFilter.value !== 'all' && record.true_color !== trueColorFilter.value) return false;
+      if (sourceDatasetFilter.value !== 'all' && record.source_dataset !== sourceDatasetFilter.value) return false;
       if (conflictColorFilter.value !== 'all' && record.conflict_color !== conflictColorFilter.value) return false;
       if (parseFilter.value !== 'all' && String(record.parse_success) !== parseFilter.value) return false;
 
@@ -645,6 +692,7 @@ HTML_TEMPLATE += r"""
 
           <div class="meta-grid">
             <div class="meta-card"><div class="k">Condition</div><div class="v">${formatMaybe(record.condition_name)}</div></div>
+            <div class="meta-card"><div class="k">Source Dataset</div><div class="v">${formatMaybe(record.source_dataset)} / ${formatMaybe(record.source_split)}</div></div>
             <div class="meta-card"><div class="k">True / Conflict</div><div class="v">${formatMaybe(record.true_color)} / ${formatMaybe(record.conflict_color)}</div></div>
             <div class="meta-card"><div class="k">Model</div><div class="v">${formatMaybe(record.model_name)}</div></div>
             <div class="meta-card"><div class="k">Checkpoint</div><div class="v">${formatMaybe(record.checkpoint_name)}</div></div>
@@ -681,7 +729,7 @@ HTML_TEMPLATE += r"""
             <div class="thumb-wrap">${thumbHtml}</div>
             <div class="meta">
               <div class="group-title">${escapeHtml(imageId)}</div>
-              <div class="meta-line">class=${formatMaybe(first.class_name)} | split=${formatMaybe(first.split)} | truth=${formatMaybe(first.truth_source)}</div>
+              <div class="meta-line">source_dataset=${formatMaybe(first.source_dataset)} | source_split=${formatMaybe(first.source_split)} | class=${formatMaybe(first.class_name)} | split=${formatMaybe(first.split)} | truth=${formatMaybe(first.truth_source)}</div>
               <div class="meta-line">true_color=${formatMaybe(first.true_color)} | conflict_color=${formatMaybe(first.conflict_color)} | acceptable_true_colors=${formatMaybe(first.acceptable_true_colors)}</div>
               <div class="meta-line">prior_issue_flag=${formatMaybe(first.prior_issue_flag)} | reviewer_check_needed=${formatMaybe(first.reviewer_check_needed)} | include_in_primary_main_analysis=${formatMaybe(first.include_in_primary_main_analysis)}</div>
               <div class="meta-line">review_status=${formatMaybe(first.manifest_review_status)} | preliminary_color_guess=${formatMaybe(first.preliminary_color_guess)}</div>
@@ -723,6 +771,7 @@ HTML_TEMPLATE += r"""
       conditionFilter.value = 'all';
       outcomeFilter.value = 'all';
       trueColorFilter.value = 'all';
+      sourceDatasetFilter.value = 'all';
       conflictColorFilter.value = 'all';
       parseFilter.value = 'all';
       searchInput.value = '';
@@ -734,9 +783,10 @@ HTML_TEMPLATE += r"""
     populateSelect(conditionFilter, RECORDS.map(record => record.condition_name));
     populateSelect(outcomeFilter, RECORDS.map(record => record.outcome_type));
     populateSelect(trueColorFilter, RECORDS.map(record => record.true_color));
+    populateSelect(sourceDatasetFilter, RECORDS.map(record => record.source_dataset));
     populateSelect(conflictColorFilter, RECORDS.map(record => record.conflict_color));
 
-    [modelFilter, familyFilter, conditionFilter, outcomeFilter, trueColorFilter, conflictColorFilter, parseFilter]
+    [modelFilter, familyFilter, conditionFilter, outcomeFilter, trueColorFilter, sourceDatasetFilter, conflictColorFilter, parseFilter]
       .forEach(el => el.addEventListener('change', render));
     searchInput.addEventListener('input', render);
     resetBtn.addEventListener('click', resetFilters);

@@ -1,7 +1,0 @@
-﻿condition_name,left_model,right_model,estimate_left_minus_right,ci_low,ci_high
-A1_forced_choice_red_family,qwen2vl7b,llava15_7b,-0.4928571428571428,-0.5785714285714286,-0.40714285714285714
-A1_forced_choice_red_family,qwen2vl7b,internvl2_8b,-0.11428571428571427,-0.22142857142857142,-0.014285714285714235
-A1_forced_choice_red_family,llava15_7b,internvl2_8b,0.37857142857142856,0.2857142857142857,0.4714285714285714
-A2_counterfactual_assumption,qwen2vl7b,llava15_7b,-0.19999999999999996,-0.27142857142857146,-0.13571428571428568
-A2_counterfactual_assumption,qwen2vl7b,internvl2_8b,-0.19999999999999996,-0.26428571428571423,-0.13571428571428568
-A2_counterfactual_assumption,llava15_7b,internvl2_8b,0.0,0.0,0.0

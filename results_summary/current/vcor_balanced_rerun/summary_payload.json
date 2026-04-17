@@ -1,0 +1,24 @@
+{
+  "output_dir": "results_summary/current/vcor_balanced_rerun",
+  "files": [
+    "auxiliary_results_expanded_balanced.csv",
+    "auxiliary_results_stanford_core.csv",
+    "auxiliary_robustness_comparison.csv",
+    "data_layer_summary.csv",
+    "dataset_build_audit.csv",
+    "dataset_update_note.md",
+    "expanded_subset_build_log.md",
+    "manual_recheck_queue.csv",
+    "paper_ready_results_summary.md",
+    "primary_results_expanded_balanced.csv",
+    "primary_results_stanford_core.csv",
+    "primary_robustness_comparison.csv",
+    "rejection_reason_summary.csv",
+    "rerun_summary.md",
+    "summary_payload.json"
+  ],
+  "expanded_total": 300,
+  "stanford_only_total": 93,
+  "selected_vcor_total": 207,
+  "manual_recheck_queue_rows": 0
+}
