@@ -1,0 +1,157 @@
+dataset:
+  processed_dir: data/processed/stanford_cars
+  core_manifest_csv: data/balanced_eval_set/appendix_stanford_core_manifest.csv
+  final_manifest_csv: data/balanced_eval_set/final_manifest.csv
+  final_auxiliary_manifest_csv: data/balanced_eval_set/final_manifest.csv
+  core_excluded_csv: data/balanced_eval_set/appendix_stanford_core_excluded.csv
+  dataset_name: balanced_car_color_eval_set
+  experiment_type: balanced_car_color_conflict_mainline
+
+prompts:
+  dir: prompts
+  v2_primary_csv: prompts/c0_c4/main_c0_c4_prompts.csv
+  v2_auxiliary_csv: prompts/a1_a2/a1_a2_prompts.csv
+  v2_smoke_csv: prompts/c0_c4/smoke_prompts.csv
+  v2_primary_prompt_template_version: primary_conditions_v2_strict_colors
+  v2_auxiliary_prompt_template_version: auxiliary_conditions_v2_strict_colors
+
+outputs:
+  v2_root_dir: results/_legacy_runner_outputs
+  offload_dir: results/_offload
+  main_dir: results
+  model_dir_templates:
+    smoke: "{model_key}_smoke"
+    primary: "{model_key}_primary"
+    auxiliary: "{model_key}_auxiliary"
+
+models:
+  - model_key: qwen2vl7b
+    model_type: qwen2_vl
+    model_name: Qwen2-VL-7B-Instruct
+    checkpoint_name: Qwen/Qwen2-VL-7B-Instruct
+    local_dir: models/qwen2_vl_7b
+    precision: auto
+    batch_size: 1
+    max_new_tokens: 8
+  - model_key: llava15_7b
+    model_type: llava
+    model_name: LLaVA-1.5-7B
+    checkpoint_name: llava-hf/llava-1.5-7b-hf
+    local_dir: models/llava_1_5_7b_hf
+    precision: float16
+    batch_size: 1
+    max_new_tokens: 8
+  - model_key: internvl2_8b
+    model_type: internvl2
+    model_name: InternVL2-8B
+    checkpoint_name: OpenGVLab/InternVL2-8B
+    local_dir: models/internvl2_8b
+    precision: bfloat16
+    batch_size: 1
+    max_new_tokens: 8
+    max_num_tiles: 1
+
+inference:
+  use_4bit: false
+  batch_size: 1
+  smoke_limit: 12
+  max_new_tokens: 12
+  temperature: 0.0
+  top_p: 1.0
+  do_sample: false
+  precision_preference: auto
+
+analysis:
+  bootstrap_samples: 5000
+  random_seed: 42
+  rare_event_ci_method: wilson
+  v2_primary_dir: results/main
+  v2_auxiliary_dir: results/auxiliary
+  v2_cross_model_dir: results/appendix
+
+color_policy:
+  variant_name: strict_colors_balanced_eval_mainline
+  primary_main_analysis_labels:
+    - red
+    - blue
+    - green
+    - yellow
+    - black
+    - white
+  excluded_primary_labels:
+    - silver
+    - gray
+    - other
+  primary_output_labels:
+    - red
+    - blue
+    - green
+    - yellow
+    - black
+    - white
+    - other
+  recognized_nonstandard_labels:
+    - gray
+    - silver
+  conflict_color_map:
+    red: blue
+    blue: red
+    green: yellow
+    yellow: red
+    black: white
+    white: black
+    gray: red
+    silver: blue
+    other: red
+  enforce_exact_faithful_match: true
+  exclude_historical_issue_ids: false
+
+dataset_builder:
+  base_manifest_csv: data/processed/stanford_cars/final_primary_manifest_strict_colors.csv
+  target_per_color: 50
+  core_manual_exclude_ids:
+    - test_01079
+    - test_02823
+    - test_04952
+    - test_05175
+    - test_06328
+    - test_06708
+    - test_06787
+    - train_07422
+    - train_04054
+    - train_01346
+  comparison_csv: results/appendix/stanford_core_to_balanced_counts.csv
+  comparison_md: results/appendix/stanford_core_to_balanced_counts.md
+  log_path: logs/build_balanced_eval_set.log
+  pipeline_log_path: logs/run_balanced_eval_pipeline.log
+
+vcor:
+  raw_dir: data_external/vcor_raw
+  selected_dir: data_external/vcor_selected
+  inventory_csv: data_external/vcor_selected/vcor_inventory.csv
+  dataset_root_marker: data_external/vcor_selected/vcor_dataset_root.json
+  candidate_pool_dir: data_external/vcor_selected/candidate_pool
+  candidate_review_csv: data_external/vcor_selected/candidate_review.csv
+  candidate_plan_csv: data_external/vcor_selected/candidate_plan.csv
+  candidate_contact_dir: reports/current/vcor_candidate_review
+  screen_csv: data_external/vcor_selected/candidate_auto_screen.csv
+  screen_summary_csv: data_external/vcor_selected/candidate_auto_screen_summary.csv
+  screen_preview_dir: reports/current/vcor_auto_screen
+  selected_manifest_csv: data_external/vcor_selected/selected_manifest.csv
+  rejected_manifest_csv: data_external/vcor_selected/rejected_manifest.csv
+  log_path: logs/stage_vcor_dataset.log
+  candidate_log_path: logs/build_vcor_candidate_pool.log
+  screen_log_path: logs/auto_screen_vcor_candidates.log
+
+paper:
+  metadata_dir: data/metadata/balanced_eval_set
+  baseline_prompt_csv: prompts/c0_c4/c0_baseline_prompts.csv
+  main_prompt_csv: prompts/c0_c4/main_c0_c4_prompts.csv
+  main_nonbaseline_prompt_csv: prompts/c0_c4/main_c1_c4_prompts.csv
+  aux_prompt_csv: prompts/a1_a2/a1_a2_prompts.csv
+  results:
+    baseline_dir: results/baseline
+    main_dir: results/main
+    aux_dir: results/auxiliary
+    appendix_dir: results/appendix
+  archive_dir: archive/deprecated_20260417

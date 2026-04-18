@@ -1,0 +1,15 @@
+{
+  "model_key": "internvl2_8b",
+  "model_name": "InternVL2-8B",
+  "checkpoint_name": "OpenGVLab/InternVL2-8B",
+  "precision": "bfloat16",
+  "device": "cuda:0+cpu_offload",
+  "device_map": "auto",
+  "batch_size": "1",
+  "input_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\prompts\\a1_a2\\a1_a2_prompts.csv",
+  "output_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\auxiliary\\raw\\internvl2_8b\\aux_a1_a2_runtime.csv",
+  "max_new_tokens": 8,
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "limit": null
+}

@@ -1,0 +1,6 @@
+﻿image_id,true_color,exclusion_reason,notes
+test_04952,black,latest_manual_ambiguity_exclusion,reviewer_check_needed | codex_single_review_contact_sheet_confirmed: reviewed=black | residual_black_vehicle_misread_after_v2_refresh
+test_06328,blue,latest_manual_ambiguity_exclusion,codex_single_review_contact_sheet_confirmed: reviewed=blue
+test_06708,black,latest_manual_ambiguity_exclusion,prior_issue_flag | codex_second_review_correction: reviewed=blue -> black; reason=other_wrong_audit
+test_06787,black,latest_manual_ambiguity_exclusion,prior_issue_flag | codex_second_review_correction: reviewed=red -> black; reason=other_wrong_audit
+train_01346,black,latest_manual_ambiguity_exclusion,prior_issue_flag | reviewer_check_needed | codex_single_review_contact_sheet_correction: provisional=other -> reviewed=black | residual_black_vehicle_misread_after_v2_refresh

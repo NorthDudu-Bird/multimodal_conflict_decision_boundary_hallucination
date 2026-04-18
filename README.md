@@ -1,44 +1,40 @@
-# Multimodal Conflict Decision Boundary Hallucination
+# Balanced Car-Color Conflict Mainline
 
-This workspace is now cleaned down to one main active experiment line plus one optional control line:
+This repository is now organized around one paper mainline only:
 
-- `configs/current/restructured_experiment_vcor_balanced.yaml`
-  Active main experiment: Stanford Cars + VCoR strict clean balanced rerun
-- `configs/current/restructured_experiment_stanford_core_vcor_robustness.yaml`
-  Stanford-only strict clean core control rerun for robustness only
+- final balanced evaluation set
+- C0 baseline
+- C0-C4 main experiment
+- A1/A2 auxiliary experiment
+- three-model comparison: `LLaVA-1.5-7B`, `Qwen2-VL-7B-Instruct`, `InternVL2-8B`
 
-Open these first:
+Start here:
 
-- `results_summary/current/vcor_balanced_rerun/`
-- `reports/current/vcor_balanced_multimodel_results_viewer.html`
-- `data/processed/stanford_cars/primary_expanded_balanced_with_vcor.csv`
+- `docs/experiment_plan.md`
+- `docs/reproduction.md`
+- `docs/project_audit.md`
+- `results/main/table1_main_metrics.md`
+- `results/main/figure2_conflict_aligned_rates.png`
+- `results/auxiliary/table3_aux_metrics.md`
+- `results/appendix/dataset_distribution.png`
 
-The main viewer and the main manifest already mix Stanford Cars and VCoR together.
-Use `source_dataset` and `source_split` to see where each image came from.
-You do not need separate dataset browsers as the default workflow.
+Official paper-facing entrypoints:
 
-Active results live in:
+- `python scripts/build_dataset.py`
+- `python scripts/run_baseline_c0.py`
+- `python scripts/run_main_c0_c4.py`
+- `python scripts/run_aux_a1_a2.py`
+- `python scripts/make_figures.py`
 
-- `analysis/current/vcor_balanced_primary/`
-- `analysis/current/vcor_balanced_auxiliary/`
-- `analysis/current/stanford_core_primary/`
-- `analysis/current/stanford_core_auxiliary/`
-- `outputs/current_vcor_balanced/`
-- `outputs/current_stanford_core/`
+Official paper-facing assets:
 
-Active prompts live in:
+- `data/balanced_eval_set/final_manifest.csv`
+- `prompts/c0_c4/c0_baseline_prompts.csv`
+- `prompts/c0_c4/main_c0_c4_prompts.csv`
+- `prompts/a1_a2/a1_a2_prompts.csv`
+- `results/baseline/`
+- `results/main/`
+- `results/auxiliary/`
+- `results/appendix/`
 
-- `prompts/current/vcor_balanced_primary_prompts.csv`
-- `prompts/current/vcor_balanced_auxiliary_prompts.csv`
-- `prompts/current/stanford_core_primary_prompts.csv`
-- `prompts/current/stanford_core_auxiliary_prompts.csv`
-
-Optional control-only entry points:
-
-- `reports/current/stanford_core_multimodel_results_viewer.html`
-- `data/processed/stanford_cars/primary_core_stanford_only.csv`
-
-Cleanup note:
-
-- Old experiments, old viewers, old prompts, old report images, old markdown files, and legacy archives were moved out of the active workspace locally.
-- The current GitHub snapshot focuses on the active mainline and does not include local cleanup archives or raw external dataset packages.
+Deprecated or down-scoped material has either been archived or removed from the default workflow. The old Stanford-only control is appendix-only and is no longer a primary entrypoint.

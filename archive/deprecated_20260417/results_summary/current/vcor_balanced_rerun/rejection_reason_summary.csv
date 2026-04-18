@@ -1,0 +1,20 @@
+﻿reason_group,count
+secondary_car_interference,426
+passes_auto_screen,330
+highlight_overexposed,65
+secondary_car_interference|highlight_overexposed,55
+secondary_car_interference|weak_color_match,34
+too_dark,30
+weak_color_match,28
+car_too_small,23
+secondary_car_interference|too_dark,22
+car_too_small|weak_color_match,17
+car_too_small|highlight_overexposed,12
+highlight_overexposed|weak_color_match,3
+too_dark|weak_color_match,2
+user_requested_swap_out | passes_auto_screen,2
+car_too_small|too_dark,2
+user_requested_swap_out | secondary_car_interference,1
+secondary_car_interference|weak_color_match|possibly_blurry,1
+manual_swap_out_after_black_recheck | looks_plum_brownish | passes_auto_screen,1
+car_too_small|weak_color_match|possibly_blurry,1

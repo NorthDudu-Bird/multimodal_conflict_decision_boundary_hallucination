@@ -1,0 +1,9 @@
+{
+  "mode": "main",
+  "combined_csv": "results\\main\\main_combined_parsed_results.csv",
+  "metrics_csv": "results\\main\\main_condition_metrics.csv",
+  "tests_csv": "results\\main\\main_exact_tests.csv",
+  "cases_csv": "results\\main\\main_representative_cases.csv",
+  "summary_md": "results\\main\\main_summary.md",
+  "rows": 4500
+}

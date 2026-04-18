@@ -1,0 +1,15 @@
+{
+  "model_key": "qwen2vl7b",
+  "model_name": "Qwen2-VL-7B-Instruct",
+  "checkpoint_name": "Qwen/Qwen2-VL-7B-Instruct",
+  "precision": "bfloat16",
+  "device": "cuda:0+cpu_offload",
+  "device_map": "auto",
+  "batch_size": "1",
+  "input_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\prompts\\a1_a2\\a1_a2_prompts.csv",
+  "output_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\auxiliary\\raw\\qwen2vl7b\\aux_a1_a2_runtime.csv",
+  "max_new_tokens": 8,
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "limit": null
+}

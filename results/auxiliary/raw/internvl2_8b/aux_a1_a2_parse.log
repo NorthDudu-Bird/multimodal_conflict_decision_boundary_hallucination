@@ -1,0 +1,2 @@
+2026-04-18 06:44:05,203 | INFO | Parsing raw results: D:\multimodal_conflict_decision_boundary_hallucination\results\auxiliary\raw\internvl2_8b\aux_a1_a2_raw_results.csv
+2026-04-18 06:44:05,827 | INFO | Parse summary: {"input_rows": 600, "outcome_counts": {"conflict_aligned": 521, "faithful": 79}, "output_csv": "results/auxiliary/raw/internvl2_8b/aux_a1_a2_parsed_results.csv", "review_csv": "results/auxiliary/raw/internvl2_8b/aux_a1_a2_parse_review.csv", "review_rows": 0, "summary_md": "results/auxiliary/raw/internvl2_8b/aux_a1_a2_parse_summary.md"}

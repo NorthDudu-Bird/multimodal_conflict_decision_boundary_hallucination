@@ -1,0 +1,7 @@
+﻿metric,value
+final_total,300
+core_stanford_total,93
+vcor_selected_total,207
+vcor_rejected_total,1055
+core_excluded_total,5
+target_per_color,50
