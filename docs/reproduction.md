@@ -1,87 +1,136 @@
 # 复现实验说明
 
+本文档对应当前唯一官方论文流程：平衡评测集、`C0`、`C0-C4`、`A1/A2`、`C3` prompt 变体控制、parser audit、附录来源 sanity check，以及最终复现一致性校验。
+
 ## 1. 环境
 
-- Python 依赖见 `requirements.txt`
-- 论文主线配置文件：`configs/paper_mainline.yaml`
-- 本地模型目录默认使用：
+- 配置文件：`configs/paper_mainline.yaml`
+- Python 依赖：`requirements.txt`
+- 模型目录：
   - `models/qwen2_vl_7b`
   - `models/llava_1_5_7b_hf`
   - `models/internvl2_8b`
 
-## 2. 数据准备
+## 2. 先创建锁定结果快照
 
-构建最终平衡评测集：
+最终提交前，先把当前锁定结果复制到忽略目录 `logs/reproducibility_snapshot/latest/`，供重跑后逐项比对。
+
+```powershell
+$repo = Resolve-Path .
+$snapshot = Join-Path $repo "logs\\reproducibility_snapshot\\latest"
+if (Test-Path $snapshot) { Remove-Item -LiteralPath $snapshot -Recurse -Force }
+
+$targets = @(
+  "data\\balanced_eval_set",
+  "data\\metadata\\balanced_eval_set",
+  "prompts\\c0_c4",
+  "prompts\\a1_a2",
+  "prompts\\robustness",
+  "results\\baseline",
+  "results\\main",
+  "results\\auxiliary",
+  "results\\robustness",
+  "results\\parser",
+  "results\\appendix",
+  "results\\final_result_summary.md"
+)
+
+foreach ($rel in $targets) {
+  $src = Join-Path $repo $rel
+  if (Test-Path $src) {
+    $dst = Join-Path $snapshot $rel
+    New-Item -ItemType Directory -Force -Path (Split-Path $dst -Parent) | Out-Null
+    Copy-Item -LiteralPath $src -Destination $dst -Recurse -Force
+  }
+}
+```
+
+## 3. 清空待重建结果
+
+只清空当前生成结果，不清理数据源和模型权重：
+
+```powershell
+$repo = Resolve-Path .
+$generated = @(
+  "results\\baseline",
+  "results\\main",
+  "results\\auxiliary",
+  "results\\robustness",
+  "results\\parser",
+  "results\\appendix"
+)
+
+foreach ($rel in $generated) {
+  $path = Join-Path $repo $rel
+  if (Test-Path $path) { Remove-Item -LiteralPath $path -Recurse -Force }
+}
+
+$variantCsv = Join-Path $repo "prompts\\robustness\\c3_prompt_variants.csv"
+if (Test-Path $variantCsv) { Remove-Item -LiteralPath $variantCsv -Force }
+```
+
+## 4. 全量重跑顺序
+
+严格按以下顺序执行，不加 `--limit`，三模型全跑：
 
 ```bash
 python scripts/build_dataset.py
-```
-
-构建后请使用：
-
-- `data/balanced_eval_set/final_manifest.csv`
-- `data/metadata/balanced_eval_set/balanced_eval_set_summary.json`
-- `data/metadata/balanced_eval_set/dataset_distribution.csv`
-
-## 3. 运行基线与主实验
-
-运行 `C0` 基线：
-
-```bash
-python scripts/run_baseline_c0.py
-```
-
-运行 `C0-C4` 主实验：
-
-```bash
-python scripts/run_main_c0_c4.py
-```
-
-运行 `A1/A2` 辅助实验：
-
-```bash
-python scripts/run_aux_a1_a2.py
-```
-
-如需只跑部分模型：
-
-```bash
-python scripts/run_main_c0_c4.py --models qwen2vl7b llava15_7b
-```
-
-## 4. 生成论文表格与图
-
-```bash
+python scripts/run_baseline_c0.py --skip-build
+python scripts/run_main_c0_c4.py --skip-build
+python scripts/run_aux_a1_a2.py --skip-build
+python scripts/run_robustness_c3_prompt_variants.py --skip-build
+python scripts/generate_parser_audit.py
 python scripts/make_figures.py
+python scripts/verify_reproducibility.py
 ```
 
-主要输出位置：
+## 5. 关键输出
 
-- `results/baseline/`
-- `results/main/`
-- `results/auxiliary/`
-- `results/appendix/`
+- 数据集：
+  - `data/balanced_eval_set/final_manifest.csv`
+  - `data/metadata/balanced_eval_set/balanced_eval_set_summary.json`
+- 主实验：
+  - `results/main/table1_main_metrics.csv`
+  - `results/main/main_key_tests.csv`
+  - `results/main/main_stats_summary.md`
+  - `results/main/figure2_conflict_aligned_rates.png`
+- 辅助实验：
+  - `results/auxiliary/table3_aux_metrics.csv`
+- 鲁棒性：
+  - `results/robustness/prompt_variant_metrics.csv`
+  - `results/robustness/prompt_variant_exact_tests.csv`
+  - `results/robustness/prompt_variant_summary.md`
+- 解析审查：
+  - `results/parser/label_mapping_audit.md`
+  - `results/parser/ambiguous_outputs_sample.csv`
+- 附录 sanity check：
+  - `results/appendix/stanford_core_sanity_check.csv`
+  - `results/appendix/stanford_core_sanity_check.md`
+- 总摘要：
+  - `results/final_result_summary.md`
+- 复现比对：
+  - `results/reproducibility_comparison.csv`
+  - `results/reproducibility_audit.md`
 
-## 5. 关键结果文件
+## 6. 验收标准
 
-- Table 1：`results/main/table1_main_metrics.csv`
-- Figure 2：`results/main/figure2_conflict_aligned_rates.png`
-- Table 3：`results/auxiliary/table3_aux_metrics.csv`
-- 数据集分布图：`results/appendix/dataset_distribution.png`
-- 主实验统计检验：`results/main/main_exact_tests.csv`
-- 辅助实验统计检验：`results/auxiliary/aux_exact_tests.csv`
-- 代表性案例：
-  - `results/main/main_representative_cases.csv`
-  - `results/auxiliary/aux_representative_cases.csv`
+`python scripts/verify_reproducibility.py` 必须通过，且至少满足：
 
-## 6. 已废弃或不应再默认使用的内容
+- `C0` 三模型仍为完美视觉忠实
+- `results/main/main_key_tests.csv` 仍为 12 行
+- `results/robustness/prompt_variant_metrics.csv` 仍为 9 行
+- `results/parser/ambiguous_outputs_sample.csv` 仍为 27 行
+- `results/appendix/stanford_core_sanity_check.csv` 仍为 12 行
+- 最终口径仍为：`LLaVA-1.5-7B` 的现象是有限且模板敏感的语言偏差，而不是稳定的跨 wording 规律
 
-以下内容不再属于当前论文默认主流程：
+## 7. 不再使用的旧入口
 
-- Stanford-only 控制主流程脚本
-- `robustness` 命名的旧总结文件
-- `LDI / RPE / decision boundary / threshold` 叙事
-- `results_summary/current/` 一类旧式汇总目录
-- `external_review_pack_current/` 之类的对外打包目录
+以下旧路径不再属于当前 GitHub 默认工作流：
 
-这些内容如果仍保留，只作为归档或 appendix 参考，不再作为正文入口。
+- 旧 `current` 配置树
+- 旧 `current` prompt 树
+- 旧分析目录
+- 旧输出目录
+- 旧预览与 review 目录
+- 旧可视化预览页面
+- 旧一键流水线

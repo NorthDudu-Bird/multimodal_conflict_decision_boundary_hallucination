@@ -2,6 +2,9 @@
   "table1": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\main\\table1_main_metrics.csv",
   "figure2": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\main\\figure2_conflict_aligned_rates.png",
   "table3": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\auxiliary\\table3_aux_metrics.csv",
+  "main_key_tests": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\main\\main_key_tests.csv",
+  "main_stats_summary": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\main\\main_stats_summary.md",
   "dataset_figure": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\appendix\\dataset_distribution.png",
+  "appendix_sanity_check": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\appendix\\stanford_core_sanity_check.csv",
   "baseline_summary": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\baseline\\baseline_summary.md"
 }

@@ -133,10 +133,10 @@ vcor:
   candidate_pool_dir: data_external/vcor_selected/candidate_pool
   candidate_review_csv: data_external/vcor_selected/candidate_review.csv
   candidate_plan_csv: data_external/vcor_selected/candidate_plan.csv
-  candidate_contact_dir: reports/current/vcor_candidate_review
+  candidate_contact_dir: logs/vcor_candidate_review
   screen_csv: data_external/vcor_selected/candidate_auto_screen.csv
   screen_summary_csv: data_external/vcor_selected/candidate_auto_screen_summary.csv
-  screen_preview_dir: reports/current/vcor_auto_screen
+  screen_preview_dir: logs/vcor_auto_screen
   selected_manifest_csv: data_external/vcor_selected/selected_manifest.csv
   rejected_manifest_csv: data_external/vcor_selected/rejected_manifest.csv
   log_path: logs/stage_vcor_dataset.log
@@ -149,9 +149,10 @@ paper:
   main_prompt_csv: prompts/c0_c4/main_c0_c4_prompts.csv
   main_nonbaseline_prompt_csv: prompts/c0_c4/main_c1_c4_prompts.csv
   aux_prompt_csv: prompts/a1_a2/a1_a2_prompts.csv
+  robustness_prompt_csv: prompts/robustness/c3_prompt_variants.csv
   results:
     baseline_dir: results/baseline
     main_dir: results/main
     aux_dir: results/auxiliary
+    robustness_dir: results/robustness
     appendix_dir: results/appendix
-  archive_dir: archive/deprecated_20260417

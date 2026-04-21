@@ -24,11 +24,19 @@ PRIMARY_CONDITION_ORDER = [
     "C3_presupposition_correction_allowed",
     "C4_stronger_open_conflict",
 ]
+PRIMARY_CONDITION_SHORT_LABELS = {
+    "C0_neutral": "C0",
+    "C1_weak_suggestion": "C1",
+    "C2_false_assertion_open": "C2",
+    "C3_presupposition_correction_allowed": "C3",
+    "C4_stronger_open_conflict": "C4",
+}
 AUXILIARY_CONDITION_ORDER = [
     "A1_forced_choice_red_family",
     "A2_counterfactual_assumption",
 ]
 MODEL_ORDER = ["qwen2vl7b", "llava15_7b", "internvl2_8b"]
+ROBUSTNESS_VARIANT_ORDER = ["C3_original", "C3_v2", "C3_v3"]
 
 
 def load_paper_config(config_path: Path | None = None) -> dict:
@@ -49,11 +57,12 @@ def paper_paths(config: dict) -> dict[str, Path]:
         "main_prompt_csv": repo_path(paper_cfg["main_prompt_csv"]),
         "main_nonbaseline_prompt_csv": repo_path(paper_cfg["main_nonbaseline_prompt_csv"]),
         "aux_prompt_csv": repo_path(paper_cfg["aux_prompt_csv"]),
+        "robustness_prompt_csv": repo_path(paper_cfg["robustness_prompt_csv"]),
         "baseline_dir": repo_path(results_cfg["baseline_dir"]),
         "main_dir": repo_path(results_cfg["main_dir"]),
         "aux_dir": repo_path(results_cfg["aux_dir"]),
+        "robustness_dir": repo_path(results_cfg["robustness_dir"]),
         "appendix_dir": repo_path(results_cfg["appendix_dir"]),
-        "archive_dir": repo_path(paper_cfg["archive_dir"]),
     }
 
 

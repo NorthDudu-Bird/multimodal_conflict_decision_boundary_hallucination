@@ -2,28 +2,34 @@
 
 ## 已完成
 
-- 数据集主线重构：完成
-- 平衡评测集 metadata 重建：完成
-- `C0` 基线路径全量 rerun：完成
-- `C0-C4` 主实验新目录全量 raw rerun：完成
-- `A1/A2` 辅助实验新目录全量 raw rerun：完成
-- `analyze_results.py` 聚合分析重算：完成
-- Table 1 / Figure 2 / Table 3 / 数据集分布图：完成
-- 文档重写：完成
-- 旧主流程归档：完成
+- 数据集重建：完成
+- `C0` 全量重跑：完成
+- `C0-C4` 全量重跑：完成
+- `A1/A2` 全量重跑：完成
+- `C3` prompt wording 鲁棒性控制全量重跑：完成
+- parser audit 重建：完成
+- Table 1 / Figure 2 / Table 3 / 附录图表重建：完成
+- 主实验关键统计与附录 source sanity check 重建：完成
+- 顶层文档与交付包整理：完成
+- 复现比对：完成
 
-## 当前状态
+## 复现结果
 
-当前论文主线所需的四类结果目录已经齐备：
+- 复现快照位置：`logs/reproducibility_snapshot/latest/`
+- 比对文件：`results/reproducibility_comparison.csv`
+- 审计摘要：`results/reproducibility_audit.md`
+- 结论：本次全量重跑在 canonical 结果层面与锁定结果一致
+
+## 当前可用结果目录
 
 - `results/baseline/`
 - `results/main/`
 - `results/auxiliary/`
+- `results/robustness/`
+- `results/parser/`
 - `results/appendix/`
 
-其中 `main` 与 `auxiliary` 的逐样本 raw 结果、解析结果、聚合统计、代表性案例和图表都已经与本次重构后的脚本入口对齐。
+## 说明
 
-## 备注
-
-- 为避免 Windows 保留名 `AUX` 带来的路径兼容性问题，辅助实验的论文输出目录已统一规范为 `results/auxiliary/`。
-- 历史生成的 `results/aux/` 仅保留为兼容过渡痕迹，不再作为默认引用路径。
+- 复现判定依据是 manifest、prompt、解析结果、条件统计、关键检验、parser audit、appendix sanity check 与总摘要等 canonical 论文资产。
+- `*.log`、runtime CSV、run metadata JSON 与 raw free-text output 不属于阻断型复现门槛，只要解析结果和下游统计完全一致即可。

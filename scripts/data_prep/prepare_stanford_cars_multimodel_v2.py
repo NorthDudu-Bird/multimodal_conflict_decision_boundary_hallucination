@@ -383,8 +383,12 @@ def build_expanded_included_row(
 
 def write_color_distribution_summary(config: dict, expanded_stats: dict[str, object]) -> None:
     dataset_cfg = config["dataset"]
-    csv_path = repo_path(dataset_cfg.get("color_distribution_csv", "analysis/current/color_distribution_v4_expanded.csv"))
-    md_path = repo_path(dataset_cfg.get("color_distribution_md", "analysis/current/color_distribution_v4_expanded.md"))
+    csv_path = repo_path(
+        dataset_cfg.get("color_distribution_csv", "data/metadata/balanced_eval_set/legacy_color_distribution.csv")
+    )
+    md_path = repo_path(
+        dataset_cfg.get("color_distribution_md", "data/metadata/balanced_eval_set/legacy_color_distribution.md")
+    )
     ensure_dirs([csv_path.parent, md_path.parent])
 
     rows: list[dict[str, object]] = []

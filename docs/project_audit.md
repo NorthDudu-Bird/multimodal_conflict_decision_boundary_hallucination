@@ -1,50 +1,52 @@
-# 项目审计结论
+# 最终清理审计
 
-## 1. 当前主线最可能对应的文件
+## 保留的子系统
 
-- 数据：
-  - `data/processed/stanford_cars/primary_expanded_balanced_with_vcor.csv`
-  - `data_external/vcor_selected/selected_manifest.csv`
-- 提示：
-  - `prompts/current/vcor_balanced_primary_prompts.csv`
-  - `prompts/current/vcor_balanced_auxiliary_prompts.csv`
-- 推理：
-  - `scripts/inference/run_multimodel_batch.py`
-  - `scripts/parsing/parse_restructured_car_color_outputs.py`
-- 旧分析主线：
-  - `analysis/current/vcor_balanced_primary/`
-  - `analysis/current/vcor_balanced_auxiliary/`
+- `data/`：平衡评测集与 Stanford appendix 清单
+- `data_external/`：VCoR 选择记录与来源元数据
+- `prompts/c0_c4/`、`prompts/a1_a2/`：正式提示表
+- `scripts/`：论文主线实际调用的构建、推理、解析、分析和复现校验脚本
+- `results/`：当前论文正式输出
+- `deliverables/`：最终 ZIP 交付包
 
-这些文件说明仓库里已经存在“最终平衡评测集 + C0-C4 + A1/A2 + 三模型”的核心实验能力。
+## 本次下线或删除的旧内容
 
-## 2. 与当前论文主线冲突或会造成误用的部分
+- `archive/`
+- `analysis/`
+- `outputs/`
+- 旧预览与 review 目录
+- 旧 `current` 配置树
+- 旧 `current` prompt 树
+- 旧 Stanford-only 并列主流程
+- 旧可视化预览页面和旧 review pack
+- `decision boundary / threshold / LDI / RPE` 一类不再使用的旧包装
 
-- Stanford-only 作为并列主流程的配置、结果和 viewer
-- `robustness`、`RPE`、`LDI` 这类旧包装
-- `results_summary/current/` 里围绕旧叙事组织的总结文件
-- `external_review_pack_current/` 之类对外整理包
-- 旧版 `run_multimodel_stanford_cars_pipeline_v2.py`
+## 清理原则
 
-这些内容会把注意力从“最终平衡评测集上的主实验”重新拉回旧对照线或旧理论包装。
+- 只保留能直接服务当前论文主线复现与投稿交付的内容
+- 删除会把读者重新带回旧叙事或旧流水线的入口
+- 把结果可信度建立在主实验统计、prompt 变体控制、parser audit 和 source sanity check 上，而不是靠大叙事扩展
 
-## 3. 可删除、归档或下线的内容类型
+## 当前公开入口
 
-- Stanford-only 主流程入口
-- 决策边界 / 阈值 / 语言主导率包装输出
-- 旧版综合总结脚本与对外 review 包
-- 历史中间结果和旧 viewer
+- 项目总览：`README.md`
+- 快速入口：`START_HERE.md`
+- 复现说明：`docs/reproduction.md`
+- 冻结实验计划：`docs/experiment_plan.md`
+- 官方脚本：
+  - `scripts/build_dataset.py`
+  - `scripts/run_baseline_c0.py`
+  - `scripts/run_main_c0_c4.py`
+  - `scripts/run_aux_a1_a2.py`
+  - `scripts/run_robustness_c3_prompt_variants.py`
+  - `scripts/generate_parser_audit.py`
+  - `scripts/make_figures.py`
+  - `scripts/verify_reproducibility.py`
 
-## 4. 原仓库缺失的关键能力
+## 结论边界
 
-- 论文专用目录与统一入口脚本
-- 单独可跑的 `C0` 基线脚本
-- 以 Wilson CI 和 paired exact McNemar 为核心的比例分析
-- 直接生成 Table 1 / Figure 2 / Table 3 / 数据集分布图
-- 面向论文主线的复现实验文档
+当前仓库支持的最终结论是一个窄而保守的 empirical claim：
 
-## 5. 本次重构后的保留原则
-
-- 保留稳定的底层推理、解析和数据构建能力
-- 新增论文专用配置、入口脚本、结果目录和文档
-- 将 Stanford-only 降级为 appendix-only sanity check
-- 不再把旧理论包装放在默认结果导出中
+- 视觉证据在本任务中总体占主导；
+- `LLaVA-1.5-7B` 只在原始强误导开放式模板下出现有限而显著的 conflict-aligned 偏移；
+- 该偏移对 wording 敏感，因此不能写成稳定的跨模板规律。

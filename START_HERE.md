@@ -1,27 +1,26 @@
 # Start Here
 
-If you only need the current paper workflow, use these files and ignore the legacy paths:
+如果你只关心当前论文定版版本，请按下面顺序看：
 
-1. `docs/experiment_plan.md`
-2. `docs/reproduction.md`
-3. `data/balanced_eval_set/final_manifest.csv`
-4. `prompts/c0_c4/c0_baseline_prompts.csv`
-5. `prompts/c0_c4/main_c0_c4_prompts.csv`
-6. `prompts/a1_a2/a1_a2_prompts.csv`
-7. `scripts/run_baseline_c0.py`
-8. `scripts/run_main_c0_c4.py`
-9. `scripts/run_aux_a1_a2.py`
-10. `scripts/make_figures.py`
+1. [README.md](README.md)
+2. [docs/reproduction.md](docs/reproduction.md)
+3. [results/final_result_summary.md](results/final_result_summary.md)
+4. [results/main/table1_main_metrics.md](results/main/table1_main_metrics.md)
+5. [results/robustness/prompt_variant_summary.md](results/robustness/prompt_variant_summary.md)
+6. [results/parser/label_mapping_audit.md](results/parser/label_mapping_audit.md)
+7. [results/appendix/stanford_core_sanity_check.md](results/appendix/stanford_core_sanity_check.md)
 
-Paper outputs:
+唯一官方脚本入口：
 
-- `results/baseline/`
-- `results/main/`
-- `results/auxiliary/`
-- `results/appendix/`
+```bash
+python scripts/build_dataset.py
+python scripts/run_baseline_c0.py
+python scripts/run_main_c0_c4.py
+python scripts/run_aux_a1_a2.py
+python scripts/run_robustness_c3_prompt_variants.py
+python scripts/generate_parser_audit.py
+python scripts/make_figures.py
+python scripts/verify_reproducibility.py
+```
 
-Audit and cleanup notes:
-
-- `docs/project_audit.md`
-
-Do not use the old Stanford-only control pipeline as a default workflow.
+不要再使用旧的 `current` 配置树、旧 `current` prompt 树、旧可视化预览页面或 Stanford-only 并列主流程。

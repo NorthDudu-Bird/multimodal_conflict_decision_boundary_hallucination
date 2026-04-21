@@ -1,9 +1,9 @@
 {
   "mode": "aux",
-  "combined_csv": "results\\auxiliary\\aux_combined_parsed_results.csv",
-  "metrics_csv": "results\\auxiliary\\aux_condition_metrics.csv",
-  "tests_csv": "results\\auxiliary\\aux_exact_tests.csv",
-  "cases_csv": "results\\auxiliary\\aux_representative_cases.csv",
-  "summary_md": "results\\auxiliary\\aux_summary.md",
+  "combined_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\auxiliary\\aux_combined_parsed_results.csv",
+  "metrics_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\auxiliary\\aux_condition_metrics.csv",
+  "tests_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\auxiliary\\aux_exact_tests.csv",
+  "cases_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\auxiliary\\aux_representative_cases.csv",
+  "summary_md": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\auxiliary\\aux_summary.md",
   "rows": 1800
 }

@@ -17,3 +17,6 @@ vendor/
 data_external/vcor_raw/
 data_external/vcor_selected/candidate_pool/
 clean/
+deliverables/gpt_paper_writing_pack_20260418/
+deliverables/gpt_experiment_check_pack_20260418/
+prompts/robustness/c3_prompt_variants.csv

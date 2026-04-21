@@ -301,8 +301,8 @@ def build_smoke_rows(primary_rows: list[dict[str, str]], auxiliary_rows: list[di
 
 def write_count_tables(config: dict, core_rows: list[dict[str, str]], expanded_rows: list[dict[str, str]], rejected_rows: list[dict[str, str]]) -> tuple[Path, Path]:
     builder_cfg = config.get("dataset_builder", {}) or {}
-    comparison_csv = repo_path(builder_cfg.get("comparison_csv", "analysis/current/vcor_balanced_dataset_version_comparison.csv"))
-    comparison_md = repo_path(builder_cfg.get("comparison_md", "analysis/current/vcor_balanced_dataset_version_comparison.md"))
+    comparison_csv = repo_path(builder_cfg.get("comparison_csv", "results/appendix/stanford_core_to_balanced_counts.csv"))
+    comparison_md = repo_path(builder_cfg.get("comparison_md", "results/appendix/stanford_core_to_balanced_counts.md"))
     ensure_dirs([comparison_csv.parent, comparison_md.parent])
     core_counts = dataset_counts(core_rows)
     expanded_counts = dataset_counts(expanded_rows)

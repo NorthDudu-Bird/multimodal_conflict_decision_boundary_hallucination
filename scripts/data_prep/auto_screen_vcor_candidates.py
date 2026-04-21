@@ -235,7 +235,7 @@ def main() -> int:
     vcor_cfg = config.get("vcor", {}) or {}
     screen_csv = repo_path(vcor_cfg.get("screen_csv", "data_external/vcor_selected/candidate_auto_screen.csv"))
     summary_csv = repo_path(vcor_cfg.get("screen_summary_csv", "data_external/vcor_selected/candidate_auto_screen_summary.csv"))
-    preview_dir = repo_path(vcor_cfg.get("screen_preview_dir", "reports/current/vcor_auto_screen"))
+    preview_dir = repo_path(vcor_cfg.get("screen_preview_dir", "logs/vcor_auto_screen"))
     candidate_review_csv = repo_path(vcor_cfg.get("candidate_review_csv", "data_external/vcor_selected/candidate_review.csv"))
     log_path = args.log_path or repo_path(vcor_cfg.get("screen_log_path", "logs/auto_screen_vcor_candidates.log"))
     ensure_dirs([screen_csv.parent, summary_csv.parent, preview_dir, log_path.parent])

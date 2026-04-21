@@ -1,0 +1,2 @@
+2026-04-21 16:41:27,303 | INFO | Parsing raw results: D:\multimodal_conflict_decision_boundary_hallucination\results\robustness\raw\internvl2_8b\c3_prompt_variants_raw_results.csv
+2026-04-21 16:41:27,581 | INFO | Parse summary: {"input_rows": 600, "outcome_counts": {"faithful": 600}, "output_csv": "results/robustness/raw/internvl2_8b/c3_prompt_variants_parsed_results.csv", "review_csv": "results/robustness/raw/internvl2_8b/c3_prompt_variants_parse_review.csv", "review_rows": 0, "summary_md": "results/robustness/raw/internvl2_8b/c3_prompt_variants_parse_summary.md"}

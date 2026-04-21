@@ -7,44 +7,42 @@
 - 颜色分布：`red / blue / green / yellow / black / white` 各 50
 - 来源构成：StanfordCars 93，VCoR 207
 
-## C0 基线
+## 主实验 C0-C4
 
-- `Qwen2-VL-7B-Instruct`：忠实率 100.00%，冲突一致率 0.00%
-- `LLaVA-1.5-7B`：忠实率 100.00%，冲突一致率 0.00%
-- `InternVL2-8B`：忠实率 100.00%，冲突一致率 0.00%
+- 三模型在 `C0` 均保持 100.00% 忠实率，`conflict_aligned=0/300`。
+- `LLaVA-1.5-7B` 在 `C3` 的冲突一致率为 9.00% [6.26%, 12.78%]，`C4` 为 3.33% [1.82%, 6.03%]。
+- `Qwen2-VL-7B-Instruct` 仅在 `C3/C4` 各出现 1 例 conflict-aligned 输出；`InternVL2-8B` 在 `C0-C4` 中未出现 conflict-aligned 输出。
+- 主实验 `refusal / other_wrong / parse_error` 全部为 0，因此主推断聚焦在 `conflict_aligned`。
 
-## C0-C4 主实验
+## 关键统计
 
-- `Qwen2-VL-7B-Instruct`：`C0-C2` 冲突一致率均为 0.00%，`C3` 为 0.33%，`C4` 为 0.33%
-- `LLaVA-1.5-7B`：`C1` 为 0.33%，`C2` 为 1.00%，`C3` 为 9.00%，`C4` 为 3.33%
-- `InternVL2-8B`：`C0-C4` 冲突一致率均为 0.00%
+- LLaVA-1.5-7B 在 C3 相对 `C0` 的 conflict-aligned 增幅达到 Holm 显著 (raw p=1.49e-08, Holm p=8.94e-08)。
+- LLaVA-1.5-7B 在 C4 相对 `C0` 的 conflict-aligned 增幅达到 Holm 显著 (raw p=0.0020, Holm p=0.0098)。
+- 在 C3，LLaVA-1.5-7B 的 conflict-aligned rate 显著高于 Qwen2-VL-7B-Instruct (raw p=2.16e-07, Holm p=1.08e-06)。
+- 在 C3，LLaVA-1.5-7B 的 conflict-aligned rate 显著高于 InternVL2-8B (raw p=1.49e-08, Holm p=8.94e-08)。
+- 在 C4，LLaVA-1.5-7B 的 conflict-aligned rate 显著高于 Qwen2-VL-7B-Instruct (raw p=0.0117, Holm p=0.0352)。
+- 在 C4，LLaVA-1.5-7B 的 conflict-aligned rate 显著高于 InternVL2-8B (raw p=0.0020, Holm p=0.0078)。
 
-主结论稳定：在清晰视觉证据下，三模型整体表现出显著视觉优先性；有限的语言主导偏差主要集中在 `LLaVA-1.5-7B` 的强误导提示条件，尤其是 `C3`。
+## Prompt Variant Robustness
 
-## A1/A2 辅助实验
+- `LLaVA-1.5-7B` | Original C3: conflict-aligned=9.00% [6.26%, 12.78%].
+- `LLaVA-1.5-7B` | C3-v2: conflict-aligned=1.67% [0.71%, 3.84%].
+- `LLaVA-1.5-7B` | C3-v3: conflict-aligned=0.00% [0.00%, 1.26%].
+- Prompt-variant robustness details are summarized in `results/robustness/prompt_variant_summary.md`.
+- 模板鲁棒性控制显示原始 `C3` 效应并不稳定：`LLaVA-1.5-7B` 从 Original C3 的 9.00% 降到 C3-v2 的 1.67%，并在 C3-v3 降到 0.00%。
+- 因此正文应把该现象写成“对原始强误导模板敏感的有限语言偏差”，而不应写成对所有等强度 wording 都稳定成立。
 
-- `Qwen2-VL-7B-Instruct`：`A1` 服从率 55.67%，`A2` 服从率 90.67%
-- `LLaVA-1.5-7B`：`A1` 服从率 85.33%，`A2` 服从率 100.00%
-- `InternVL2-8B`：`A1` 服从率 73.67%，`A2` 服从率 100.00%
+## 解析与附录检查
 
-辅助实验说明，在受限答案空间下，模型对错误前提的服从性会明显提高，因此 A1/A2 适合作为补充证据，而不是正文主实验替代。
+- 解析规则审查见 `results/parser/label_mapping_audit.md`，别名抽样复核见 `results/parser/ambiguous_outputs_sample.csv`。
+- 数据来源 sanity check 已改为最终平衡集内部按 `source_dataset` 分层，见 `results/appendix/stanford_core_sanity_check.md`。
 
 ## 关键文件
 
 - Table 1：`results/main/table1_main_metrics.csv`
 - Figure 2：`results/main/figure2_conflict_aligned_rates.png`
-- Table 3：`results/auxiliary/table3_aux_metrics.csv`
-- 数据集分布图：`results/appendix/dataset_distribution.png`
-- 主实验统计检验：`results/main/main_exact_tests.csv`
-- 辅助实验统计检验：`results/auxiliary/aux_exact_tests.csv`
-
-## 当前重跑状态
-
-- 已完成：`python scripts/build_dataset.py`
-- 已完成：`python scripts/run_baseline_c0.py`
-- 已完成：`python scripts/run_main_c0_c4.py`
-- 已完成：`python scripts/run_aux_a1_a2.py`
-- 已完成：`python scripts/analyze_results.py`
-- 已完成：`python scripts/make_figures.py`
-
-本次重构后的新目录下，`baseline / main / auxiliary / appendix` 四类论文输出都已重新生成并核对完成。
+- Main stats summary：`results/main/main_stats_summary.md`
+- Main key tests：`results/main/main_key_tests.csv`
+- Prompt robustness：`results/robustness/prompt_variant_summary.md`
+- Parser audit：`results/parser/label_mapping_audit.md`
+- Appendix sanity check：`results/appendix/stanford_core_sanity_check.md`

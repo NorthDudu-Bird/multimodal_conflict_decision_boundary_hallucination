@@ -169,7 +169,7 @@ def main() -> int:
     stage_root = repo_path(vcor_cfg.get("candidate_pool_dir", "data_external/vcor_selected/candidate_pool"))
     review_csv = repo_path(vcor_cfg.get("candidate_review_csv", "data_external/vcor_selected/candidate_review.csv"))
     planning_csv = repo_path(vcor_cfg.get("candidate_plan_csv", "data_external/vcor_selected/candidate_plan.csv"))
-    contact_dir = repo_path(vcor_cfg.get("candidate_contact_dir", "reports/current/vcor_candidate_review"))
+    contact_dir = repo_path(vcor_cfg.get("candidate_contact_dir", "logs/vcor_candidate_review"))
     log_path = args.log_path or repo_path(vcor_cfg.get("candidate_log_path", "logs/build_vcor_candidate_pool.log"))
     ensure_dirs([stage_root, review_csv.parent, planning_csv.parent, contact_dir, log_path.parent])
     logger = build_logger("build_vcor_candidate_pool", log_path)
