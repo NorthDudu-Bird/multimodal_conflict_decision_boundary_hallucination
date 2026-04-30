@@ -4,10 +4,14 @@
 
 ## 推荐使用
 
+- `gpt_paper_writing_pack_20files_20260430.zip`
+  - 面向“最多只能上传 20 个文件”的论文写作场景。
+  - 当前最推荐上传给 GPT 的压缩包。
+  - 保留所有关键证据类别：主结果、paired flip、prompt boundary、A1/A2 角色、parser/source/reproducibility/visual clarity threats。
 - `gpt_paper_writing_pack_25files_20260430.zip`
   - 面向“最多只能上传 25 个文件”的论文写作场景。
   - 新增 paired flip、prompt boundary、auxiliary role、threats-to-validity 和 visual clarity audit 说明。
-  - 推荐作为后续 Abstract / Results / Discussion / Limitations 写作的默认包。
+  - 如果平台允许 25 个文件，可使用该包获取更多表图文件。
 
 ## 历史包
 
@@ -29,5 +33,6 @@
 如果需要重新生成 20260430 写作包，请运行：
 
 ```bash
-python scripts/build_writing_pack.py --pack-date 20260430
+python scripts/build_writing_pack.py --pack-date 20260430 --file-cap 20
+python scripts/build_writing_pack.py --pack-date 20260430 --file-cap 25
 ```

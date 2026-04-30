@@ -2,7 +2,7 @@
 
 ## What Changed
 
-The writing interface was upgraded from a compact result bundle into a stronger paper-writing pack. The new pack keeps the 25-file cap while adding the highest-value strengthening artifacts:
+The writing interface was upgraded from a compact result bundle into stronger paper-writing packs. The default 25-file pack keeps more tables and figures. The compact 20-file pack is for platforms with a stricter upload cap and still preserves all major evidence categories through consolidated summaries.
 
 - same-image paired flip summary;
 - main results paper-ready summary;
@@ -11,7 +11,20 @@ The writing interface was upgraded from a compact result bundle into a stronger 
 - formal threats-to-validity summary;
 - visual clarity audit readme.
 
-## Recommended Upload Order
+## Recommended 20-File Upload Pack
+
+If the platform allows only 20 files, use:
+
+- `deliverables/gpt_paper_writing_pack_20files_20260430.zip`
+
+The 20-file pack intentionally drops only redundant or lower-priority files:
+
+- `docs/experiment_plan.md` and `docs/reproduction.md` are represented by `README.md`, `docs/strengthening_master_plan.md`, and `results/reproducibility_audit.md`.
+- `results/main/main_key_tests.csv` is represented by the key-test table in `results/main/main_stats_summary.md`.
+- `results/robustness/prompt_boundary_metrics.csv` is represented by the metric bullets in `results/robustness/prompt_boundary_summary.md`.
+- `results/main/figure2_conflict_aligned_rates.png` is represented by `table1_main_metrics.csv` and the paper-ready summaries.
+
+## Recommended Manual Upload Order
 
 1. `README.md`
 2. `GPT_PROMPT_TEMPLATE.md`
