@@ -1,12 +1,33 @@
 # Deliverables
 
-当前仓库只保留两个最终 ZIP 交付包：
+当前目录保留论文写作和检查用交付包。
+
+## 推荐使用
+
+- `gpt_paper_writing_pack_25files_20260430.zip`
+  - 面向“最多只能上传 25 个文件”的论文写作场景。
+  - 新增 paired flip、prompt boundary、auxiliary role、threats-to-validity 和 visual clarity audit 说明。
+  - 推荐作为后续 Abstract / Results / Discussion / Limitations 写作的默认包。
+
+## 历史包
 
 - `gpt_paper_writing_pack_20260418.zip`
-  - 面向论文整理与归档
-  - 包含当前论文主线所需的关键数据、文档、结果表图和结果摘要
+  - 早期论文整理与归档包。
 - `gpt_experiment_check_pack_20260418.zip`
-  - 面向 GPT 或审稿式质量检查
-  - 只保留判断“实验是否达标”所需的高信号材料
+  - 早期实验检查包。
 
-不再提交任何解压后的 deliverable 目录；如需查看内容，请临时解压到本地工作目录之外或忽略目录中。
+## 写作边界
+
+使用交付包时必须保持以下边界：
+
+- 不改研究问题。
+- 不新增模型或任务。
+- 不把局部结果写成 VLM 普遍语言偏置。
+- 不把 C3 wording boundary 写成跨模板鲁棒性成功。
+- 不把 A1/A2 当成 C0-C4 主证据。
+
+如果需要重新生成 20260430 写作包，请运行：
+
+```bash
+python scripts/build_writing_pack.py --pack-date 20260430
+```
