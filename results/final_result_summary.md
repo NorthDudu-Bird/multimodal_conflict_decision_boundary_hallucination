@@ -46,3 +46,11 @@
 - Prompt robustness：`results/robustness/prompt_variant_summary.md`
 - Parser audit：`results/parser/label_mapping_audit.md`
 - Appendix sanity check：`results/appendix/stanford_core_sanity_check.md`
+
+## Phase 2 Full Strengthening Addendum
+
+- Per-color split tightens the original LLaVA C3 interpretation: the 27 C3 flips are not dispersed across all six colors; 20/27 are `white->black`, with smaller `black->white` and `blue->red` contributions. Across LLaVA C3/C4, 33/37 main flip row-events are in the achromatic black/white family.
+- The completed visual clarity audit reviewed 42 target flip rows and 42 matched faithful controls. Target rows are mostly inspectable (`clear`=38/42), but visual confound flags are more common in targets (11/42) than controls (4/42). This reduces, but does not eliminate, the "images are hard" alternative explanation.
+- Prompt factorization shows that false-text form matters. LLaVA reaches 32.00% under title/prefix framing and 16.33% under no-correction presupposition; Qwen is most affected by no-correction presupposition (34.00%), and InternVL2 by title/prefix framing (36.00%).
+- Answer-format control shows that original LLaVA C3 is format-sensitive: free-answer C3 is 2.33%, multiple-choice C3 is 1.33%, and yes/no false-claim acceptance is 1.33%. 20/27 original C3 flip rows are not reproduced by all three formal controls.
+- Multi-turn persuasion is an appendix-level extension. LLaVA remains near zero across MT1/MT2/MT3 (0.33%, 0.33%, 0.00%), while InternVL2 rises sharply in MT2/MT3 (21.33%/74.67%). This changes the boundary of the paper, not the frozen single-turn mainline.

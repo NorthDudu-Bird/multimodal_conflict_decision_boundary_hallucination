@@ -36,10 +36,20 @@ Remaining boundary: the paper should treat wording sensitivity as a claim limite
 
 Conflict-aligned cases might be visually harder, affected by reflections, background color, occlusion, or multiple-car interference.
 
-The new visual clarity audit infrastructure in `results/audit/visual_clarity_audit_readme.md` and `results/audit/visual_clarity_audit_manifest.csv` addresses this as a reviewable threat. It extracts all 27 LLaVA original C3 conflict-aligned cases and 27 matched faithful controls, preserving image paths, source, true color, false prompt color, and model output.
+The completed visual clarity audit in `results/audit/visual_clarity_audit_manifest_completed.csv` and `results/audit/visual_clarity_audit_summary.md` reviews 42 target flip rows and 42 matched faithful-control rows. Target rows are mostly inspectable (`clear`=38/42; high salience=37/42), and controls show a similar clarity profile (`clear`=39/42; high salience=39/42). This reduces the alternative explanation that the main flip cases are simply unreadable images.
 
-Remaining boundary: the manifest is infrastructure for human review, not a completed human-rating result. It should be cited as threat-reduction support and appendix material, not as a new main experiment unless manually completed later.
+Remaining boundary: the audit is a threat-reduction review, not a new main experiment or a multi-annotator human study. Visual confound flags are more frequent among targets (11/42) than controls (4/42), so reflection, lighting, background color, and dataset style remain residual threats.
 
 ## Overall Boundary
 
 These controls support a narrow empirical conclusion: the task is visually faithful under C0; LLaVA-1.5-7B shows limited significant conflict-aligned behavior under the original strong misleading C3/C4 templates; Qwen2-VL-7B-Instruct and InternVL2-8B remain largely visually consistent; and the LLaVA effect is wording-sensitive. They do not support a broad claim about general VLM language dominance.
+
+## Phase 2 Threat Updates
+
+The visual-clarity threat is now a completed audit rather than only infrastructure. The audit covers all LLaVA original C3 flips, all C4 flips, all C3-v2 remaining flips, and matched faithful controls. Most target rows are clear/high-salience, so the main flips are not plausibly explained by globally unreadable images. However, visual confound flags are more frequent among targets (11/42) than controls (4/42), so reflection, lighting, background color, and dataset style remain residual threats.
+
+The color split introduces a new boundary: the LLaVA original C3/C4 shifts are strongly concentrated in achromatic black/white routes, especially `white->black`. The paper should not imply uniform color-class susceptibility.
+
+The factorization and format-control results reduce the risk of treating "false text" as one monolithic condition. Title/prefix framing and no-correction presupposition can be much stronger than quoted or indirect hints, while free-answer, multiple-choice, and yes/no controls reduce the original LLaVA C3 effect.
+
+The multi-turn result adds a separate boundary. InternVL2 is stable in the original single-turn mainline but highly susceptible in repeated previous-turn false context. This does not invalidate the mainline; it shows that single-turn visual consistency cannot be generalized to multi-turn persuasion without an explicit dialogue diagnostic.

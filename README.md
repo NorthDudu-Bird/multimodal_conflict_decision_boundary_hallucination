@@ -10,7 +10,8 @@
 - parser 映射审查
 - 按 `source_dataset` 分层的附录 sanity check
 - same-image paired flip 派生分析
-- visual clarity / task-validity audit 基础设施
+- completed visual clarity / task-validity audit
+- Phase 2 attribution and boundary diagnostics: per-color split, prompt factorization, answer-format control, multi-turn extension, case taxonomy, and gatekeeping protocol
 
 论文当前可保留的结论边界是：
 
@@ -19,6 +20,7 @@
 - `Qwen2-VL-7B-Instruct` 与 `InternVL2-8B` 在当前任务中基本保持视觉一致。
 - same-image paired 分析说明该现象可表述为同图从 faithful C0 输出翻转到 false prompt color 的有限样本级偏移。
 - `C3` prompt wording 变体说明该现象对 wording 敏感，因此正文应写成“有限、模板敏感的语言偏差”，而不是稳定的跨模板规律。
+- Phase 2 进一步收缩该结论：LLaVA 原始 C3/C4 flips 强烈集中在特定颜色对，尤其 `white->black`；prompt factor、answer format 和 multi-turn context 会改变结果，但它们是归因/边界/扩展诊断，不替代原始 C0-C4 主线。
 
 ## 先看这里
 
@@ -49,7 +51,13 @@ python scripts/verify_reproducibility.py
 python scripts/generate_paired_flip_analysis.py
 python scripts/generate_prompt_boundary_analysis.py
 python scripts/generate_visual_clarity_audit.py
-python scripts/build_writing_pack.py --pack-date 20260430
+python scripts/generate_color_split_analysis.py
+python scripts/generate_visual_clarity_completed_audit.py
+python scripts/run_phase2_diagnostics.py --family factorization
+python scripts/run_phase2_diagnostics.py --family format_control
+python scripts/run_phase2_diagnostics.py --family multiturn
+python scripts/generate_phase2_synthesis.py
+python scripts/build_final_writing_pack.py
 ```
 
 ## 关键输出
@@ -66,6 +74,13 @@ python scripts/build_writing_pack.py --pack-date 20260430
 - parser 审查：[results/parser/label_mapping_audit.md](results/parser/label_mapping_audit.md)
 - 附录来源 sanity check：[results/appendix/stanford_core_sanity_check.md](results/appendix/stanford_core_sanity_check.md)
 - visual clarity audit：[results/audit/visual_clarity_audit_readme.md](results/audit/visual_clarity_audit_readme.md)
+- completed visual clarity audit：[results/audit/visual_clarity_audit_summary.md](results/audit/visual_clarity_audit_summary.md)
+- Phase 2 writing interface：[docs/final_writing_interface_note.md](docs/final_writing_interface_note.md)
+- per-color split：[results/color_split/color_split_summary.md](results/color_split/color_split_summary.md)
+- prompt factorization：[results/factorization/factorized_prompt_summary.md](results/factorization/factorized_prompt_summary.md)
+- answer-format control：[results/format_control/format_control_summary.md](results/format_control/format_control_summary.md)
+- multi-turn extension：[results/multiturn/multiturn_summary.md](results/multiturn/multiturn_summary.md)
+- gatekeeping protocol：[results/gatekeeping/gatekeeping_summary.md](results/gatekeeping/gatekeeping_summary.md)
 - threats-to-validity 汇总：[results/threats_to_validity_summary.md](results/threats_to_validity_summary.md)
 - 写作包升级说明：[docs/writing_pack_upgrade_note.md](docs/writing_pack_upgrade_note.md)
 
@@ -97,6 +112,10 @@ python scripts/build_writing_pack.py --pack-date 20260430
 - 不把 A1/A2 当成主实验证据。
 - 不把 C3 wording 变体写成鲁棒性成功；它的作用是限制主张边界。
 - 不把 source/parser/reproducibility audit 写成新的主实验因素。
+- 不把 Phase 2 factorization 写成通用 prompt engineering 规律。
+- 不把 multi-turn extension 写成本文主线或通用 persuasion 论文。
+- 不把 visual clarity audit 写成完全排除视觉混淆；它是 threat-reduction。
+- 不把 LLaVA C3 的 9% 写成均匀颜色效应；它主要集中在 `white->black`。
 
 ## 最终交付包
 

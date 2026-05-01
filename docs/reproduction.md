@@ -112,52 +112,80 @@ python scripts/verify_reproducibility.py
   - `results/reproducibility_comparison.csv`
   - `results/reproducibility_audit.md`
 
-## 6. 论文级派生补强
+## 6. Derived Strengthening And Phase 2 Diagnostics
 
-以下脚本只读取已有 canonical parsed/metrics outputs，不调用模型推理，也不改变主结果口径：
+The scripts below are split into two classes. The first class reads existing canonical parsed/metrics outputs and does not call model inference. The second class runs Phase 2 local diagnostic inference in separate directories without overwriting canonical C0-C4/A1-A2 outputs.
+
+### 6.1 Derived-only strengthening
 
 ```bash
 python scripts/generate_paired_flip_analysis.py
 python scripts/generate_prompt_boundary_analysis.py
 python scripts/generate_visual_clarity_audit.py
-python scripts/build_writing_pack.py --pack-date 20260430
+python scripts/generate_color_split_analysis.py
+python scripts/generate_visual_clarity_completed_audit.py
+python scripts/generate_phase2_synthesis.py
 ```
 
-对应新增输出：
+Key outputs:
 
-- same-image paired analysis：
-  - `results/main/paired_transition_counts.csv`
-  - `results/main/paired_flip_metrics.csv`
-  - `results/main/paired_flip_summary.md`
-- prompt wording boundary control：
-  - `results/robustness/prompt_boundary_metrics.csv`
-  - `results/robustness/prompt_boundary_summary.md`
-- visual clarity audit infrastructure：
-  - `results/audit/visual_clarity_audit_manifest.csv`
-  - `results/audit/visual_clarity_audit_readme.md`
-- 写作包：
-  - `deliverables/gpt_paper_writing_pack_25files_20260430.zip`
+- same-image paired analysis: `results/main/paired_flip_summary.md`
+- prompt wording boundary control: `results/robustness/prompt_boundary_summary.md`
+- per-color split: `results/color_split/color_split_summary.md`
+- completed visual clarity audit: `results/audit/visual_clarity_audit_manifest_completed.csv`, `results/audit/visual_clarity_audit_summary.md`
+- failure taxonomy and casebook: `results/case_analysis/*`
+- gatekeeping protocol: `docs/gatekeeping_protocol.md`, `results/gatekeeping/*`
 
-## 7. 验收标准
+### 6.2 Phase 2 local diagnostic inference
 
-`python scripts/verify_reproducibility.py` 必须通过，且至少满足：
+Run smoke tests before full local diagnostic inference:
 
-- `C0` 三模型仍为完美视觉忠实
-- `results/main/main_key_tests.csv` 仍为 12 行
-- `results/robustness/prompt_variant_metrics.csv` 仍为 9 行
-- `results/parser/ambiguous_outputs_sample.csv` 仍为 27 行
-- `results/appendix/stanford_core_sanity_check.csv` 仍为 12 行
-- 最终口径仍为：`LLaVA-1.5-7B` 的现象是有限且模板敏感的语言偏差，而不是稳定的跨 wording 规律
-- 派生补强应满足：LLaVA `C3` paired flips 为 `27/300`，`C4` 为 `10/300`；prompt boundary 中 LLaVA Original C3/C3-v2/C3-v3 分别为 `27/300`、`5/300`、`0/300`；visual clarity audit manifest 为 `54` 行且所有 image paths 存在。
+```bash
+python scripts/run_phase2_diagnostics.py --family factorization --limit 12
+python scripts/run_phase2_diagnostics.py --family format_control --limit 12
+python scripts/run_phase2_diagnostics.py --family multiturn --limit 12
+```
 
-## 8. 不再使用的旧入口
+Then run the three full modules:
 
-以下旧路径不再属于当前 GitHub 默认工作流：
+```bash
+python scripts/run_phase2_diagnostics.py --family factorization
+python scripts/run_phase2_diagnostics.py --family format_control
+python scripts/run_phase2_diagnostics.py --family multiturn
+```
 
-- 旧 `current` 配置树
-- 旧 `current` prompt 树
-- 旧分析目录
-- 旧输出目录
-- 旧预览与 review 目录
-- 旧可视化预览页面
-- 旧一键流水线
+Key outputs:
+
+- factorization: `results/factorization/factorized_prompt_metrics.csv`, `results/factorization/factorized_prompt_summary.md`
+- answer-format control: `results/format_control/format_control_metrics.csv`, `results/format_control/format_control_summary.md`
+- multi-turn extension: `results/multiturn/multiturn_metrics.csv`, `results/multiturn/multiturn_summary.md`
+
+## 7. Acceptance Criteria
+
+`python scripts/verify_reproducibility.py` checks the locked canonical artifacts. After Phase 2 writing-summary updates, `results/final_result_summary.md` may intentionally differ from the old snapshot because it contains a new Phase 2 addendum. This is a writing-summary update, not a change to canonical parsed outputs or metrics.
+
+Required checks:
+
+- `C0` remains perfectly visually faithful for all three models.
+- `results/main/main_key_tests.csv` remains 12 rows.
+- `results/robustness/prompt_variant_metrics.csv` remains 9 rows.
+- `results/parser/ambiguous_outputs_sample.csv` remains 27 rows.
+- `results/appendix/stanford_core_sanity_check.csv` remains 12 rows.
+- LLaVA `C3` paired flips remain `27/300`; `C4` remains `10/300`.
+- Prompt boundary LLaVA Original C3/C3-v2/C3-v3 remains `27/300`, `5/300`, and `0/300`.
+- Phase 2 row-count checks: color split main metrics `90` rows; color paired metrics `72`; completed audit manifest `84`; factorization combined `9000`; format-control combined `9900`; multi-turn combined `5400`; gatekeeping table `8`.
+- Completed visual clarity audit has no missing image paths.
+- Final writing pack: `deliverables/gpt_paper_writing_pack_20files_final.zip` plus `deliverables/gpt_paper_writing_pack_20files_manifest.md`.
+
+## 8. Deprecated Entrypoints
+
+The following old paths are no longer part of the current official workflow:
+
+- old `current` config tree
+- old `current` prompt tree
+- old analysis directories
+- old output directories
+- old preview/review directories
+- old visualization preview page
+- old one-command pipeline
+- old 25-file writing packs as final delivery entrypoints

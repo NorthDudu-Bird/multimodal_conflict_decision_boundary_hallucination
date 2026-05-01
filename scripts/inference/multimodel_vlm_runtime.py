@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import gc
+import json
 import logging
 import sys
 import time
@@ -44,6 +45,14 @@ RESULT_FIELDS = [
     "condition_family",
     "prompt_template_version",
     "prompt_text",
+    "diagnostic_family",
+    "factor_id",
+    "tone_strength",
+    "injection_position",
+    "false_text_form",
+    "answer_format",
+    "response_schema",
+    "context_turns_json",
     "model_key",
     "model_name",
     "checkpoint_name",
@@ -100,6 +109,53 @@ def append_result(output_csv: Path, row: dict[str, str]) -> None:
         if write_header:
             writer.writeheader()
         writer.writerow({field: row.get(field, "") for field in RESULT_FIELDS})
+
+
+def load_context_turns(row: dict[str, str]) -> list[dict[str, str]]:
+    raw = (row.get("context_turns_json", "") or "").strip()
+    if not raw:
+        return []
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        return []
+    if not isinstance(parsed, list):
+        return []
+    turns: list[dict[str, str]] = []
+    for item in parsed:
+        if not isinstance(item, dict):
+            continue
+        role = str(item.get("role", "user")).strip().lower()
+        if role not in {"system", "user", "assistant"}:
+            role = "user"
+        content = str(item.get("content", "")).strip()
+        if not content:
+            continue
+        turns.append({"role": role, "content": content})
+    return turns
+
+
+def text_context_messages(row: dict[str, str]) -> list[dict[str, Any]]:
+    messages: list[dict[str, Any]] = []
+    for turn in load_context_turns(row):
+        messages.append(
+            {
+                "role": turn["role"],
+                "content": [{"type": "text", "text": turn["content"]}],
+            }
+        )
+    return messages
+
+
+def internvl_context_prefix(row: dict[str, str]) -> str:
+    turns = load_context_turns(row)
+    if not turns:
+        return ""
+    lines = ["Previous conversation context:"]
+    for turn in turns:
+        lines.append(f"{turn['role']}: {turn['content']}")
+    lines.append("")
+    return "\n".join(lines)
 
 
 def choose_torch_dtype(precision: str) -> torch.dtype:
@@ -265,7 +321,8 @@ class Qwen2VLRunner(BaseVLMRunner):
         image_path = resolve_model_dir(row["image_path"])
         image = Image.open(image_path).convert("RGB")
         try:
-            messages = [
+            messages = text_context_messages(row)
+            messages.append(
                 {
                     "role": "user",
                     "content": [
@@ -273,7 +330,7 @@ class Qwen2VLRunner(BaseVLMRunner):
                         {"type": "text", "text": row["prompt_text"]},
                     ],
                 }
-            ]
+            )
             prompt = self.processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             inputs = self.processor(text=[prompt], images=[image], return_tensors="pt", padding=True)
             inputs = inputs.to(self.output_device)
@@ -309,7 +366,8 @@ class LlavaRunner(BaseVLMRunner):
         image_path = resolve_model_dir(row["image_path"])
         image = Image.open(image_path).convert("RGB")
         try:
-            conversation = [
+            conversation = text_context_messages(row)
+            conversation.append(
                 {
                     "role": "user",
                     "content": [
@@ -317,7 +375,7 @@ class LlavaRunner(BaseVLMRunner):
                         {"type": "image"},
                     ],
                 }
-            ]
+            )
             prompt = self.processor.apply_chat_template(conversation, add_generation_prompt=True)
             inputs = self.processor(images=[image], text=[prompt], return_tensors="pt", padding=True)
             inputs = inputs.to(self.output_device, self.torch_dtype)
@@ -374,7 +432,8 @@ class InternVL2Runner(BaseVLMRunner):
     def generate_one(self, row: dict[str, str], max_new_tokens: int, temperature: float, top_p: float) -> str:
         image_path = resolve_model_dir(row["image_path"])
         pixel_values = self.load_image_tensor(image_path)
-        question = f"<image>\n{row['prompt_text']}"
+        context_prefix = internvl_context_prefix(row)
+        question = f"<image>\n{context_prefix}{row['prompt_text']}"
         generation_config = self.generation_config(max_new_tokens=max_new_tokens, temperature=temperature, top_p=top_p)
         response = self.model.chat(
             self.tokenizer,
@@ -417,6 +476,14 @@ def make_result_row(
         "condition_family": source_row.get("condition_family", ""),
         "prompt_template_version": source_row.get("prompt_template_version", ""),
         "prompt_text": source_row.get("prompt_text", ""),
+        "diagnostic_family": source_row.get("diagnostic_family", ""),
+        "factor_id": source_row.get("factor_id", ""),
+        "tone_strength": source_row.get("tone_strength", ""),
+        "injection_position": source_row.get("injection_position", ""),
+        "false_text_form": source_row.get("false_text_form", ""),
+        "answer_format": source_row.get("answer_format", ""),
+        "response_schema": source_row.get("response_schema", ""),
+        "context_turns_json": source_row.get("context_turns_json", ""),
         "model_key": metadata["model_key"],
         "model_name": metadata["model_name"],
         "checkpoint_name": metadata["checkpoint_name"],

@@ -1,0 +1,7 @@
+﻿category_id,sample_count,unique_image_count,scope,primary_role,note
+prompt_following_flip,37,28,LLaVA original C3/C4 same-image flips,main evidence,Rows are same-image flips from faithful C0 to the false prompt color.
+color_pair_concentration,33,24,Achromatic black/white route among LLaVA C3/C4 flips,boundary/attribution,28 row-events are specifically white->black.
+visual_clarity_flagged,11,6,Completed audit target rows with at least one visual confound flag,threat reduction,Target rows 11/42 flagged; controls 4/42 flagged.
+format_compliance_sensitive,20,20,"Original LLaVA C3 flips not reproduced by free C3, MC C3, or yes/no false-claim probes",format boundary,"This is a format-sensitivity tag, not proof that format alone caused each individual flip."
+multiturn_induced,288,224,InternVL2 MT2/MT3 conflict-following rows with neutral final question,extension diagnostic,Short multi-turn context creates a strong InternVL2-specific effect absent from its original C0-C4 rows.
+source_style_sensitive_candidate,27,27,LLaVA C3 flips split by StanfordCars/VCoR,appendix threat check,StanfordCars: 13/93 (13.98%); VCoR: 14/207 (6.76%)

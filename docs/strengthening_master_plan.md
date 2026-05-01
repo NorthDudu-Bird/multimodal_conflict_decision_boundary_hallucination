@@ -1,5 +1,11 @@
 # Strengthening Master Plan
 
+Historical note: this document records the first-round strengthening plan and retains
+its original 20260430 pack/infrastructure wording for auditability. The current final
+writing interface after Phase 2 is `docs/final_writing_interface_note.md`, and the
+current recommended package is
+`deliverables/gpt_paper_writing_pack_20files_final.zip`.
+
 ## Purpose
 
 This plan records the completed strengthening path for the frozen empirical paper. It keeps the research question unchanged: whether VLMs are affected by false text prompts when the visual evidence is a clear single-attribute car-body color judgment.
@@ -24,7 +30,7 @@ The strengthening work is designed to improve rigor, interpretability, reproduci
 | --- | --- | --- | --- | --- | --- |
 | Attribution is not explicit enough | Condition-level rates can look like independent image pools. | Make same-image paired transitions explicit and quantify faithful-to-conflict flips from C0. | `results/main/paired_*`; `figure_paired_flip_rates.png` | Direct derived analysis | Methods, Results |
 | Prompt variables are entangled | Original C3 could be a wording artifact rather than a stable behavior. | Reframe C3 variants as a boundary-control module and report weakened/disappearing effects. | `results/robustness/prompt_boundary_*`; `figure_prompt_boundary.png` | Direct derived analysis | Results, Discussion |
-| Task may be visually ambiguous | Reviewers may ask whether conflict cases are simply harder images. | Build a human-review manifest and gallery for LLaVA original C3 conflict cases plus matched faithful controls. | `results/audit/visual_clarity_*` | Derived audit infrastructure | Appendix, Threats |
+| Task may be visually ambiguous | Reviewers may ask whether conflict cases are simply harder images. | Build and complete a visual-clarity audit for target flips plus matched faithful controls. | `results/audit/visual_clarity_*` | Completed audit plus derived infrastructure | Appendix, Threats |
 | Parser may inflate conflict-aligned counts | Alias/mention logic can create false positives. | Keep parser audit separate and emphasize main outputs are base single-label answers. | `results/parser/label_mapping_audit.md`; `results/threats_to_validity_summary.md` | Existing audit synthesis | Threats |
 | Source composition may drive the effect | Final set mixes StanfordCars and VCoR. | Use source-stratified sanity check only as appendix evidence. | `results/appendix/stanford_core_sanity_check.md` | Existing derived analysis | Appendix, Threats |
 | Reproducibility may be unclear | Empirical papers need artifact stability. | Reference locked snapshot audit and keep derived scripts separate from inference. | `results/reproducibility_audit.md`; new scripts | Existing audit plus derived scripts | Methods, Appendix |
@@ -43,9 +49,9 @@ The strengthening work is designed to improve rigor, interpretability, reproduci
 | `scripts/generate_prompt_boundary_analysis.py` | New derived script | Repackages C3 variants as claim-boundary control. |
 | `results/robustness/prompt_boundary_*` | Robustness combined parsed outputs | Boundary metrics, tests, summary, and figure. |
 | `results/auxiliary/aux_role_note.md` | Existing auxiliary outputs | Prevents A1/A2 overclaiming. |
-| `results/audit/visual_clarity_audit_manifest.csv` | LLaVA original C3 parsed outputs | Human-review checklist for image clarity and task validity. |
+| `results/audit/visual_clarity_audit_manifest.csv`; `results/audit/visual_clarity_audit_manifest_completed.csv` | LLaVA flip outputs and matched controls | Human-review checklist and completed single-reviewer clarity audit for task-validity threat reduction. |
 | `results/threats_to_validity_summary.md` | Existing audits plus visual audit | Formal threats-to-validity module. |
-| `docs/writing_pack_upgrade_note.md` | New writing interface | Explains the upgraded 25-file writing pack. |
+| `docs/writing_pack_upgrade_note.md` | Writing interface note | Records the final 20-file pack status after Phase 2 and deprecates older 20260430 packs. |
 
 ## Execution Order
 
@@ -54,7 +60,7 @@ The strengthening work is designed to improve rigor, interpretability, reproduci
 3. Generate paired flip, prompt boundary, and visual clarity audit outputs from existing parsed results.
 4. Add paper-ready result summaries and formal threat/auxiliary role notes.
 5. Update writing interfaces: `README.md`, `GPT_PROMPT_TEMPLATE.md`, `deliverables/README.md`, and the new writing-pack note.
-6. Build the new capped 25-file writing pack with `scripts/build_writing_pack.py`.
+6. Historical first-round step: build the capped 25-file writing pack with `scripts/build_writing_pack.py`. Current Phase 2 final pack is built with `scripts/build_final_writing_pack.py`.
 7. Validate script compilation, expected counts, image paths, and pack file count.
 
 ## Decisions Locked

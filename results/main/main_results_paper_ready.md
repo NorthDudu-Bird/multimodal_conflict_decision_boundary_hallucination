@@ -36,3 +36,13 @@ Therefore the paper should not state that LLaVA has a stable strong-conflict beh
 - Do not infer model-size effects from these three checkpoints.
 - Do not treat C3 wording variants as evidence of robustness; they are evidence that the main claim must be bounded.
 - Do not use A1/A2 as primary evidence for the C0-C4 causal chain.
+
+## Phase 2 Writing Placement
+
+Use the Phase 2 results to strengthen, not replace, the main C0-C4 story. The main-text evidence chain should remain: balanced 300-image dataset, C0 visual fidelity, C0-C4 conflict conditions, same-image paired flips, and C3 wording boundary.
+
+Recommended main-text secondary results are: per-color split showing `white->black` concentration, answer-format control showing reduced conflict following under free/multiple-choice/yes-no formats, and a compact prompt-factorization paragraph showing that title/prefix framing and no-correction presupposition are the strongest false-text forms.
+
+Recommended appendix results are: completed visual clarity audit, full factorization tables, multi-turn persuasion, failure taxonomy/casebook, gatekeeping protocol, parser/source/reproducibility details.
+
+Updated main conclusion: in a visually clear single-attribute car-color task, all three models are faithful under neutral prompting; LLaVA shows a limited, significant, same-image conflict-following shift under the original strong misleading templates; that shift is model-, wording-, answer-format-, and color-pair-sensitive; multi-turn context can induce a separate model-specific vulnerability, especially for InternVL2, but it should not be folded into the single-turn mainline.

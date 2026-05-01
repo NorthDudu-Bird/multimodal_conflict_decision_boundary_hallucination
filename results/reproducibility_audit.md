@@ -2,9 +2,9 @@
 
 - Snapshot root: `D:\multimodal_conflict_decision_boundary_hallucination\logs\reproducibility_snapshot\latest`
 - Canonical files checked: 51
-- Exact/normalized matches: 51
-- Blocking mismatches or missing files: 0
-- Verdict: The rerun reproduced all locked canonical artifacts.
+- Exact/normalized matches: 50
+- Blocking mismatches or missing files: 1
+- Verdict: The rerun did not reproduce all locked canonical artifacts.
 
 ## Allowed Non-Canonical Differences
 
@@ -15,7 +15,14 @@
 - `*_parse_review.csv`
 - `results/**/raw/**`
 
-## Result
+## Blocking Items
 
-- All tracked canonical manifests, prompts, parsed outputs, condition metrics, key tests, summary files, parser audit files, and appendix sanity files matched the locked snapshot.
-- Any log/runtime/raw-output differences are outside the reproducibility gate.
+- `results/final_result_summary.md`: different. Canonical artifact differs from the locked snapshot.
+
+## Phase 2 Interpretation Note
+
+The single mismatch is an intentional writing-facing update: `results/final_result_summary.md`
+now contains the Phase 2 diagnostic addendum. The locked canonical result tables,
+statistics, parser/source audits, and figures remain reproducible against the snapshot.
+Treat this as a summary-document drift after additional diagnostics, not as a change in
+the original C0-C4/A1-A2 experimental results.
