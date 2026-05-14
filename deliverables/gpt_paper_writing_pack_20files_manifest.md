@@ -1,8 +1,9 @@
 # GPT Paper Writing Pack - 20 Files Final
 
 - Zip: `deliverables/gpt_paper_writing_pack_20files_final.zip`
+- Unpacked directory: `deliverables/gpt_paper_writing_pack_20files_final`
 - Count: 20 selected project files, excluding this manifest.
-- Purpose: compact, writing-facing handoff that covers the final empirical study without dragging GPT into raw-result sprawl.
+- Purpose: compact, writing-facing handoff for the integrated empirical study.
 
 ## Files And Purposes
 
@@ -12,9 +13,9 @@
 | 2 | `GPT_PROMPT_TEMPLATE.md` | Drafting instructions and explicit overclaim boundaries for downstream GPT writing. |
 | 3 | `docs/final_writing_interface_note.md` | Final writing interface: evidence hierarchy, terminology, caveats, and upload order. |
 | 4 | `docs/experiment_plan.md` | Original C0-C4/A1-A2 experimental design and main protocol framing. |
-| 5 | `docs/reproduction.md` | Reproduction and rerun instructions, including Phase 2 diagnostic scripts. |
+| 5 | `docs/reproduction.md` | Reproduction and rerun instructions for the integrated experiment system. |
 | 6 | `data/metadata/balanced_eval_set/balanced_eval_set_summary.json` | Dataset balance summary: 300 images, six colors, source composition. |
-| 7 | `results/final_result_summary.md` | Writing-facing final result summary with Phase 2 addendum. |
+| 7 | `results/final_result_summary.md` | Writing-facing final result summary organized by experimental function. |
 | 8 | `results/results_discussion_summary.md` | Discussion-ready synthesis and limitation language. |
 | 9 | `results/main/table1_main_metrics.csv` | Canonical main C0-C4 metrics across all three models. |
 | 10 | `results/main/main_key_tests.csv` | Canonical statistical tests for the main experiment. |
@@ -26,12 +27,12 @@
 | 16 | `results/robustness/prompt_boundary_summary.md` | C3 wording robustness and template-sensitivity summary. |
 | 17 | `results/parser/label_mapping_audit.md` | Parser reliability audit and label-mapping notes. |
 | 18 | `results/appendix/stanford_core_sanity_check.md` | Source-stratified sanity check for StanfordCars core images. |
-| 19 | `results/reproducibility_audit.md` | Canonical reproducibility audit and Phase 2 summary-drift interpretation. |
-| 20 | `results/phase2_final_summary.md` | Compact A-G Phase 2 synthesis covering all new diagnostics. |
+| 19 | `results/reproducibility_audit.md` | Canonical reproducibility audit and summary-document interpretation. |
+| 20 | `results/integrated_experiment_summary.md` | Compact A-E synthesis covering primary, auxiliary, controlled, validity, and extension diagnostics. |
 
 ## Selection Logic
 
-The pack prioritizes project boundary, reproduction, dataset balance, canonical main results, A1/A2 auxiliary diagnostics, wording robustness, parser/source/reproducibility checks, and one compact Phase 2 synthesis. It intentionally does not include every raw Phase 2 CSV because the downstream writing task needs the final interpretation and boundaries, not a new benchmark-style data dump.
+The pack prioritizes project boundary, reproduction, dataset balance, primary results, A1/A2 auxiliary diagnostics, wording robustness, parser/source/reproducibility checks, and one compact integrated experiment summary. It intentionally excludes raw diagnostic CSVs because the downstream writing task needs the final interpretation and boundaries, not a benchmark-style data dump.
 
 ## Recommended Upload Order
 
@@ -54,4 +55,4 @@ The pack prioritizes project boundary, reproduction, dataset balance, canonical 
 17. `results/parser/label_mapping_audit.md`
 18. `results/appendix/stanford_core_sanity_check.md`
 19. `results/reproducibility_audit.md`
-20. `results/phase2_final_summary.md`
+20. `results/integrated_experiment_summary.md`

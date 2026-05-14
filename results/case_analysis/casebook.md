@@ -60,7 +60,7 @@ The examples below are sampled from actual result rows. They should be used as i
 
 ## Multi-Turn-Induced Cases
 
-| image_id | condition_name | factor_id | route | true_color | conflict_color | source_dataset | parsed_label | phase2_parsed_label | raw_output |
+| image_id | condition_name | factor_id | route | true_color | conflict_color | source_dataset | parsed_label | diagnostic_parsed_label | raw_output |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | test_03234 | MT2_two_turn_persuasion | two_turn_persuasion | black->white | black | white | StanfordCars | white | white | white |
 | test_03801 | MT2_two_turn_persuasion | two_turn_persuasion | black->white | black | white | StanfordCars | white | white | white |

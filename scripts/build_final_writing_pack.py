@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import shutil
 from zipfile import ZIP_DEFLATED, ZipFile
 
 
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "deliverables"
 ZIP_PATH = OUT_DIR / "gpt_paper_writing_pack_20files_final.zip"
 MANIFEST_PATH = OUT_DIR / "gpt_paper_writing_pack_20files_manifest.md"
+UNPACKED_DIR = OUT_DIR / "gpt_paper_writing_pack_20files_final"
 
 
 FILES = [
@@ -31,7 +33,7 @@ FILES = [
     ),
     (
         "docs/reproduction.md",
-        "Reproduction and rerun instructions, including Phase 2 diagnostic scripts.",
+        "Reproduction and rerun instructions for the integrated experiment system.",
     ),
     (
         "data/metadata/balanced_eval_set/balanced_eval_set_summary.json",
@@ -39,7 +41,7 @@ FILES = [
     ),
     (
         "results/final_result_summary.md",
-        "Writing-facing final result summary with Phase 2 addendum.",
+        "Writing-facing final result summary organized by experimental function.",
     ),
     (
         "results/results_discussion_summary.md",
@@ -87,11 +89,11 @@ FILES = [
     ),
     (
         "results/reproducibility_audit.md",
-        "Canonical reproducibility audit and Phase 2 summary-drift interpretation.",
+        "Canonical reproducibility audit and summary-document interpretation.",
     ),
     (
-        "results/phase2_final_summary.md",
-        "Compact A-G Phase 2 synthesis covering all new diagnostics.",
+        "results/integrated_experiment_summary.md",
+        "Compact A-E synthesis covering primary, auxiliary, controlled, validity, and extension diagnostics.",
     ),
 ]
 
@@ -108,16 +110,29 @@ def main() -> None:
     if ZIP_PATH.exists():
         ZIP_PATH.unlink()
 
+    resolved_unpack = UNPACKED_DIR.resolve()
+    resolved_out = OUT_DIR.resolve()
+    if UNPACKED_DIR.exists():
+        if resolved_unpack.parent != resolved_out:
+            raise RuntimeError(f"Refusing to remove unexpected directory: {resolved_unpack}")
+        shutil.rmtree(UNPACKED_DIR)
+    UNPACKED_DIR.mkdir(parents=True, exist_ok=True)
+
     with ZipFile(ZIP_PATH, "w", compression=ZIP_DEFLATED) as zf:
         for rel, _purpose in FILES:
-            zf.write(ROOT / rel, rel)
+            src = ROOT / rel
+            zf.write(src, rel)
+            dst = UNPACKED_DIR / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
 
     lines = [
         "# GPT Paper Writing Pack - 20 Files Final",
         "",
         f"- Zip: `{ZIP_PATH.relative_to(ROOT).as_posix()}`",
+        f"- Unpacked directory: `{UNPACKED_DIR.relative_to(ROOT).as_posix()}`",
         "- Count: 20 selected project files, excluding this manifest.",
-        "- Purpose: compact, writing-facing handoff that covers the final empirical study without dragging GPT into raw-result sprawl.",
+        "- Purpose: compact, writing-facing handoff for the integrated empirical study.",
         "",
         "## Files And Purposes",
         "",
@@ -132,7 +147,7 @@ def main() -> None:
             "",
             "## Selection Logic",
             "",
-            "The pack prioritizes project boundary, reproduction, dataset balance, canonical main results, A1/A2 auxiliary diagnostics, wording robustness, parser/source/reproducibility checks, and one compact Phase 2 synthesis. It intentionally does not include every raw Phase 2 CSV because the downstream writing task needs the final interpretation and boundaries, not a new benchmark-style data dump.",
+            "The pack prioritizes project boundary, reproduction, dataset balance, primary results, A1/A2 auxiliary diagnostics, wording robustness, parser/source/reproducibility checks, and one compact integrated experiment summary. It intentionally excludes raw diagnostic CSVs because the downstream writing task needs the final interpretation and boundaries, not a benchmark-style data dump.",
             "",
             "## Recommended Upload Order",
             "",
@@ -144,6 +159,7 @@ def main() -> None:
     MANIFEST_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     print(f"Wrote {ZIP_PATH}")
+    print(f"Wrote {UNPACKED_DIR}")
     print(f"Wrote {MANIFEST_PATH}")
     print("Pack files: 20")
 

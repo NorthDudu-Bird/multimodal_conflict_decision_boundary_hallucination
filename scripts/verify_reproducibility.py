@@ -48,7 +48,6 @@ CANONICAL_FILES = [
     "results/baseline/baseline_condition_metrics.csv",
     "results/baseline/baseline_exact_tests.csv",
     "results/baseline/baseline_summary.md",
-    "results/final_result_summary.md",
     "results/main/figure2_conflict_aligned_rates.png",
     "results/main/main_combined_parsed_results.csv",
     "results/main/main_condition_metrics.csv",
@@ -66,6 +65,10 @@ CANONICAL_FILES = [
     "results/robustness/prompt_variant_metrics.csv",
     "results/robustness/prompt_variant_summary.json",
     "results/robustness/prompt_variant_summary.md",
+]
+
+WRITING_FACING_FILES = [
+    "results/final_result_summary.md",
 ]
 
 TEXT_SUFFIXES = {".csv", ".json", ".md", ".txt"}
@@ -119,7 +122,7 @@ def file_digest(path: Path, relative_path: str) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def compare_file(snapshot_root: Path, relative_path: str) -> dict[str, object]:
+def compare_file(snapshot_root: Path, relative_path: str, *, blocking: bool = True) -> dict[str, object]:
     snapshot_path = snapshot_root / relative_path
     current_path = ROOT / relative_path
     snapshot_exists = snapshot_path.exists()
@@ -132,7 +135,7 @@ def compare_file(snapshot_root: Path, relative_path: str) -> dict[str, object]:
         "snapshot_sha256": "",
         "current_sha256": "",
         "status": "",
-        "blocking": True,
+        "blocking": blocking,
         "note": "",
     }
 
@@ -156,26 +159,32 @@ def compare_file(snapshot_root: Path, relative_path: str) -> dict[str, object]:
         row["note"] = "Canonical artifact matched."
     else:
         row["status"] = "different"
-        row["note"] = "Canonical artifact differs from the locked snapshot."
+        row["note"] = (
+            "Canonical artifact differs from the locked snapshot."
+            if blocking
+            else "Writing-facing summary differs from the locked snapshot; experimental artifacts remain gated separately."
+        )
     return row
 
 
 def write_summary(rows: list[dict[str, object]], output_md: Path, snapshot_root: Path) -> None:
     total = len(rows)
     matched = sum(1 for row in rows if row["status"] == "match")
-    blocking_failures = [row for row in rows if row["status"] != "match"]
+    blocking_failures = [row for row in rows if row["status"] != "match" and row["blocking"]]
+    nonblocking_differences = [row for row in rows if row["status"] != "match" and not row["blocking"]]
     status_line = (
-        "The rerun reproduced all locked canonical artifacts."
+        "The rerun reproduced all locked experimental artifacts."
         if not blocking_failures
-        else "The rerun did not reproduce all locked canonical artifacts."
+        else "The rerun did not reproduce all locked experimental artifacts."
     )
     lines = [
         "# Reproducibility Audit",
         "",
         f"- Snapshot root: `{snapshot_root}`",
-        f"- Canonical files checked: {total}",
+        f"- Files checked: {total}",
         f"- Exact/normalized matches: {matched}",
         f"- Blocking mismatches or missing files: {len(blocking_failures)}",
+        f"- Non-blocking writing-summary differences: {len(nonblocking_differences)}",
         f"- Verdict: {status_line}",
         "",
         "## Allowed Non-Canonical Differences",
@@ -188,13 +197,17 @@ def write_summary(rows: list[dict[str, object]], output_md: Path, snapshot_root:
         lines.extend(["", "## Blocking Items", ""])
         for row in blocking_failures:
             lines.append(f"- `{row['relative_path']}`: {row['status']}. {row['note']}")
-    else:
+    if nonblocking_differences:
+        lines.extend(["", "## Non-Blocking Writing-Facing Differences", ""])
+        for row in nonblocking_differences:
+            lines.append(f"- `{row['relative_path']}`: {row['status']}. {row['note']}")
+    if not blocking_failures:
         lines.extend(
             [
                 "",
                 "## Result",
                 "",
-                "- All tracked canonical manifests, prompts, parsed outputs, condition metrics, key tests, summary files, parser audit files, and appendix sanity files matched the locked snapshot.",
+                "- All tracked canonical manifests, prompts, parsed outputs, condition metrics, key tests, parser audit files, and appendix sanity files matched the locked snapshot.",
                 "- Any log/runtime/raw-output differences are outside the reproducibility gate.",
             ]
         )
@@ -219,6 +232,7 @@ def main() -> int:
         return 1
 
     rows = [compare_file(snapshot_root, relative_path) for relative_path in CANONICAL_FILES]
+    rows.extend(compare_file(snapshot_root, relative_path, blocking=False) for relative_path in WRITING_FACING_FILES)
     comparison_df = pd.DataFrame(rows)
 
     results_dir = ROOT / "results"
@@ -228,7 +242,7 @@ def main() -> int:
     comparison_df.to_csv(comparison_csv, index=False, encoding="utf-8-sig")
     write_summary(rows, audit_md, snapshot_root)
 
-    failures = [row for row in rows if row["status"] != "match"]
+    failures = [row for row in rows if row["status"] != "match" and row["blocking"]]
     print(
         json.dumps(
             {
