@@ -1,0 +1,5 @@
+figure,claim,archetype
+figure1_evidence_chain,The study uses a short evidence chain from identical images and faithful C0 baselines to paired conflict flips and boundary checks.,schematic-led composite
+figure2_main_conflict_rates,Only LLaVA-1.5-7B shows a clear primary C3/C4 false-colour alignment shift.,quantitative grid
+figure3_paired_flips,"The LLaVA C3/C4 outputs are same-image faithful-to-conflict paired flips, not unpaired aggregate differences.",quantitative grid
+figure4_boundary_diagnostics,"The observed shift is bounded by wording, answer format, colour route, and prompt factor.",asymmetric mixed-modality figure

@@ -1,0 +1,16 @@
+model_key,model_name,condition_name,condition_short,n,conflict_aligned_n,conflict_aligned_rate,conflict_aligned_ci_low,conflict_aligned_ci_high
+llava15_7b,LLaVA-1.5-7B,C0_neutral,C0,300,0,0.0,0.0,0.012642971224546
+llava15_7b,LLaVA-1.5-7B,C1_weak_suggestion,C1,300,1,0.0033333333333333,0.0005886577218511,0.0186366936945312
+llava15_7b,LLaVA-1.5-7B,C2_false_assertion_open,C2,300,3,0.01,0.0034066184377152,0.0289834933623398
+llava15_7b,LLaVA-1.5-7B,C3_presupposition_correction_allowed,C3,300,27,0.09,0.0625902256054793,0.1277770107986483
+llava15_7b,LLaVA-1.5-7B,C4_stronger_open_conflict,C4,300,10,0.0333333333333333,0.0182049473388548,0.0602618258040548
+qwen2vl7b,Qwen2-VL-7B-Instruct,C0_neutral,C0,300,0,0.0,0.0,0.012642971224546
+qwen2vl7b,Qwen2-VL-7B-Instruct,C1_weak_suggestion,C1,300,0,0.0,0.0,0.012642971224546
+qwen2vl7b,Qwen2-VL-7B-Instruct,C2_false_assertion_open,C2,300,0,0.0,0.0,0.012642971224546
+qwen2vl7b,Qwen2-VL-7B-Instruct,C3_presupposition_correction_allowed,C3,300,1,0.0033333333333333,0.0005886577218511,0.0186366936945312
+qwen2vl7b,Qwen2-VL-7B-Instruct,C4_stronger_open_conflict,C4,300,1,0.0033333333333333,0.0005886577218511,0.0186366936945312
+internvl2_8b,InternVL2-8B,C0_neutral,C0,300,0,0.0,0.0,0.012642971224546
+internvl2_8b,InternVL2-8B,C1_weak_suggestion,C1,300,0,0.0,0.0,0.012642971224546
+internvl2_8b,InternVL2-8B,C2_false_assertion_open,C2,300,0,0.0,0.0,0.012642971224546
+internvl2_8b,InternVL2-8B,C3_presupposition_correction_allowed,C3,300,0,0.0,0.0,0.012642971224546
+internvl2_8b,InternVL2-8B,C4_stronger_open_conflict,C4,300,0,0.0,0.0,0.012642971224546

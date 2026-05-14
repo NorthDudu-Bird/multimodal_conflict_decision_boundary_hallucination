@@ -1,0 +1,13 @@
+step,summary
+Image set,"300 real car images
+6 colours, 50 each"
+Neutral baseline,"C0 faithful
+300/300 for all models"
+Conflict prompts,"Same images under
+C1-C4 false colour cues"
+Paired flip test,"Faithful C0 ->
+false-text-aligned output"
+Boundary checks,"Wording, format,
+colour route, factors"
+Bounded claim,"Local LLaVA C3/C4 shift;
+no general text-over-vision claim"

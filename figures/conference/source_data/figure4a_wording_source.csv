@@ -1,0 +1,4 @@
+model_key,model,robustness_variant,variant,n,conflict_aligned_n,conflict_aligned_rate,conflict_aligned_ci_low,conflict_aligned_ci_high,faithful_n,faithful_rate,faithful_ci_low,faithful_ci_high,other_wrong_n,refusal_n,parse_error_n
+llava15_7b,LLaVA-1.5-7B,C3_original,Original C3,300,27,0.09,0.0625902256054793,0.1277770107986483,273,0.91,0.8722229892013517,0.9374097743945206,0,0,0
+llava15_7b,LLaVA-1.5-7B,C3_v2,C3-v2,300,5,0.0166666666666666,0.0071394773506333,0.0384153948330945,294,0.98,0.9570603791821394,0.9908023684422964,1,0,0
+llava15_7b,LLaVA-1.5-7B,C3_v3,C3-v3,300,0,0.0,0.0,0.012642971224546,299,0.9966666666666668,0.9813633063054688,0.9994113422781488,1,0,0

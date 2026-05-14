@@ -1,0 +1,13 @@
+model_key,model,condition,n_pairs,faithful_to_faithful_n,faithful_to_conflict_aligned_n,answer_flip_n,answer_flip_rate,faithful_retention_rate,p_value_exact_mcnemar
+llava15_7b,LLaVA-1.5-7B,C1,300,299,1,1,0.0033333333333333,0.9966666666666668,1.0
+llava15_7b,LLaVA-1.5-7B,C2,300,297,3,3,0.01,0.99,0.25
+llava15_7b,LLaVA-1.5-7B,C3,300,273,27,27,0.09,0.91,1.4901161193847656e-08
+llava15_7b,LLaVA-1.5-7B,C4,300,290,10,10,0.0333333333333333,0.9666666666666668,0.001953125
+qwen2vl7b,Qwen2-VL-7B-Instruct,C1,300,300,0,0,0.0,1.0,1.0
+qwen2vl7b,Qwen2-VL-7B-Instruct,C2,300,300,0,0,0.0,1.0,1.0
+qwen2vl7b,Qwen2-VL-7B-Instruct,C3,300,299,1,1,0.0033333333333333,0.9966666666666668,1.0
+qwen2vl7b,Qwen2-VL-7B-Instruct,C4,300,299,1,1,0.0033333333333333,0.9966666666666668,1.0
+internvl2_8b,InternVL2-8B,C1,300,300,0,0,0.0,1.0,1.0
+internvl2_8b,InternVL2-8B,C2,300,300,0,0,0.0,1.0,1.0
+internvl2_8b,InternVL2-8B,C3,300,300,0,0,0.0,1.0,1.0
+internvl2_8b,InternVL2-8B,C4,300,300,0,0,0.0,1.0,1.0

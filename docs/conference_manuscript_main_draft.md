@@ -112,8 +112,11 @@ The contributions are:
   checks, and extension diagnostics so that stronger prompt-compliance phenomena do not
   overwrite the narrower C0-C4 claim.
 
-[FIGURE PLACEHOLDER: Figure 1 should summarize the evidence chain: image -> C0 neutral
-answer -> C1-C4 false-colour prompts -> paired flip definition -> boundary diagnostics.]
+**Figure 1. Evidence chain for same-image conflict-following analysis.** File stem:
+`figures/conference/figure1_evidence_chain`. The schematic summarizes the study logic:
+the same 300 images are evaluated under neutral C0 and C1-C4 false-colour prompts;
+because all C0 answers are faithful, false-colour-aligned conflict outputs can be read
+as paired faithful-to-conflict shifts; boundary diagnostics then constrain the claim.
 
 ## 2. Related Work
 
@@ -236,8 +239,10 @@ interval of 6.26%-12.78%; the C4 rate is 3.33% with a 95% confidence interval of
 1.82%-6.03%. The C3 and C4 increases are significant in paired tests against C0 and
 in matched-image comparisons against the stable models.
 
-[FIGURE PLACEHOLDER: Figure 2 should show conflict-following rates across C0-C4 for
-the three models, with confidence intervals and a caption defining the interval method.]
+**Figure 2. Primary C0-C4 conflict-following rates.** File stem:
+`figures/conference/figure2_main_conflict_rates`. Points show false-colour-aligned
+output rates for each model-condition cell with Wilson confidence intervals from
+`results/main/main_condition_metrics.csv`; labels mark non-zero counts out of 300.
 
 ### 4.3 Same-image paired flips make the attribution narrower
 
@@ -252,8 +257,10 @@ does not prove a general causal mechanism, but it removes an important source of
 cross-sample ambiguity: each changed answer is tied to the same visual evidence under
 a changed prompt.
 
-[FIGURE PLACEHOLDER: Figure 3 should visualize paired C0-to-conflict transitions or
-answer-flip rates, using `results/main/paired_flip_metrics.csv`.]
+**Figure 3. Same-image paired faithful-to-conflict flips.** File stem:
+`figures/conference/figure3_paired_flips`. Bars show the number of images for which a
+model is faithful under C0 and false-colour-aligned under C1-C4, using
+`results/main/paired_flip_metrics.csv`.
 
 ### 4.4 Auxiliary diagnostics show compliance under stronger constraints
 
@@ -289,9 +296,11 @@ title/prefix framing and no-correction presupposition can be much stronger, incl
 for Qwen and InternVL2. These diagnostics constrain interpretation; they should not be
 rewritten as a new prompt-engineering mainline.
 
-[FIGURE PLACEHOLDER: Figure 4 should combine wording robustness, colour-pair split, and
-answer-format/factor diagnostics as boundary evidence. Keep this figure secondary to
-the primary paired C0-C4 figure.]
+**Figure 4. Boundary diagnostics for the primary LLaVA shift.** File stem:
+`figures/conference/figure4_boundary_diagnostics`. Panels summarize C3 wording
+robustness, answer-format controls, colour-pair concentration, and factorized-prompt
+effects. The figure is secondary to the primary paired C0-C4 evidence and is intended
+to bound, not replace, the main claim.
 
 ### 4.6 Validity checks reduce, but do not eliminate, alternative explanations
 
@@ -415,8 +424,8 @@ general text-over-vision claim.
 
 - Convert the first-pass BibTeX scaffold into the final venue style and verify
   proceedings metadata for accepted versions.
-- Convert figure placeholders into a concrete figure plan before invoking
-  `nature-figure`.
+- Review the generated figure captions and decide whether visual clarity contact sheets
+  and multi-turn diagnostics should become supplementary figures.
 - Add Data Availability, Code Availability, and third-party data/source statements with
   `nature-data`.
 - After citations and figures are added, run `nature-polishing` for paragraph flow,
