@@ -406,6 +406,35 @@ supported conclusion is therefore a local and bounded one: false textual cues ca
 one tested model in specific prompt settings, but the evidence does not support a
 general text-over-vision claim.
 
+## Data Availability
+
+The processed manifests, reviewed colour labels, prompt condition tables, parsed model
+outputs, statistical result tables, figure source data, audit summaries, and
+reproducibility records supporting this study are available in the project repository at
+`https://github.com/NorthDudu-Bird/multimodal_conflict_decision_boundary_hallucination`
+and should be archived in a DOI-bearing release before submission. The primary
+300-image evaluation manifest is stored at `data/balanced_eval_set/final_manifest.csv`,
+with the balanced-set summary at
+`data/metadata/balanced_eval_set/balanced_eval_set_summary.json`. Figure source data
+for the conference draft are provided under `figures/conference/source_data/`.
+
+The underlying vehicle images are reused third-party data from StanfordCars and VCoR.
+Readers should obtain the original images from the corresponding dataset providers and
+respect their terms of use. The repository records source dataset identity, source paths,
+cropped-image paths, reviewed labels, and selection metadata needed to reconstruct the
+evaluation set, but the paper does not claim to newly release or relicense the original
+third-party image collections.
+
+## Code Availability
+
+The analysis and figure-generation code used for this manuscript draft is available in
+the same repository at
+`https://github.com/NorthDudu-Bird/multimodal_conflict_decision_boundary_hallucination`.
+The main reproduction entry points are documented in `docs/reproduction.md`; the current
+conference-figure script is `scripts/make_conference_figures.py`. Model weights are not
+redistributed by this repository and should be obtained from their respective model
+providers.
+
 ## Claim-Evidence Map
 
 | Claim | Evidence source | Status |
@@ -426,7 +455,7 @@ general text-over-vision claim.
   proceedings metadata for accepted versions.
 - Review the generated figure captions and decide whether visual clarity contact sheets
   and multi-turn diagnostics should become supplementary figures.
-- Add Data Availability, Code Availability, and third-party data/source statements with
-  `nature-data`.
+- Replace the GitHub repository URL with a DOI-bearing archived release before formal
+  submission, and confirm whether the archive may include cropped third-party images.
 - After citations and figures are added, run `nature-polishing` for paragraph flow,
   title compression, abstract tightening, and conference-style language cleanup.
