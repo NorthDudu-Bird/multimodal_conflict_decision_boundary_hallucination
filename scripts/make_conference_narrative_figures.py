@@ -279,62 +279,70 @@ def draw_graphical_abstract() -> None:
     img = Image.open(ROOT / str(case["image_path"])).convert("RGB")
     img = cartoonize_image(img)
 
-    fig = plt.figure(figsize=(8.2, 5.25))
+    fig = plt.figure(figsize=(8.4, 4.95))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_axis_off()
     ax.add_patch(Rectangle((0, 0), 1, 1, transform=ax.transAxes, facecolor=COLORS["paper"], edgecolor="none", zorder=-10))
     add_halftone(ax)
 
-    add_label(ax, 0.045, 0.965, "Same car, two prompts, one flip", COLORS["ink"], size=17, font=COMIC_BOLD)
-    add_body(ax, 0.047, 0.900, "A real paired example drawn as a cartoon-style workflow; the prompt text is the exact text used in the run.", size=7.8, color=COLORS["muted"], width=115)
+    add_label(ax, 0.045, 0.960, "Same car, two prompts, one flip", COLORS["ink"], size=16.5, font=COMIC_BOLD)
+    add_body(ax, 0.047, 0.895, "A cleaner cartoon workflow using the exact C0 and C3 prompts from the experiment.", size=7.8, color=COLORS["muted"], width=110)
 
-    img_ax = fig.add_axes([0.055, 0.268, 0.292, 0.505])
+    add_panel(ax, (0.045, 0.205), (0.295, 0.590), "#FFFFFF", COLORS["line"], lw=2.4, radius=0.035)
+    img_ax = fig.add_axes([0.068, 0.305, 0.250, 0.390])
     img_ax.imshow(img)
     img_ax.set_xticks([])
     img_ax.set_yticks([])
     for spine in img_ax.spines.values():
         spine.set_color(COLORS["line"])
-        spine.set_linewidth(2.2)
+        spine.set_linewidth(1.7)
         spine.set_linestyle("-")
-    img_ax.set_title(f"real crop: {case['image_id']} ({case['source_dataset']})", fontsize=8.2, pad=7, fontproperties=COMIC)
-    add_tape(ax, 0.070, 0.745, 0.083, 0.024, angle=-7)
-    add_tape(ax, 0.272, 0.255, 0.083, 0.024, angle=5)
+    img_ax.set_title(f"real crop: {case['image_id']} ({case['source_dataset']})", fontsize=7.8, pad=6, fontproperties=COMIC)
+    add_tape(ax, 0.065, 0.772, 0.085, 0.023, angle=-6)
+    add_tape(ax, 0.247, 0.204, 0.085, 0.023, angle=5)
+    add_label(ax, 0.095, 0.745, "same image", COLORS["line"], size=9.2, font=COMIC_BOLD)
 
-    add_panel(ax, (0.080, 0.120), (0.230, 0.072), "#FFFFFF", COLORS["line"], lw=1.8, radius=0.030)
-    add_body(ax, 0.103, 0.165, f"true colour: {case['true_color']}    false cue: {case['conflict_color']}", size=7.4, width=45)
+    add_panel(ax, (0.075, 0.218), (0.230, 0.062), COLORS["paper2"], COLORS["line"], lw=1.6, radius=0.022, shadow=False)
+    add_body(ax, 0.095, 0.256, f"true: {case['true_color']}    false cue: {case['conflict_color']}", size=7.0, width=42)
 
-    add_prompt_bubble(
-        ax,
-        (0.405, 0.590),
-        (0.370, 0.215),
-        "C0 prompt",
-        case["c0_prompt_text"],
-        COLORS["green"],
-        width=56,
-    )
-    add_prompt_bubble(
-        ax,
-        (0.405, 0.285),
-        (0.370, 0.235),
-        "C3 prompt",
-        case["prompt_text"],
-        COLORS["red"],
-        width=56,
-    )
-    draw_robot(ax, 0.355, 0.505, scale=1.0)
-    add_answer_card(ax, (0.825, 0.610), "answer", str(case["c0_parsed_label"]).lower(), COLORS["green"], COLORS["green_soft"])
-    add_answer_card(ax, (0.825, 0.338), "answer", str(case["parsed_label"]).lower(), COLORS["red"], COLORS["red_soft"])
-    add_panel(ax, (0.690, 0.105), (0.260, 0.110), COLORS["purple_soft"], COLORS["purple"], lw=2.2, radius=0.035)
-    add_label(ax, 0.715, 0.178, "takeaway", COLORS["purple"], size=8.2)
-    add_body(ax, 0.715, 0.148, "This is an illustration; aggregate rates and diagnostics carry the claim.", size=6.7, width=44)
+    lanes = [
+        {
+            "tag": "C0",
+            "title": "neutral prompt",
+            "prompt": case["c0_prompt_text"],
+            "answer": str(case["c0_parsed_label"]).lower(),
+            "edge": COLORS["green"],
+            "face": COLORS["green_soft"],
+            "y": 0.575,
+        },
+        {
+            "tag": "C3",
+            "title": "false-colour prompt",
+            "prompt": case["prompt_text"],
+            "answer": str(case["parsed_label"]).lower(),
+            "edge": COLORS["red"],
+            "face": COLORS["red_soft"],
+            "y": 0.285,
+        },
+    ]
+    for lane in lanes:
+        y = lane["y"]
+        add_panel(ax, (0.385, y), (0.385, 0.205), "#FFFFFF", lane["edge"], lw=2.4, radius=0.035)
+        badge = Circle((0.405, y + 0.165), 0.026, transform=ax.transAxes, facecolor=lane["edge"], edgecolor="#FFFFFF", lw=2.0, zorder=9)
+        sketch(badge)
+        ax.add_patch(badge)
+        add_label(ax, 0.405, y + 0.165, lane["tag"], "#FFFFFF", size=7.8, ha="center", va="center", font=COMIC_BOLD, zorder=10)
+        add_label(ax, 0.438, y + 0.172, lane["title"], lane["edge"], size=8.0, font=COMIC_BOLD)
+        add_body(ax, 0.405, y + 0.118, '"' + lane["prompt"] + '"', size=5.9, width=64)
+        add_answer_card(ax, (0.820, y + 0.030), "answer", lane["answer"], lane["edge"], lane["face"])
+        arrow(ax, (0.340, y + 0.102), (0.385, y + 0.102), lane["edge"], curve=0.0, lw=2.0, scale=14)
+        arrow(ax, (0.770, y + 0.102), (0.820, y + 0.102), lane["edge"], curve=0.0, lw=2.0, scale=14)
 
-    arrow(ax, (0.335, 0.545), (0.405, 0.695), COLORS["green"], curve=0.18)
-    arrow(ax, (0.335, 0.505), (0.405, 0.405), COLORS["red"], curve=-0.16)
-    arrow(ax, (0.775, 0.700), (0.825, 0.690), COLORS["green"])
-    arrow(ax, (0.775, 0.405), (0.825, 0.415), COLORS["red"])
-    arrow(ax, (0.895, 0.338), (0.827, 0.215), COLORS["purple"], curve=-0.25)
+    add_panel(ax, (0.385, 0.095), (0.580, 0.095), COLORS["purple_soft"], COLORS["purple"], lw=2.0, radius=0.030)
+    add_label(ax, 0.410, 0.158, "reader note", COLORS["purple"], size=7.8)
+    add_body(ax, 0.410, 0.132, "Illustrative example only; aggregate rates and diagnostics carry the claim.", size=6.45, width=78)
 
-    add_body(ax, 0.060, 0.055, f"Parsed labels: C0={case['c0_parsed_label']} | C3={case['parsed_label']} | model=LLaVA-1.5-7B", size=7.3, color=COLORS["muted"], width=95)
+    add_body(ax, 0.060, 0.065, f"Parsed labels: C0={case['c0_parsed_label']} | C3={case['parsed_label']} | model=LLaVA-1.5-7B", size=7.0, color=COLORS["muted"], width=78)
     save_all(fig, "graphical_abstract_real_case")
 
 
