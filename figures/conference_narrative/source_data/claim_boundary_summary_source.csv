@@ -1,0 +1,4 @@
+zone,message
+Supported,All models are faithful under C0; LLaVA shows C3/C4 paired shifts.
+Bounded,"The shift changes with wording, format, prompt factor, and colour pair."
+Not claimed,The evidence does not show general text-over-vision behaviour.

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="388.26pt" height="180.72pt" viewBox="0 0 388.26 180.72" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-05-15T15:15:24.002403</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.6, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 180.72 
+L 388.26 180.72 
+L 388.26 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 31.12704 125.61984 
+L 121.60116 125.61984 
+Q 127.58292 125.61984 127.58292 122.95872 
+L 127.58292 61.08768 
+Q 127.58292 58.42656 121.60116 58.42656 
+L 31.12704 58.42656 
+Q 25.14528 58.42656 25.14528 61.08768 
+L 25.14528 122.95872 
+Q 25.14528 125.61984 31.12704 125.61984 
+z
+" clip-path="url(#pdd16a51597)" style="fill: #ddf3de; stroke: #2e7d4f; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 147.02364 125.61984 
+L 237.49776 125.61984 
+Q 243.47952 125.61984 243.47952 122.95872 
+L 243.47952 61.08768 
+Q 243.47952 58.42656 237.49776 58.42656 
+L 147.02364 58.42656 
+Q 141.04188 58.42656 141.04188 61.08768 
+L 141.04188 122.95872 
+Q 141.04188 125.61984 147.02364 125.61984 
+z
+" clip-path="url(#pdd16a51597)" style="fill: #f4e6c8; stroke: #d99b2b; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 262.92024 125.61984 
+L 353.39436 125.61984 
+Q 359.37612 125.61984 359.37612 122.95872 
+L 359.37612 61.08768 
+Q 359.37612 58.42656 353.39436 58.42656 
+L 262.92024 58.42656 
+Q 256.93848 58.42656 256.93848 61.08768 
+L 256.93848 122.95872 
+Q 256.93848 125.61984 262.92024 125.61984 
+z
+" clip-path="url(#pdd16a51597)" style="fill: #f4d5d2; stroke: #b64342; stroke-width: 0.9; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: start" x="22.1544" y="27.578025" transform="rotate(-0 22.1544 27.578025)">Claim boundary at a glance</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 7.4px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: start; fill: #696969" x="22.1544" y="39.198169" transform="rotate(-0 22.1544 39.198169)">A compact reader guide for keeping the result strong without overclaiming.</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 7.1px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: start; fill: #272727" x="37.1088" y="74.738578" transform="rotate(-0 37.1088 74.738578)">Supported</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(37.1088 85.104956)">All models are faithful</text>
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(37.1088 92.321902)">under C0; LLaVA shows</text>
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(37.1088 99.639394)">C3/C4 paired shifts.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 7.1px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: start; fill: #272727" x="153.0054" y="74.652047" transform="rotate(-0 153.0054 74.652047)">Bounded</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(153.0054 85.185394)">The shift changes with</text>
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(153.0054 92.58023)">wording, format, prompt</text>
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(153.0054 99.975066)">factor, and colour pair.</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 7.1px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: start; fill: #272727" x="268.902" y="74.652047" transform="rotate(-0 268.902 74.652047)">Not claimed</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(268.902 85.104956)">The evidence does not</text>
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(268.902 92.321902)">show general text-over-</text>
+    <text style="font-size: 6.6px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; fill: #272727" transform="translate(268.902 99.616191)">vision behaviour.</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 7.2px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif; text-anchor: middle; fill: #696969" x="194.13" y="150.2352" transform="rotate(-0 194.13 150.2352)">Best use: final Discussion slide, graphical takeaway, or optional summary panel after Figure 4.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pdd16a51597">
+   <rect x="7.2" y="7.2" width="373.86" height="166.32"/>
+  </clipPath>
+ </defs>
+</svg>

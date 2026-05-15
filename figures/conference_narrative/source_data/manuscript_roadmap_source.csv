@@ -1,0 +1,7 @@
+stage,message
+Question,Can false text move a simple visual judgement?
+Primary evidence,C0 baseline and C1-C4 paired conflict prompts
+Observed shift,LLaVA C3/C4 shows limited same-image flips
+Boundary tests,"Wording, format, colour route, prompt factor"
+Validity checks,"Parser, source sanity, visual clarity, reproducibility"
+Claim,"Local, conditional shift rather than general text-over-vision"
