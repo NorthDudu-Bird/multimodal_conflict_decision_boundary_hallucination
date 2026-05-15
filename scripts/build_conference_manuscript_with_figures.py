@@ -32,6 +32,21 @@ FIGURES = {
     },
 }
 
+NARRATIVE_FIGURES = {
+    "Graphical overview": {
+        "png": ROOT / "figures" / "conference_narrative" / "graphical_abstract_real_case.png",
+        "alt": "Graphical overview. Real-prompt paired workflow for one LLaVA example.",
+    },
+    "Reader map": {
+        "png": ROOT / "figures" / "conference_narrative" / "manuscript_argument_roadmap.png",
+        "alt": "Reader map. Hand-drawn argument path of the manuscript.",
+    },
+    "Claim boundary guide": {
+        "png": ROOT / "figures" / "conference_narrative" / "claim_boundary_summary.png",
+        "alt": "Claim boundary guide. Supported, bounded, and not-claimed conclusions.",
+    },
+}
+
 
 def strip_working_notes(text: str) -> str:
     marker = "\n## Polishing Notes\n"
@@ -42,11 +57,29 @@ def strip_working_notes(text: str) -> str:
 
 def copy_figures() -> None:
     IMG_DIR.mkdir(parents=True, exist_ok=True)
-    for spec in FIGURES.values():
+    for spec in list(NARRATIVE_FIGURES.values()) + list(FIGURES.values()):
         src = spec["png"]
         if not src.exists():
             raise FileNotFoundError(src)
         shutil.copy2(src, IMG_DIR / src.name)
+
+
+def insert_narrative_figures(text: str) -> str:
+    for fig_label, spec in NARRATIVE_FIGURES.items():
+        filename = spec["png"].name
+        image_md = f"![](images/{filename}){{width=100%}}\n\n"
+        pattern = rf"(\*\*{re.escape(fig_label)}\.[\s\S]*?)(?=\n\n)"
+
+        def repl(match: re.Match[str]) -> str:
+            block = match.group(1)
+            if f"](images/{filename})" in block:
+                return block
+            return image_md + block
+
+        text, n = re.subn(pattern, repl, text, count=1)
+        if n != 1:
+            raise RuntimeError(f"Could not insert {fig_label}")
+    return text
 
 
 def insert_figures(text: str) -> str:
@@ -164,6 +197,7 @@ def main() -> None:
     text = strip_working_notes(text)
     text = clean_captions(text)
     text = insert_tables(text)
+    text = insert_narrative_figures(text)
     text = insert_figures(text)
     out_md = OUT_DIR / "conference_manuscript_with_figures.md"
     out_md.write_text(text, encoding="utf-8", newline="\n")

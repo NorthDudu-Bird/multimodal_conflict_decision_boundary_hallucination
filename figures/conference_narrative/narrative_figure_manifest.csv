@@ -1,4 +1,4 @@
 figure,type,suggested_use
-graphical_abstract_real_case,real-image workflow with actual prompts,Graphical abstract or opening transition before Figure 1
-manuscript_argument_roadmap,cartoon argument roadmap,Introductory bridge between Introduction and Related Work or for slides
-claim_boundary_summary,cartoon claim-boundary summary,Discussion transition or graphical takeaway
+graphical_abstract_real_case,cartoon real-image workflow with actual prompts,Graphical overview or opening transition before the evidence-chain figure
+manuscript_argument_roadmap,hand-drawn argument roadmap,Introductory bridge or reader-guide figure
+claim_boundary_summary,cartoon claim-boundary guide,Discussion transition or graphical takeaway

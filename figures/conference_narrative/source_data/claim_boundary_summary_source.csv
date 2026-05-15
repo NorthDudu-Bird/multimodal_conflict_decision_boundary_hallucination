@@ -1,4 +1,4 @@
-zone,message,tag
-Supported,All models are faithful under C0; LLaVA shows C3/C4 paired shifts.,OK
-Bounded,"The shift changes with wording, format, prompt factor, and colour pair.",IF
-Not claimed,The evidence does not show general text-over-vision behaviour.,NO
+zone,message,tag,shape
+Supported,All models are faithful under C0; LLaVA shows C3/C4 paired shifts.,OK,check
+Bounded,"The shift changes with wording, format, prompt factor, and colour pair.",IF,yield
+Not claimed,The evidence does not show general text-over-vision behaviour.,NO,stop
