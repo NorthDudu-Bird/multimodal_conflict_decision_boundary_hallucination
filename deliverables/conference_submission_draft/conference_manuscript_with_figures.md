@@ -68,17 +68,18 @@ stronger stress-test effects from being folded into the primary C0-C4 claim.
 
 ![](images/graphical_abstract_real_case.png){width=100%}
 
-**Graphical overview. Real-prompt paired workflow.** This illustrative panel uses one
-actual paired LLaVA example to show the experimental unit: the same image is evaluated
-with the neutral C0 prompt and the false-colour C3 prompt, and the parsed answer changes
-from the true colour to the embedded false cue. The panel is a reader aid rather than
-primary evidence.
+**Graphical overview. Real-prompt paired workflow.** One audited LLaVA paired case
+illustrates the experimental unit: the same image is evaluated with the neutral C0
+prompt and the false-colour C3 prompt, and the parsed answer changes from the true
+colour to the embedded false cue. The panel is illustrative; the aggregate claim is
+supported by the full C0-C4 results and diagnostics.
 
 ![](images/manuscript_argument_roadmap.png){width=100%}
 
-**Reader map. Argument path of the manuscript.** This visual guide summarises the paper's
-logic from question, paired evidence, and observed shift to diagnostics, validity checks,
-and a bounded claim. It is intended to orient the reader before the quantitative figures.
+**Argument map. Narrative structure of the manuscript.** This guide summarises the
+paper's logic from question, paired evidence, and observed shift to diagnostics,
+validity checks, and a bounded claim. It is included to orient the reader before the
+quantitative figures.
 
 ![](images/figure1_evidence_chain.png){width=100%}
 
@@ -336,10 +337,10 @@ change when the false-text form or interaction regime changes.
 
 ![](images/claim_boundary_summary.png){width=100%}
 
-**Claim boundary guide. Supported, bounded, and not claimed.** The guide restates the
+**Claim-boundary guide. Supported, bounded, and not claimed.** This guide restates the
 interpretive boundary of the study: C0 faithfulness and LLaVA C3/C4 paired shifts are
-supported, prompt and colour-pair dependence bounds the conclusion, and the evidence
-does not support a general text-over-vision claim.
+supported, prompt and colour-pair dependence bound the conclusion, and the evidence does
+not support a general text-over-vision claim.
 
 The main value of the study is methodological as much as numerical. It separates the
 primary paired evidence chain from auxiliary stress tests, controlled diagnostics,

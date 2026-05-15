@@ -282,11 +282,10 @@ def draw_graphical_abstract() -> None:
     fig = plt.figure(figsize=(8.4, 4.95))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_axis_off()
-    ax.add_patch(Rectangle((0, 0), 1, 1, transform=ax.transAxes, facecolor=COLORS["paper"], edgecolor="none", zorder=-10))
-    add_halftone(ax)
+    ax.add_patch(Rectangle((0, 0), 1, 1, transform=ax.transAxes, facecolor="#FFFFFF", edgecolor="none", zorder=-10))
 
     add_label(ax, 0.045, 0.960, "Same car, two prompts, one flip", COLORS["ink"], size=16.5, font=COMIC_BOLD)
-    add_body(ax, 0.047, 0.895, "A cleaner cartoon workflow using the exact C0 and C3 prompts from the experiment.", size=7.8, color=COLORS["muted"], width=110)
+    add_body(ax, 0.047, 0.895, "Exact C0 and C3 prompts from one audited paired example.", size=7.8, color=COLORS["muted"], width=110)
 
     add_panel(ax, (0.045, 0.205), (0.295, 0.590), "#FFFFFF", COLORS["line"], lw=2.4, radius=0.035)
     img_ax = fig.add_axes([0.068, 0.305, 0.250, 0.390])
@@ -339,8 +338,8 @@ def draw_graphical_abstract() -> None:
         arrow(ax, (0.770, y + 0.102), (0.820, y + 0.102), lane["edge"], curve=0.0, lw=2.0, scale=14)
 
     add_panel(ax, (0.385, 0.095), (0.580, 0.095), COLORS["purple_soft"], COLORS["purple"], lw=2.0, radius=0.030)
-    add_label(ax, 0.410, 0.158, "reader note", COLORS["purple"], size=7.8)
-    add_body(ax, 0.410, 0.132, "Illustrative example only; aggregate rates and diagnostics carry the claim.", size=6.45, width=78)
+    add_label(ax, 0.410, 0.158, "scope note", COLORS["purple"], size=7.8)
+    add_body(ax, 0.410, 0.132, "Illustrative case only; aggregate rates and diagnostics carry the claim.", size=6.45, width=78)
 
     add_body(ax, 0.060, 0.065, f"Parsed labels: C0={case['c0_parsed_label']} | C3={case['parsed_label']} | model=LLaVA-1.5-7B", size=7.0, color=COLORS["muted"], width=78)
     save_all(fig, "graphical_abstract_real_case")
@@ -374,10 +373,9 @@ def draw_manuscript_roadmap() -> None:
 
     fig, ax = plt.subplots(figsize=(8.2, 3.8))
     ax.set_axis_off()
-    ax.add_patch(Rectangle((0, 0), 1, 1, transform=ax.transAxes, facecolor=COLORS["paper2"], edgecolor="none", zorder=-10))
-    add_halftone(ax, color="#DDE1F7")
+    ax.add_patch(Rectangle((0, 0), 1, 1, transform=ax.transAxes, facecolor="#FFFFFF", edgecolor="none", zorder=-10))
     add_label(ax, 0.045, 0.940, "A hand-drawn map through the paper", COLORS["ink"], size=15.5, font=COMIC_BOLD)
-    add_body(ax, 0.047, 0.858, "Use once as a visual guide; the measured evidence still lives in the quantitative figures.", size=7.5, color=COLORS["muted"], width=105)
+    add_body(ax, 0.047, 0.858, "Narrative guide only; the quantitative figures carry the measured evidence.", size=7.5, color=COLORS["muted"], width=105)
 
     xroad = np.linspace(0.060, 0.935, 100)
     yroad = 0.370 + 0.045 * np.sin(np.linspace(0, 2.8 * np.pi, 100))
@@ -425,8 +423,7 @@ def draw_claim_boundary_summary() -> None:
 
     fig, ax = plt.subplots(figsize=(7.4, 3.55))
     ax.set_axis_off()
-    ax.add_patch(Rectangle((0, 0), 1, 1, transform=ax.transAxes, facecolor="#F9FCFF", edgecolor="none", zorder=-10))
-    add_halftone(ax, color="#CFDFEA")
+    ax.add_patch(Rectangle((0, 0), 1, 1, transform=ax.transAxes, facecolor="#FFFFFF", edgecolor="none", zorder=-10))
     add_label(ax, 0.045, 0.940, "Claim boundary cheat sheet", COLORS["ink"], size=15.5, font=COMIC_BOLD)
     add_body(ax, 0.047, 0.850, "A visual reminder of what the result supports, where it is conditional, and what it does not claim.", size=7.6, color=COLORS["muted"], width=105)
 
@@ -434,7 +431,7 @@ def draw_claim_boundary_summary() -> None:
         title, body, face, edge, tag, shape = row
         add_claim_card(ax, 0.065 + i * 0.310, 0.270, title, body, face, edge, tag, shape)
 
-    add_label(ax, 0.500, 0.112, "Good for Discussion: strong result, honest border.", COLORS["muted"], size=8.4, ha="center", font=HAND)
+    add_label(ax, 0.500, 0.112, "Discussion guide: strong result, explicit boundary.", COLORS["muted"], size=8.4, ha="center", font=HAND)
     save_all(fig, "claim_boundary_summary")
 
 

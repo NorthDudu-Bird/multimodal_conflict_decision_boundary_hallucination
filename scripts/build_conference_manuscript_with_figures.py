@@ -37,13 +37,13 @@ NARRATIVE_FIGURES = {
         "png": ROOT / "figures" / "conference_narrative" / "graphical_abstract_real_case.png",
         "alt": "Graphical overview. Real-prompt paired workflow for one LLaVA example.",
     },
-    "Reader map": {
+    "Argument map": {
         "png": ROOT / "figures" / "conference_narrative" / "manuscript_argument_roadmap.png",
-        "alt": "Reader map. Hand-drawn argument path of the manuscript.",
+        "alt": "Argument map. Hand-drawn narrative structure of the manuscript.",
     },
-    "Claim boundary guide": {
+    "Claim-boundary guide": {
         "png": ROOT / "figures" / "conference_narrative" / "claim_boundary_summary.png",
-        "alt": "Claim boundary guide. Supported, bounded, and not-claimed conclusions.",
+        "alt": "Claim-boundary guide. Supported, bounded, and not-claimed conclusions.",
     },
 }
 

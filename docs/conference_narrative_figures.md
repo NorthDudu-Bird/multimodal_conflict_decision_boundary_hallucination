@@ -3,10 +3,11 @@
 This note records the optional narrative and transition figures generated with the
 Python `nature-figure` workflow. These are not replacements for the quantitative Figures
 1-4. They are meant to make the manuscript, talk, or graphical abstract easier to read.
-The current version uses a cartoon explainer style for non-data figures: hand-drawn
-outlines, comic fonts, speech bubbles, signposts, and a cartoonized real-image crop.
-The intent is to make these reader-aid figures visually distinct from the quantitative
-evidence figures while keeping all scientific content traceable to source data.
+The current version uses a white-background cartoon explainer style for non-data
+figures: hand-drawn outlines, comic fonts, speech bubbles, signposts, and a cartoonized
+real-image crop. The intent is to make these reader-aid figures visually distinct from
+the quantitative evidence figures while keeping all scientific content traceable to
+source data.
 
 ## Generated Figures
 
