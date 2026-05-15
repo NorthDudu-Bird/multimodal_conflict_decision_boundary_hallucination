@@ -68,10 +68,9 @@ stronger stress-test effects from being folded into the primary C0-C4 claim.
 
 ![](images/figure1_evidence_chain.png){width=100%}
 
-**Figure 1. Evidence chain for same-image conflict-following analysis.** File stem:
-`figures/conference/figure1_evidence_chain`. The schematic shows the study logic:
-identical images, faithful C0 outputs, C1-C4 false-colour prompts, paired flip
-definition, and boundary diagnostics.
+**Figure 1. Evidence chain for same-image conflict-following analysis.** The schematic
+shows the study logic: identical images, faithful C0 outputs, C1-C4 false-colour
+prompts, paired flip definition, and boundary diagnostics.
 
 ## 2. Related Work
 
@@ -125,10 +124,18 @@ identity is retained for provenance, sanity checks, and limitations, but it is n
 primary experimental factor. Both sources are used as real vehicle-image inputs after
 cropping.
 
-**Table 1. Evaluation set composition.** Source file:
-`data/metadata/balanced_eval_set/balanced_eval_set_summary.json`. The table should
-report the six true-colour classes, 50 images per class, and the StanfordCars/VCoR
-source counts.
+**Table 1. Evaluation set composition.** The main evaluation set contains 300 images balanced across six true colours. Source identity is retained for provenance and sanity checks, not as a primary comparison axis.
+
+| True colour   |   StanfordCars |   VCoR |   Total |
+|:--------------|---------------:|-------:|--------:|
+| black         |             23 |     27 |      50 |
+| blue          |             12 |     38 |      50 |
+| green         |              2 |     48 |      50 |
+| red           |             40 |     10 |      50 |
+| white         |             14 |     36 |      50 |
+| yellow        |              2 |     48 |      50 |
+| Total         |             93 |    207 |     300 |
+
 
 ### 3.3 Models
 
@@ -145,16 +152,16 @@ conditions, C1-C4. C0 asks for the car-body primary colour without a false cue. 
 introduce erroneous colour information with different wording strengths and frames. Each
 model is evaluated on the same 300 images in every condition.
 
-**Table 2. Prompt condition roles.** This table should summarise C0-C4 without
-reproducing every full prompt. Full prompt text should be placed in supplementary
-material.
+**Table 2. Prompt condition roles.** C0 is the neutral reference condition. C1-C4 introduce erroneous colour information with increasing or different forms of textual conflict; full prompt text is reserved for supplementary material.
 
-Model outputs are parsed into the six target colour labels or `other`. The primary
-C0-C4 outputs remain in the base single-label regime: the parser audit reports 4500
-main parsed rows with no parse errors, refusals, corrections, or other-wrong outputs.
-The main metrics are faithfulness rate, conflict-following rate, answer-flip rate,
-faithful retention rate, and paired exact tests against C0. Holm correction is used for
-predefined multiple comparisons.
+| Condition   | Role                               | False-text form                                                             | Purpose in analysis                         |
+|:------------|:-----------------------------------|:----------------------------------------------------------------------------|:--------------------------------------------|
+| C0          | Neutral baseline                   | No false colour cue                                                         | Estimate faithful visual colour recognition |
+| C1          | Weak suggestion                    | Low-strength erroneous colour cue                                           | Test weak textual influence                 |
+| C2          | False assertion                    | Open prompt with a false colour assertion                                   | Test direct false-text conflict             |
+| C3          | Presupposition, correction allowed | False colour embedded as a presupposition while correction remains possible | Primary conflict condition                  |
+| C4          | Stronger open conflict             | Repeated or stronger false-colour framing                                   | Primary stronger conflict condition         |
+
 
 ## 4. Results
 
@@ -166,9 +173,26 @@ conflict_aligned = 0/300. The main C0-C4 table also contained no refusals, parse
 or other-wrong outputs. Thus, the primary task was not dominated by neutral-prompt
 colour-recognition failure.
 
-**Table 3. Main C0-C4 metrics.** Source file:
-`results/main/table1_main_metrics.csv`. The table should report all model-condition
-rows and highlight LLaVA C3/C4 without suppressing the stable comparator rows.
+**Table 3. Main C0-C4 metrics.** Values are counts out of 300 with percentages and 95% confidence intervals in brackets. Asterisks and daggers follow the locked source table and mark the primary LLaVA C3/C4 findings.
+
+| Model                | Condition   |   n | False-colour aligned             | Faithful                            |
+|:---------------------|:------------|----:|:---------------------------------|:------------------------------------|
+| LLaVA-1.5-7B         | C0          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+| LLaVA-1.5-7B         | C1          | 300 | 1/300 (0.33% [0.06%, 1.86%])     | 299/300 (99.67% [98.14%, 99.94%])   |
+| LLaVA-1.5-7B         | C2          | 300 | 3/300 (1.00% [0.34%, 2.90%])     | 297/300 (99.00% [97.10%, 99.66%])   |
+| LLaVA-1.5-7B         | C3          | 300 | 27/300 (9.00% [6.26%, 12.78%])*† | 273/300 (91.00% [87.22%, 93.74%])   |
+| LLaVA-1.5-7B         | C4          | 300 | 10/300 (3.33% [1.82%, 6.03%])*†  | 290/300 (96.67% [93.97%, 98.18%])   |
+| Qwen2-VL-7B-Instruct | C0          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+| Qwen2-VL-7B-Instruct | C1          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+| Qwen2-VL-7B-Instruct | C2          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+| Qwen2-VL-7B-Instruct | C3          | 300 | 1/300 (0.33% [0.06%, 1.86%])     | 299/300 (99.67% [98.14%, 99.94%])   |
+| Qwen2-VL-7B-Instruct | C4          | 300 | 1/300 (0.33% [0.06%, 1.86%])     | 299/300 (99.67% [98.14%, 99.94%])   |
+| InternVL2-8B         | C0          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+| InternVL2-8B         | C1          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+| InternVL2-8B         | C2          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+| InternVL2-8B         | C3          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+| InternVL2-8B         | C4          | 300 | 0/300 (0.00% [0.00%, 1.26%])     | 300/300 (100.00% [98.74%, 100.00%]) |
+
 
 ### 4.2 Primary conflict prompts produced a limited LLaVA-specific shift
 
@@ -184,10 +208,9 @@ stable models.
 
 ![](images/figure2_main_conflict_rates.png){width=100%}
 
-**Figure 2. Primary C0-C4 conflict-following rates.** File stem:
-`figures/conference/figure2_main_conflict_rates`. Points show false-colour-aligned
-output rates for each model-condition cell with Wilson confidence intervals from
-`results/main/main_condition_metrics.csv`. Non-zero labels mark counts out of 300.
+**Figure 2. Primary C0-C4 conflict-following rates.** Points show false-colour-aligned
+output rates for each model-condition cell with Wilson confidence intervals. Non-zero
+labels mark counts out of 300.
 
 ### 4.3 Paired flips narrowed the attribution
 
@@ -204,10 +227,8 @@ prompt.
 
 ![](images/figure3_paired_flips.png){width=100%}
 
-**Figure 3. Same-image paired faithful-to-conflict flips.** File stem:
-`figures/conference/figure3_paired_flips`. Bars show the number of images for which a
-model is faithful under C0 and false-colour-aligned under C1-C4, using
-`results/main/paired_flip_metrics.csv`.
+**Figure 3. Same-image paired faithful-to-conflict flips.** Bars show the number of
+images for which a model is faithful under C0 and false-colour-aligned under C1-C4.
 
 ### 4.4 Auxiliary diagnostics showed stronger compliance under stronger constraints
 
@@ -245,10 +266,10 @@ for Qwen and InternVL2.
 
 ![](images/figure4_boundary_diagnostics.png){width=100%}
 
-**Figure 4. Boundary diagnostics for the primary LLaVA shift.** File stem:
-`figures/conference/figure4_boundary_diagnostics`. Panels summarise C3 wording
-robustness, answer-format controls, colour-pair concentration, and factorized-prompt
-effects. This figure bounds the primary claim rather than replacing it.
+**Figure 4. Boundary diagnostics for the primary LLaVA shift.** Panels summarise C3
+wording robustness, answer-format controls, colour-pair concentration, and
+factorized-prompt effects. This figure bounds the primary claim rather than replacing
+it.
 
 ### 4.6 Validity checks reduced several alternative explanations
 

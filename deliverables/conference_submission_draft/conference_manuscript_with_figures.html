@@ -327,11 +327,9 @@ claim.</p>
 <p><img src="images/figure1_evidence_chain.png"
 style="width:100.0%" /></p>
 <p><strong>Figure 1. Evidence chain for same-image conflict-following
-analysis.</strong> File stem:
-<code>figures/conference/figure1_evidence_chain</code>. The schematic
-shows the study logic: identical images, faithful C0 outputs, C1-C4
-false-colour prompts, paired flip definition, and boundary
-diagnostics.</p>
+analysis.</strong> The schematic shows the study logic: identical
+images, faithful C0 outputs, C1-C4 false-colour prompts, paired flip
+definition, and boundary diagnostics.</p>
 <h2 id="related-work">2. Related Work</h2>
 <h3 id="multimodal-conflict-and-hallucination-evaluation">Multimodal
 conflict and hallucination evaluation</h3>
@@ -384,10 +382,64 @@ images and 207 VCoR images. Source identity is retained for provenance,
 sanity checks, and limitations, but it is not a primary experimental
 factor. Both sources are used as real vehicle-image inputs after
 cropping.</p>
-<p><strong>Table 1. Evaluation set composition.</strong> Source file:
-<code>data/metadata/balanced_eval_set/balanced_eval_set_summary.json</code>.
-The table should report the six true-colour classes, 50 images per
-class, and the StanfordCars/VCoR source counts.</p>
+<p><strong>Table 1. Evaluation set composition.</strong> The main
+evaluation set contains 300 images balanced across six true colours.
+Source identity is retained for provenance and sanity checks, not as a
+primary comparison axis.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">True colour</th>
+<th style="text-align: right;">StanfordCars</th>
+<th style="text-align: right;">VCoR</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">black</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">blue</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">green</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">red</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">white</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">yellow</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">207</td>
+<td style="text-align: right;">300</td>
+</tr>
+</tbody>
+</table>
 <h3 id="models">3.3 Models</h3>
 <p>We evaluate LLaVA-1.5-7B, Qwen2-VL-7B-Instruct, and InternVL2-8B.
 These citations identify the model families and reports, but they are
@@ -402,16 +454,62 @@ single-turn conflict conditions, C1-C4. C0 asks for the car-body primary
 colour without a false cue. C1-C4 introduce erroneous colour information
 with different wording strengths and frames. Each model is evaluated on
 the same 300 images in every condition.</p>
-<p><strong>Table 2. Prompt condition roles.</strong> This table should
-summarise C0-C4 without reproducing every full prompt. Full prompt text
-should be placed in supplementary material.</p>
-<p>Model outputs are parsed into the six target colour labels or
-<code>other</code>. The primary C0-C4 outputs remain in the base
-single-label regime: the parser audit reports 4500 main parsed rows with
-no parse errors, refusals, corrections, or other-wrong outputs. The main
-metrics are faithfulness rate, conflict-following rate, answer-flip
-rate, faithful retention rate, and paired exact tests against C0. Holm
-correction is used for predefined multiple comparisons.</p>
+<p><strong>Table 2. Prompt condition roles.</strong> C0 is the neutral
+reference condition. C1-C4 introduce erroneous colour information with
+increasing or different forms of textual conflict; full prompt text is
+reserved for supplementary material.</p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 21%" />
+<col style="width: 45%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: left;">Role</th>
+<th style="text-align: left;">False-text form</th>
+<th style="text-align: left;">Purpose in analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">C0</td>
+<td style="text-align: left;">Neutral baseline</td>
+<td style="text-align: left;">No false colour cue</td>
+<td style="text-align: left;">Estimate faithful visual colour
+recognition</td>
+</tr>
+<tr>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">Weak suggestion</td>
+<td style="text-align: left;">Low-strength erroneous colour cue</td>
+<td style="text-align: left;">Test weak textual influence</td>
+</tr>
+<tr>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">False assertion</td>
+<td style="text-align: left;">Open prompt with a false colour
+assertion</td>
+<td style="text-align: left;">Test direct false-text conflict</td>
+</tr>
+<tr>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">Presupposition, correction allowed</td>
+<td style="text-align: left;">False colour embedded as a presupposition
+while correction remains possible</td>
+<td style="text-align: left;">Primary conflict condition</td>
+</tr>
+<tr>
+<td style="text-align: left;">C4</td>
+<td style="text-align: left;">Stronger open conflict</td>
+<td style="text-align: left;">Repeated or stronger false-colour
+framing</td>
+<td style="text-align: left;">Primary stronger conflict condition</td>
+</tr>
+</tbody>
+</table>
 <h2 id="results">4. Results</h2>
 <h3 id="neutral-prompting-established-a-stable-visual-baseline">4.1
 Neutral prompting established a stable visual baseline</h3>
@@ -421,10 +519,135 @@ were faithful = 300/300 and conflict_aligned = 0/300. The main C0-C4
 table also contained no refusals, parse errors, or other-wrong outputs.
 Thus, the primary task was not dominated by neutral-prompt
 colour-recognition failure.</p>
-<p><strong>Table 3. Main C0-C4 metrics.</strong> Source file:
-<code>results/main/table1_main_metrics.csv</code>. The table should
-report all model-condition rows and highlight LLaVA C3/C4 without
-suppressing the stable comparator rows.</p>
+<p><strong>Table 3. Main C0-C4 metrics.</strong> Values are counts out
+of 300 with percentages and 95% confidence intervals in brackets.
+Asterisks and daggers follow the locked source table and mark the
+primary LLaVA C3/C4 findings.</p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 11%" />
+<col style="width: 4%" />
+<col style="width: 30%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Model</th>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: left;">False-colour aligned</th>
+<th style="text-align: left;">Faithful</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C0</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">1/300 (0.33% [0.06%, 1.86%])</td>
+<td style="text-align: left;">299/300 (99.67% [98.14%, 99.94%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">3/300 (1.00% [0.34%, 2.90%])</td>
+<td style="text-align: left;">297/300 (99.00% [97.10%, 99.66%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">27/300 (9.00% [6.26%, 12.78%])*†</td>
+<td style="text-align: left;">273/300 (91.00% [87.22%, 93.74%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C4</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">10/300 (3.33% [1.82%, 6.03%])*†</td>
+<td style="text-align: left;">290/300 (96.67% [93.97%, 98.18%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C0</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">1/300 (0.33% [0.06%, 1.86%])</td>
+<td style="text-align: left;">299/300 (99.67% [98.14%, 99.94%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C4</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">1/300 (0.33% [0.06%, 1.86%])</td>
+<td style="text-align: left;">299/300 (99.67% [98.14%, 99.94%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C0</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C4</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+</tbody>
+</table>
 <h3
 id="primary-conflict-prompts-produced-a-limited-llava-specific-shift">4.2
 Primary conflict prompts produced a limited LLaVA-specific shift</h3>
@@ -441,11 +664,9 @@ models.</p>
 <p><img src="images/figure2_main_conflict_rates.png"
 style="width:100.0%" /></p>
 <p><strong>Figure 2. Primary C0-C4 conflict-following rates.</strong>
-File stem: <code>figures/conference/figure2_main_conflict_rates</code>.
 Points show false-colour-aligned output rates for each model-condition
-cell with Wilson confidence intervals from
-<code>results/main/main_condition_metrics.csv</code>. Non-zero labels
-mark counts out of 300.</p>
+cell with Wilson confidence intervals. Non-zero labels mark counts out
+of 300.</p>
 <h3 id="paired-flips-narrowed-the-attribution">4.3 Paired flips narrowed
 the attribution</h3>
 <p>Because all conditions used the same images and all C0 outputs were
@@ -461,11 +682,8 @@ changed answer is tied to the same image under a changed prompt.</p>
 <p><img src="images/figure3_paired_flips.png"
 style="width:100.0%" /></p>
 <p><strong>Figure 3. Same-image paired faithful-to-conflict
-flips.</strong> File stem:
-<code>figures/conference/figure3_paired_flips</code>. Bars show the
-number of images for which a model is faithful under C0 and
-false-colour-aligned under C1-C4, using
-<code>results/main/paired_flip_metrics.csv</code>.</p>
+flips.</strong> Bars show the number of images for which a model is
+faithful under C0 and false-colour-aligned under C1-C4.</p>
 <h3
 id="auxiliary-diagnostics-showed-stronger-compliance-under-stronger-constraints">4.4
 Auxiliary diagnostics showed stronger compliance under stronger
@@ -504,11 +722,9 @@ stronger, including for Qwen and InternVL2.</p>
 <p><img src="images/figure4_boundary_diagnostics.png"
 style="width:100.0%" /></p>
 <p><strong>Figure 4. Boundary diagnostics for the primary LLaVA
-shift.</strong> File stem:
-<code>figures/conference/figure4_boundary_diagnostics</code>. Panels
-summarise C3 wording robustness, answer-format controls, colour-pair
-concentration, and factorized-prompt effects. This figure bounds the
-primary claim rather than replacing it.</p>
+shift.</strong> Panels summarise C3 wording robustness, answer-format
+controls, colour-pair concentration, and factorized-prompt effects. This
+figure bounds the primary claim rather than replacing it.</p>
 <h3 id="validity-checks-reduced-several-alternative-explanations">4.6
 Validity checks reduced several alternative explanations</h3>
 <p>The parser audit reduced the risk that conflict-following counts were
