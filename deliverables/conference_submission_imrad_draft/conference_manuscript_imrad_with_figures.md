@@ -128,7 +128,7 @@ vehicle-image inputs after cropping.
 ### 3.3 Models and prompt conditions
 
 The evaluated checkpoints were LLaVA-1.5-7B, Qwen2-VL-7B-Instruct, and InternVL2-8B.
-The citations identify the model families and reports, but they are not evidence for
+The citations identify the model families, reports, and model card, but they are not evidence for
 the robustness claims in this study [4,5,16-18]. The comparison is local to these
 checkpoints, prompts, and images.
 
@@ -386,38 +386,38 @@ providers.
 
 ## References
 
-[1] A. Radford et al., "Learning Transferable Visual Models From Natural Language Supervision," in Proc. ICML, 2021.
+[1] A. Radford et al., "Learning Transferable Visual Models From Natural Language Supervision," in Proc. 38th International Conference on Machine Learning (ICML), Proc. Mach. Learn. Res., vol. 139, pp. 8748-8763, 2021.
 
-[2] J.-B. Alayrac et al., "Flamingo: a Visual Language Model for Few-Shot Learning," arXiv:2204.14198, 2022.
+[2] J.-B. Alayrac et al., "Flamingo: a Visual Language Model for Few-Shot Learning," in Advances in Neural Information Processing Systems 35 (NeurIPS), pp. 23716-23736, 2022.
 
-[3] J. Li, D. Li, S. Savarese, and S. Hoi, "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models," in Proc. ICML, 2023.
+[3] J. Li, D. Li, S. Savarese, and S. Hoi, "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models," in Proc. 40th International Conference on Machine Learning (ICML), Proc. Mach. Learn. Res., vol. 202, pp. 19730-19742, 2023.
 
-[4] H. Liu, C. Li, Q. Wu, and Y. J. Lee, "Visual Instruction Tuning," arXiv:2304.08485, 2023.
+[4] H. Liu, C. Li, Q. Wu, and Y. J. Lee, "Visual Instruction Tuning," in Advances in Neural Information Processing Systems 36 (NeurIPS), pp. 34892-34916, 2023.
 
-[5] H. Liu, C. Li, Y. Li, and Y. J. Lee, "Improved Baselines with Visual Instruction Tuning," arXiv:2310.03744, 2023.
+[5] H. Liu, C. Li, Y. Li, and Y. J. Lee, "Improved Baselines with Visual Instruction Tuning," in Proc. IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 26296-26306, 2024.
 
-[6] Y. Goyal, T. Khot, D. Summers-Stay, D. Batra, and D. Parikh, "Making the V in VQA Matter: Elevating the Role of Image Understanding in Visual Question Answering," in Proc. CVPR, 2017.
+[6] Y. Goyal, T. Khot, D. Summers-Stay, D. Batra, and D. Parikh, "Making the V in VQA Matter: Elevating the Role of Image Understanding in Visual Question Answering," in Proc. IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.
 
-[7] A. Agrawal, D. Batra, D. Parikh, and A. Kembhavi, "Don't Just Assume; Look and Answer: Overcoming Priors for Visual Question Answering," in Proc. CVPR, 2018.
+[7] A. Agrawal, D. Batra, D. Parikh, and A. Kembhavi, "Don't Just Assume; Look and Answer: Overcoming Priors for Visual Question Answering," in Proc. IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2018.
 
-[8] Y. Li, Y. Du, K. Zhou, J. Wang, W. X. Zhao, and J.-R. Wen, "Evaluating Object Hallucination in Large Vision-Language Models," arXiv:2305.10355, 2023.
+[8] Y. Li, Y. Du, K. Zhou, J. Wang, W. X. Zhao, and J.-R. Wen, "Evaluating Object Hallucination in Large Vision-Language Models," in Proc. 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP), pp. 292-305, 2023.
 
-[9] T. Guan et al., "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models," arXiv:2310.14566, 2023.
+[9] T. Guan et al., "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models," in Proc. IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 14375-14385, 2024.
 
 [10] K.-i. Lee, M. Kim, S. Yoon, M. Kim, D. Lee, H. Koh, and K. Jung, "VLind-Bench: Measuring Language Priors in Large Vision-Language Models," arXiv:2406.08702, 2024.
 
 [11] Y. Liang et al., "ColorBench: Can VLMs See and Understand the Colorful World? A Comprehensive Benchmark for Color Perception, Reasoning, and Robustness," arXiv:2504.10514, 2025.
 
-[12] M. Yuksekgonul, F. Bianchi, P. Kalluri, D. Jurafsky, and J. Zou, "When and Why Vision-Language Models Behave Like Bags-of-Words, and What to Do About It?," in Proc. ICLR, 2023.
+[12] M. Yuksekgonul, F. Bianchi, P. Kalluri, D. Jurafsky, and J. Zou, "When and Why Vision-Language Models Behave Like Bags-of-Words, and What to Do About It?," in Proc. International Conference on Learning Representations (ICLR), 2023.
 
-[13] T. Thrush et al., "Winoground: Probing Vision and Language Models for Visio-Linguistic Compositionality," in Proc. CVPR, 2022.
+[13] T. Thrush et al., "Winoground: Probing Vision and Language Models for Visio-Linguistic Compositionality," in Proc. IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2022.
 
-[14] J. Krause, M. Stark, J. Deng, and L. Fei-Fei, "3D Object Representations for Fine-Grained Categorization," in Proc. 4th International IEEE Workshop on 3D Representation and Recognition, 2013.
+[14] J. Krause, M. Stark, J. Deng, and L. Fei-Fei, "3D Object Representations for Fine-Grained Categorization," in Proc. IEEE International Conference on Computer Vision Workshops (ICCV Workshops), pp. 554-561, 2013, doi: 10.1109/ICCVW.2013.77.
 
-[15] K. Panetta, L. Kezebou, V. Oludare, J. Intriligator, and S. Agaian, "Artificial Intelligence for Text-Based Vehicle Search, Recognition, and Continuous Localization in Traffic Videos," AI, vol. 2, no. 4, pp. 684-704, 2021.
+[15] K. Panetta, L. Kezebou, V. Oludare, J. Intriligator, and S. Agaian, "Artificial Intelligence for Text-Based Vehicle Search, Recognition, and Continuous Localization in Traffic Videos," AI, vol. 2, no. 4, pp. 684-704, 2021, doi: 10.3390/ai2040041.
 
 [16] P. Wang et al., "Qwen2-VL: Enhancing Vision-Language Model's Perception of the World at Any Resolution," arXiv:2409.12191, 2024.
 
-[17] Z. Chen et al., "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks," arXiv:2312.14238, 2023.
+[17] Z. Chen et al., "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks," in Proc. IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 24185-24198, 2024.
 
-[18] Z. Chen et al., "How Far Are We to GPT-4V? Closing the Gap to Commercial Multimodal Models with Open-Source Suites," arXiv:2404.16821, 2024.
+[18] OpenGVLab, "OpenGVLab/InternVL2-8B," Hugging Face model card, 2024. Available: https://huggingface.co/OpenGVLab/InternVL2-8B.
