@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>False Colour Cues Reveal Local Paired Shifts in Car-Colour VLMs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">False Colour Cues Reveal Local Paired Shifts in
+Car-Colour VLMs</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a
+href="#false-colour-cues-reveal-local-paired-shifts-in-car-colour-vlms"
+id="toc-false-colour-cues-reveal-local-paired-shifts-in-car-colour-vlms">False
+Colour Cues Reveal Local Paired Shifts in Car-Colour VLMs</a>
+<ul>
+<li><a href="#abstract" id="toc-abstract">Abstract</a></li>
+<li><a href="#introduction" id="toc-introduction">1.
+Introduction</a></li>
+<li><a href="#related-work" id="toc-related-work">2. Related
+Work</a></li>
+<li><a href="#methods" id="toc-methods">3. Methods</a>
+<ul>
+<li><a href="#study-design-and-task" id="toc-study-design-and-task">3.1
+Study design and task</a></li>
+<li><a href="#evaluation-set" id="toc-evaluation-set">3.2 Evaluation
+set</a></li>
+<li><a href="#models-and-prompt-conditions"
+id="toc-models-and-prompt-conditions">3.3 Models and prompt
+conditions</a></li>
+<li><a href="#parsing-metrics-and-statistical-comparisons"
+id="toc-parsing-metrics-and-statistical-comparisons">3.4 Parsing,
+metrics, and statistical comparisons</a></li>
+<li><a href="#diagnostics-and-audits"
+id="toc-diagnostics-and-audits">3.5 Diagnostics and audits</a></li>
+</ul></li>
+<li><a href="#results" id="toc-results">4. Results</a>
+<ul>
+<li><a href="#neutral-prompting-established-a-stable-visual-baseline"
+id="toc-neutral-prompting-established-a-stable-visual-baseline">4.1
+Neutral prompting established a stable visual baseline</a></li>
+<li><a
+href="#primary-conflict-prompts-produced-a-limited-llava-specific-shift"
+id="toc-primary-conflict-prompts-produced-a-limited-llava-specific-shift">4.2
+Primary conflict prompts produced a limited LLaVA-specific
+shift</a></li>
+<li><a href="#same-image-flips-narrowed-the-attribution"
+id="toc-same-image-flips-narrowed-the-attribution">4.3 Same-image flips
+narrowed the attribution</a></li>
+<li><a href="#diagnostics-bounded-the-main-result"
+id="toc-diagnostics-bounded-the-main-result">4.4 Diagnostics bounded the
+main result</a></li>
+<li><a href="#validity-checks-and-multi-turn-extension"
+id="toc-validity-checks-and-multi-turn-extension">4.5 Validity checks
+and multi-turn extension</a></li>
+</ul></li>
+<li><a href="#discussion" id="toc-discussion">5. Discussion</a></li>
+<li><a href="#limitations" id="toc-limitations">6. Limitations</a></li>
+<li><a href="#conclusion" id="toc-conclusion">7. Conclusion</a></li>
+<li><a href="#data-availability" id="toc-data-availability">Data
+Availability</a></li>
+<li><a href="#code-availability" id="toc-code-availability">Code
+Availability</a></li>
+<li><a href="#references" id="toc-references">References</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1
+id="false-colour-cues-reveal-local-paired-shifts-in-car-colour-vlms">False
+Colour Cues Reveal Local Paired Shifts in Car-Colour VLMs</h1>
+<h2 id="abstract">Abstract</h2>
+<p>Vision-language models are often evaluated with instructions that are
+consistent with the image. In practical use, however, textual context
+may be wrong, and a wrong answer under such conflict is difficult to
+attribute. It may reflect visual error, language prior, prompt
+compliance, response-format pressure, output parsing, or local image
+ambiguity. This study examines that attribution problem in a
+deliberately narrow research setting: primary car-body colour
+recognition under false textual colour cues. The protocol uses a
+balanced 300-image car set over six colours to evaluate LLaVA-1.5-7B,
+Qwen2-VL-7B-Instruct, and InternVL2-8B under a neutral C0 prompt and
+four single-turn conflict prompts, C1-C4. All three models were faithful
+under C0 on all 300 images. In the primary conflict family, LLaVA-1.5-7B
+showed the only clear shift, with false-colour-aligned outputs in 27/300
+C3 cases and 10/300 C4 cases. Qwen2-VL-7B-Instruct had 1/300 in each of
+C3 and C4, and InternVL2-8B had 0/300 across C0-C4. Because the same
+images were used across conditions, the LLaVA cases are same-image flips
+from faithful C0 answers to false-text-aligned answers. Controlled
+diagnostics showed that the effect weakened under C3 rewrites, decreased
+under alternative answer formats, depended on prompt factor, and
+concentrated in the white-to-black route. The evidence supports a local,
+conditional account of text-sensitive behaviour, not a general claim
+that VLMs prioritise text over vision.</p>
+<p><strong>Keywords:</strong> vision-language models; multimodal
+conflict; colour recognition; prompt sensitivity; paired evaluation</p>
+<h2 id="introduction">1. Introduction</h2>
+<p>Vision-language models (VLMs) combine image inputs with
+natural-language instructions, descriptions, and contextual claims
+[1-5]. This interface makes models useful for interactive image
+interpretation, but it also creates a reliability problem. A user may
+provide text that is false, leading, or only partially compatible with
+the image. The central question is not only whether an answer is wrong,
+but why the answer changed.</p>
+<p>False-text-aligned outputs are not self-explanatory. A model may
+follow a false cue because it misperceives the image, overuses language
+priors, complies with the prompt, responds to the answer format, or
+exposes a parser artefact. Prior work on visual question answering,
+language priors, hallucination, multimodal conflict, and attribute
+binding has made these risks visible [6-13]. Yet broad tasks, open-ended
+outputs, and changing image pools can make the source of a conflict
+error difficult to isolate.</p>
+<p>This study narrows the problem to a paired and reproducible
+observation. It asks whether a false textual colour cue can move a model
+away from image evidence when the visual attribute is simple, the answer
+space is fixed, and the same image is evaluated under neutral and
+conflict prompts. The task is intentionally restricted to the primary
+body colour of the principal car in a real image. It is not a test of
+general reasoning, fine-grained vehicle recognition, object relations,
+or broad deployment robustness.</p>
+<p>The study design follows an MRD logic. The Methods section defines
+the paired protocol, datasets, prompt conditions, parsing rules,
+metrics, diagnostics, and audit checks. The Results section then reports
+the neutral visual baseline, the primary C0-C4 conflict family,
+same-image paired flips, controlled diagnostics, and multi-turn
+extension. This organization keeps the central claim close to the
+evidence and keeps auxiliary stress tests outside the main evidence
+chain.</p>
+<p><img src="images/graphical_abstract_real_case.png"
+style="width:100.0%" /></p>
+<p><strong>Graphical overview. Real-prompt paired workflow.</strong> One
+audited LLaVA paired case illustrates the experimental unit: the same
+image is evaluated with the neutral C0 prompt and the false-colour C3
+prompt, and the parsed answer changes from the true colour to the
+embedded false cue. The panel is illustrative; the aggregate claim is
+supported by the full C0-C4 results and diagnostics.</p>
+<h2 id="related-work">2. Related Work</h2>
+<p>Multimodal conflict and hallucination benchmarks test whether model
+outputs remain grounded when visual evidence, textual context, or world
+knowledge are unreliable [8-10]. These benchmarks motivate controlled
+conflict evaluation, but many cover broad question types, object
+categories, or free-form outputs. The present study differs by reducing
+the task to one visual attribute and by treating same-image paired flips
+as the primary evidence unit.</p>
+<p>Language-prior work shows that plausible answers can be produced
+without adequate visual grounding [6,7]. However, a false-text-aligned
+colour answer is not automatically a pure language-prior effect. It can
+also reflect image visibility, ambiguous labels, prompt wording,
+response constraints, or parser behaviour. This study therefore treats
+diagnostic separation as part of the protocol rather than as a post-hoc
+explanation.</p>
+<p>Colour is interpretable, but it is not a trivial probe. Colour,
+compositionality, and attribute-binding benchmarks show that VLM
+behaviour can vary with object category, colour distribution, visual
+ambiguity, and prompt form [11-13]. Car-body colour is used here as a
+controlled observation window, not as a basis for broad claims about
+colour perception.</p>
+<h2 id="methods">3. Methods</h2>
+<h3 id="study-design-and-task">3.1 Study design and task</h3>
+<p>The study used a paired within-image design to isolate changes caused
+by prompt condition. Each model saw the same 300 images under a neutral
+C0 prompt and four single-turn conflict prompts, C1-C4. The principal
+outcome was a same-image paired flip: a model answered faithfully under
+C0 on an image and followed the false prompt colour for the same image
+under a conflict condition.</p>
+<p>The task was to identify the primary body colour of the principal car
+in an image. The canonical labels were black, blue, green, red, white,
+and yellow, with <code>other</code> reserved for outputs outside the
+target label set. A response was faithful if the parsed label matched
+the ground-truth car-body colour. A response was conflict-following if
+the parsed label matched the false colour introduced by the prompt.</p>
+<p><img src="images/figure1_evidence_chain.png"
+style="width:100.0%" /></p>
+<p><strong>Figure 1. Evidence chain for same-image conflict-following
+analysis.</strong> The schematic shows the study logic: identical
+images, faithful C0 outputs, C1-C4 false-colour prompts, paired flip
+definition, and boundary diagnostics.</p>
+<h3 id="evaluation-set">3.2 Evaluation set</h3>
+<p>The main evaluation set contained 300 real car images, balanced
+across six true colours with 50 images per class. It combined 93
+StanfordCars images and 207 VCoR images [14,15]. Source identity was
+retained for provenance, sanity checks, and limitations, but it was not
+used as a primary experimental factor. Both sources were used as real
+vehicle-image inputs after cropping.</p>
+<p><strong>Table 1. Evaluation set composition.</strong> The main
+evaluation set contains 300 images balanced across six true colours.
+Source identity is retained for provenance and sanity checks, not as a
+primary comparison axis.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">True colour</th>
+<th style="text-align: right;">StanfordCars</th>
+<th style="text-align: right;">VCoR</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">black</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">blue</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">green</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">red</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">white</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">yellow</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">207</td>
+<td style="text-align: right;">300</td>
+</tr>
+</tbody>
+</table>
+<h3 id="models-and-prompt-conditions">3.3 Models and prompt
+conditions</h3>
+<p>The evaluated checkpoints were LLaVA-1.5-7B, Qwen2-VL-7B-Instruct,
+and InternVL2-8B. The citations identify the model families and reports,
+but they are not evidence for the robustness claims in this study
+[4,5,16-18]. The comparison is local to these checkpoints, prompts, and
+images.</p>
+<p>The primary protocol used one neutral condition and four conflict
+conditions. C0 asked for the car-body primary colour without a false
+cue. C1-C4 introduced erroneous colour information with different
+wording strengths and frames. Full prompt text is reserved for
+supplementary material.</p>
+<p><strong>Table 2. Prompt condition roles.</strong> C0 is the neutral
+reference condition. C1-C4 introduce erroneous colour information with
+increasing or different forms of textual conflict; full prompt text is
+reserved for supplementary material.</p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 21%" />
+<col style="width: 45%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: left;">Role</th>
+<th style="text-align: left;">False-text form</th>
+<th style="text-align: left;">Purpose in analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">C0</td>
+<td style="text-align: left;">Neutral baseline</td>
+<td style="text-align: left;">No false colour cue</td>
+<td style="text-align: left;">Estimate faithful visual colour
+recognition</td>
+</tr>
+<tr>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">Weak suggestion</td>
+<td style="text-align: left;">Low-strength erroneous colour cue</td>
+<td style="text-align: left;">Test weak textual influence</td>
+</tr>
+<tr>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">False assertion</td>
+<td style="text-align: left;">Open prompt with a false colour
+assertion</td>
+<td style="text-align: left;">Test direct false-text conflict</td>
+</tr>
+<tr>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">Presupposition, correction allowed</td>
+<td style="text-align: left;">False colour embedded as a presupposition
+while correction remains possible</td>
+<td style="text-align: left;">Primary conflict condition</td>
+</tr>
+<tr>
+<td style="text-align: left;">C4</td>
+<td style="text-align: left;">Stronger open conflict</td>
+<td style="text-align: left;">Repeated or stronger false-colour
+framing</td>
+<td style="text-align: left;">Primary stronger conflict condition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parsing-metrics-and-statistical-comparisons">3.4 Parsing,
+metrics, and statistical comparisons</h3>
+<p>Model outputs were parsed into the six target colour labels or
+<code>other</code>. The primary C0-C4 outputs remained in the base
+single-label regime. The parser audit reported 4500 main parsed rows
+with no parse errors, refusals, corrections, or other-wrong outputs.</p>
+<p>The main metrics were faithfulness rate, conflict-following rate,
+answer-flip rate, faithful retention rate, and paired exact tests
+against C0. Holm correction was used for predefined multiple
+comparisons. The analysis also compared LLaVA with the stable models on
+matched images to distinguish a model-specific shift from a shared
+template effect.</p>
+<h3 id="diagnostics-and-audits">3.5 Diagnostics and audits</h3>
+<p>Controlled diagnostics tested whether the primary result survived
+changes in wording, answer format, prompt factor, colour pair, source
+subset, and visual clarity. A1/A2 were kept as auxiliary stress tests
+because they changed the task assumption or response space. Multi-turn
+prompts were treated as a separate interaction regime and were not used
+to reinterpret the single-turn C0-C4 result.</p>
+<p>Reproducibility was checked against locked experimental artifacts.
+The audit compared manifests, parsed outputs, result tables, figure
+source data, and report files against the snapshot used for the
+manuscript.</p>
+<h2 id="results">4. Results</h2>
+<h3 id="neutral-prompting-established-a-stable-visual-baseline">4.1
+Neutral prompting established a stable visual baseline</h3>
+<p>All three models answered all 300 images faithfully under C0. For
+LLaVA-1.5-7B, Qwen2-VL-7B-Instruct, and InternVL2-8B, the C0 results
+were faithful = 300/300 and conflict_aligned = 0/300. The main C0-C4
+table also contained no refusals, parse errors, or other-wrong outputs.
+Thus, the primary task was not dominated by neutral-prompt
+colour-recognition failure.</p>
+<p><strong>Table 3. Main C0-C4 metrics.</strong> Values are counts out
+of 300 with percentages and 95% confidence intervals in brackets.
+Asterisks and daggers follow the locked source table and mark the
+primary LLaVA C3/C4 findings.</p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 11%" />
+<col style="width: 4%" />
+<col style="width: 30%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Model</th>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: left;">False-colour aligned</th>
+<th style="text-align: left;">Faithful</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C0</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">1/300 (0.33% [0.06%, 1.86%])</td>
+<td style="text-align: left;">299/300 (99.67% [98.14%, 99.94%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">3/300 (1.00% [0.34%, 2.90%])</td>
+<td style="text-align: left;">297/300 (99.00% [97.10%, 99.66%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">27/300 (9.00% [6.26%, 12.78%])*†</td>
+<td style="text-align: left;">273/300 (91.00% [87.22%, 93.74%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">LLaVA-1.5-7B</td>
+<td style="text-align: left;">C4</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">10/300 (3.33% [1.82%, 6.03%])*†</td>
+<td style="text-align: left;">290/300 (96.67% [93.97%, 98.18%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C0</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">1/300 (0.33% [0.06%, 1.86%])</td>
+<td style="text-align: left;">299/300 (99.67% [98.14%, 99.94%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qwen2-VL-7B-Instruct</td>
+<td style="text-align: left;">C4</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">1/300 (0.33% [0.06%, 1.86%])</td>
+<td style="text-align: left;">299/300 (99.67% [98.14%, 99.94%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C0</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C1</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C3</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+<tr>
+<td style="text-align: left;">InternVL2-8B</td>
+<td style="text-align: left;">C4</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: left;">0/300 (0.00% [0.00%, 1.26%])</td>
+<td style="text-align: left;">300/300 (100.00% [98.74%, 100.00%])</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="primary-conflict-prompts-produced-a-limited-llava-specific-shift">4.2
+Primary conflict prompts produced a limited LLaVA-specific shift</h3>
+<p>Most conflict-condition outputs remained visually faithful.
+Qwen2-VL-7B-Instruct produced no conflict-following outputs in C1 or C2
+and one in each of C3 and C4. InternVL2-8B produced none across C0-C4.
+LLaVA-1.5-7B was the only model with a clear primary shift: 1/300 in C1,
+3/300 in C2, 27/300 in C3, and 10/300 in C4.</p>
+<p>The LLaVA C3 rate was 9.00%, with a 95% confidence interval of
+6.26-12.78%. The C4 rate was 3.33%, with a 95% confidence interval of
+1.82-6.03%. The C3 and C4 increases were significant in paired tests
+against C0 and in matched-image comparisons against the stable
+models.</p>
+<p><img src="images/figure2_main_conflict_rates.png"
+style="width:100.0%" /></p>
+<p><strong>Figure 2. Primary C0-C4 conflict-following rates.</strong>
+Points show false-colour-aligned output rates for each model-condition
+cell with Wilson confidence intervals. Non-zero labels mark counts out
+of 300.</p>
+<h3 id="same-image-flips-narrowed-the-attribution">4.3 Same-image flips
+narrowed the attribution</h3>
+<p>Because all conditions used the same images and all C0 outputs were
+faithful, the LLaVA C3 and C4 conflict-following outputs can be written
+as same-image paired flips. LLaVA had 27/300 faithful-to-conflict flips
+in C3 and 10/300 in C4. These correspond to faithful retention rates of
+91.00% and 96.67%. Qwen2-VL-7B-Instruct had one such flip in each of C3
+and C4. InternVL2-8B had none across C1-C4.</p>
+<p>This paired interpretation reduces a key ambiguity in conflict
+evaluation. It does not identify a general causal mechanism, but it ties
+each changed answer to identical visual evidence under a changed
+prompt.</p>
+<p><img src="images/figure3_paired_flips.png"
+style="width:100.0%" /></p>
+<p><strong>Figure 3. Same-image paired faithful-to-conflict
+flips.</strong> Bars show the number of images for which a model is
+faithful under C0 and false-colour-aligned under C1-C4.</p>
+<h3 id="diagnostics-bounded-the-main-result">4.4 Diagnostics bounded the
+main result</h3>
+<p>Auxiliary stress tests showed that stronger constraints could push
+all tested models toward the false-colour family. Qwen2-VL-7B-Instruct
+reached 55.67% in A1 and 90.67% in A2. LLaVA-1.5-7B reached 85.33% in A1
+and 100.00% in A2. InternVL2-8B reached 73.67% in A1 and 100.00% in A2.
+These results do not replace the open-answer C0-C4 evidence because they
+changed the task assumption or response space.</p>
+<p>The LLaVA C3/C4 result was conditional rather than stable across
+prompt variants. Under C3 wording robustness, LLaVA dropped from 27/300
+under canonical C3 to 5/300 under C3-v2 and 0/300 under C3-v3. Answer
+format also changed the observed rate. Canonical C3 was larger than
+matched free-answer C3 at 7/300, multiple-choice C3 at 4/300, and yes/no
+false-claim probing at 4/300.</p>
+<p>The effect was also concentrated in a small set of colour routes.
+Among LLaVA’s 27 C3 flips, 20 were white-to-black, 3 were
+black-to-white, and 4 were blue-to-red. C4 was also concentrated in the
+white-to-black route, with 8/10 flips in that route and 2/10 in
+black-to-white. Thus, the 9.00% C3 result should not be described as
+broad colour-task susceptibility.</p>
+<p><img src="images/figure4_boundary_diagnostics.png"
+style="width:100.0%" /></p>
+<p><strong>Figure 4. Boundary diagnostics for the primary LLaVA
+shift.</strong> Panels summarise C3 wording robustness, answer-format
+controls, colour-pair concentration, and factorized-prompt effects. This
+figure bounds the primary claim rather than replacing it.</p>
+<h3 id="validity-checks-and-multi-turn-extension">4.5 Validity checks
+and multi-turn extension</h3>
+<p>Source-stratified checks reduced the concern that the main pattern
+was confined to one source subset. Under C0, all three models were
+faithful in both StanfordCars and VCoR. Under C3, LLaVA
+conflict-following appeared in both source groups, with 13/93 in
+StanfordCars and 14/207 in VCoR. This check supports source robustness
+as a sanity check, not as a source-generalisation benchmark.</p>
+<p>The visual clarity audit reviewed 42 target flip rows and 42 matched
+faithful controls. Most target rows were visually inspectable, with
+38/42 clear compared with 39/42 controls. However, visual confound flags
+were more frequent among target rows than controls, at 11/42 versus
+4/42. Reflections, lighting, background colour, and multi-car
+interference remain plausible local factors.</p>
+<p>The multi-turn diagnostic tested a separate interaction regime. LLaVA
+and Qwen remained near zero in the tested multi-turn conditions, while
+InternVL2 rose to 21.33% in MT2 and 74.67% in MT3. Repeated dialogue
+context can therefore create a strong model-specific vulnerability, but
+this result should not be folded into the single-turn C0-C4 claim.</p>
+<h2 id="discussion">5. Discussion</h2>
+<p>The central finding is a local paired observation. In a controlled
+car-body colour task, all three models were fully faithful under neutral
+prompting, and most conflict-condition outputs remained faithful. Within
+the primary single-turn prompt family, LLaVA-1.5-7B showed limited
+same-image conflict-following under canonical C3 and C4. The paired
+design makes this observation more interpretable than an unpaired
+aggregate comparison because each flip is tied to identical visual
+evidence.</p>
+<p>This finding refines, rather than replaces, prior concerns about
+multimodal hallucination, language priors, and conflict sensitivity. The
+present evidence shows that misleading text can matter in a simple
+visual attribute task. It also shows that the effect can be model-,
+wording-, format-, and colour-pair-dependent. The result is therefore
+best read as a bounded behavioural pattern, not as a stable
+cross-template law.</p>
+<p>The stable C0-C4 behaviour of Qwen2-VL-7B-Instruct and InternVL2-8B
+is also local. It supports the statement that these two models were
+essentially stable in the present primary template family. It does not
+imply global robustness to all misleading-text designs. Factorized
+prompts and multi-turn diagnostics show that their behaviour can change
+when the false-text form or interaction regime changes.</p>
+<p><img src="images/claim_boundary_summary.png"
+style="width:100.0%" /></p>
+<p><strong>Claim-boundary guide. Supported, bounded, and not
+claimed.</strong> This guide restates the interpretive boundary of the
+study: C0 faithfulness and LLaVA C3/C4 paired shifts are supported,
+prompt and colour-pair dependence bound the conclusion, and the evidence
+does not support a general text-over-vision claim.</p>
+<p>The main methodological value is the separation between primary
+paired evidence, auxiliary stress tests, controlled diagnostics,
+validity checks, and extension diagnostics. This separation gives
+reviewers a clearer basis for judging what the evidence supports and
+where it stops.</p>
+<h2 id="limitations">6. Limitations</h2>
+<p>The task scope is intentionally narrow. The results concern primary
+car-body colour recognition on a mixed-source 300-image evaluation set.
+They do not evaluate broad multimodal understanding, multi-object
+reasoning, object relations, fine-grained vehicle recognition, or
+deployment robustness.</p>
+<p>The model scope is limited to three checkpoints. Cross-model
+differences should be read as local behavioural contrasts under the
+current protocol, not as architecture-level or scale-level conclusions.
+The prompt scope is also limited. The clearest result occurs under
+canonical C3 and, secondarily, C4. Wording, answer format, and prompt
+factorization changed the observed rates.</p>
+<p>The visual clarity audit reduced but did not eliminate
+visual-confusion explanations. Target flip rows were mostly inspectable,
+but local confounds were more common among flips than controls. The
+current evidence supports a text-related shift in specific cases. It
+does not show that every flip is free of visual ambiguity.</p>
+<p>The evaluation set is modest in size. The balanced design helps
+isolate paired prompt effects, but it cannot estimate performance across
+all vehicle domains, camera conditions, or colour distributions. Larger
+preregistered image sets would be needed to turn the present behavioural
+pattern into a broader benchmark claim.</p>
+<h2 id="conclusion">7. Conclusion</h2>
+<p>This work demonstrates a bounded way to study false-text influence in
+VLM image interpretation. In a paired car-body colour task, all three
+tested models were faithful under neutral C0 prompting. In the primary
+single-turn C0-C4 prompt family, LLaVA-1.5-7B showed limited but
+significant same-image conflict-following under canonical C3 and C4,
+while Qwen2-VL-7B-Instruct and InternVL2-8B remained essentially stable.
+Controlled diagnostics showed that the shift was wording-, format-,
+factor-, and colour-pair-sensitive, and validity checks reduced but did
+not remove alternative explanations. The strongest supported conclusion
+is therefore local: false textual cues can shift one tested model in
+specific prompt settings, but the evidence does not support a general
+text-over-vision claim.</p>
+<h2 id="data-availability">Data Availability</h2>
+<p>The processed manifests, reviewed colour labels, prompt condition
+tables, parsed model outputs, result tables, figure source data, audit
+summaries, and reproducibility records are available in the project
+repository at
+<code>https://github.com/NorthDudu-Bird/multimodal_conflict_decision_boundary_hallucination</code>.
+This repository should be archived in a DOI-bearing release before
+submission. The primary 300-image evaluation manifest is stored at
+<code>data/balanced_eval_set/final_manifest.csv</code>, with the
+balanced-set summary at
+<code>data/metadata/balanced_eval_set/balanced_eval_set_summary.json</code>.
+Figure source data for the conference draft are provided under
+<code>figures/conference/source_data/</code>.</p>
+<p>The underlying vehicle images are reused third-party data from
+StanfordCars and VCoR. Readers should obtain the original images from
+the corresponding dataset providers and respect their terms of use. The
+repository records source dataset identity, source paths, cropped-image
+paths, reviewed labels, and selection metadata needed to reconstruct the
+evaluation set, but the paper does not claim to newly release or
+relicense the original third-party image collections.</p>
+<h2 id="code-availability">Code Availability</h2>
+<p>The analysis and figure-generation code used for this manuscript
+draft is available in the same repository at
+<code>https://github.com/NorthDudu-Bird/multimodal_conflict_decision_boundary_hallucination</code>.
+The main reproduction entry points are documented in
+<code>docs/reproduction.md</code>; the current conference-figure script
+is <code>scripts/make_conference_figures.py</code>. Model weights are
+not redistributed by this repository and should be obtained from their
+respective model providers.</p>
+<h2 id="references">References</h2>
+<p>[1] A. Radford et al., “Learning Transferable Visual Models From
+Natural Language Supervision,” in Proc. ICML, 2021.</p>
+<p>[2] J.-B. Alayrac et al., “Flamingo: a Visual Language Model for
+Few-Shot Learning,” arXiv:2204.14198, 2022.</p>
+<p>[3] J. Li, D. Li, S. Savarese, and S. Hoi, “BLIP-2: Bootstrapping
+Language-Image Pre-training with Frozen Image Encoders and Large
+Language Models,” in Proc. ICML, 2023.</p>
+<p>[4] H. Liu, C. Li, Q. Wu, and Y. J. Lee, “Visual Instruction Tuning,”
+arXiv:2304.08485, 2023.</p>
+<p>[5] H. Liu, C. Li, Y. Li, and Y. J. Lee, “Improved Baselines with
+Visual Instruction Tuning,” arXiv:2310.03744, 2023.</p>
+<p>[6] Y. Goyal, T. Khot, D. Summers-Stay, D. Batra, and D. Parikh,
+“Making the V in VQA Matter: Elevating the Role of Image Understanding
+in Visual Question Answering,” in Proc. CVPR, 2017.</p>
+<p>[7] A. Agrawal, D. Batra, D. Parikh, and A. Kembhavi, “Don’t Just
+Assume; Look and Answer: Overcoming Priors for Visual Question
+Answering,” in Proc. CVPR, 2018.</p>
+<p>[8] Y. Li, Y. Du, K. Zhou, J. Wang, W. X. Zhao, and J.-R. Wen,
+“Evaluating Object Hallucination in Large Vision-Language Models,”
+arXiv:2305.10355, 2023.</p>
+<p>[9] T. Guan et al., “HallusionBench: An Advanced Diagnostic Suite for
+Entangled Language Hallucination and Visual Illusion in Large
+Vision-Language Models,” arXiv:2310.14566, 2023.</p>
+<p>[10] K.-i. Lee, M. Kim, S. Yoon, M. Kim, D. Lee, H. Koh, and K. Jung,
+“VLind-Bench: Measuring Language Priors in Large Vision-Language
+Models,” arXiv:2406.08702, 2024.</p>
+<p>[11] Y. Liang et al., “ColorBench: Can VLMs See and Understand the
+Colorful World? A Comprehensive Benchmark for Color Perception,
+Reasoning, and Robustness,” arXiv:2504.10514, 2025.</p>
+<p>[12] M. Yuksekgonul, F. Bianchi, P. Kalluri, D. Jurafsky, and J. Zou,
+“When and Why Vision-Language Models Behave Like Bags-of-Words, and What
+to Do About It?,” in Proc. ICLR, 2023.</p>
+<p>[13] T. Thrush et al., “Winoground: Probing Vision and Language
+Models for Visio-Linguistic Compositionality,” in Proc. CVPR, 2022.</p>
+<p>[14] J. Krause, M. Stark, J. Deng, and L. Fei-Fei, “3D Object
+Representations for Fine-Grained Categorization,” in Proc. 4th
+International IEEE Workshop on 3D Representation and Recognition,
+2013.</p>
+<p>[15] K. Panetta, L. Kezebou, V. Oludare, J. Intriligator, and S.
+Agaian, “Artificial Intelligence for Text-Based Vehicle Search,
+Recognition, and Continuous Localization in Traffic Videos,” AI, vol. 2,
+no. 4, pp. 684-704, 2021.</p>
+<p>[16] P. Wang et al., “Qwen2-VL: Enhancing Vision-Language Model’s
+Perception of the World at Any Resolution,” arXiv:2409.12191, 2024.</p>
+<p>[17] Z. Chen et al., “InternVL: Scaling up Vision Foundation Models
+and Aligning for Generic Visual-Linguistic Tasks,” arXiv:2312.14238,
+2023.</p>
+<p>[18] Z. Chen et al., “How Far Are We to GPT-4V? Closing the Gap to
+Commercial Multimodal Models with Open-Source Suites,” arXiv:2404.16821,
+2024.</p>
+</body>
+</html>
