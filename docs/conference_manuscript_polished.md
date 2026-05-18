@@ -6,10 +6,11 @@ Vision-language models are commonly evaluated with prompts whose text is consist
 the image. In practical use, however, textual context may be wrong. When a model answers
 incorrectly under such conflict, the error is difficult to attribute: it may reflect
 visual misperception, linguistic compliance, prompt wording, answer-format pressure, or
-output parsing. We study this attribution problem in a deliberately narrow setting:
-primary car-body colour recognition with false textual colour cues. Using a balanced
-300-image car set over six colours, we evaluate LLaVA-1.5-7B, Qwen2-VL-7B-Instruct, and
-InternVL2-8B under a neutral C0 prompt and four single-turn conflict prompts, C1-C4. All
+output parsing. This study examines this attribution problem in a deliberately narrow
+setting: primary car-body colour recognition with false textual colour cues. The
+protocol uses a balanced 300-image car set over six colours to evaluate LLaVA-1.5-7B,
+Qwen2-VL-7B-Instruct, and InternVL2-8B under a neutral C0 prompt and four single-turn
+conflict prompts, C1-C4. All
 three models are faithful under C0 on all 300 images. In the primary conflict family,
 LLaVA-1.5-7B shows the only clear shift, with false-colour-aligned outputs in 27/300 C3
 cases and 10/300 C4 cases. Qwen2-VL-7B-Instruct has 1/300 in each of C3 and C4, and
@@ -23,9 +24,8 @@ text-sensitive behaviour, not a general claim that VLMs prioritise text over vis
 ## 1. Introduction
 
 Vision-language models (VLMs) increasingly interpret images together with natural
-language instructions, descriptions, or contextual claims [Radford2021CLIP;
-Alayrac2022Flamingo; Li2023BLIP2; Liu2023VisualInstruction; Liu2023Improved]. This
-joint interface creates a reliability question that is easy to pose but hard to
+language instructions, descriptions, or contextual claims [1-5]. This joint interface
+creates a reliability question that is easy to pose but hard to
 diagnose: what happens when the text says something false about the image?
 
 A model may ignore an erroneous claim, correct it, partially incorporate it, or follow
@@ -33,20 +33,19 @@ it. A false-text-aligned answer is therefore not self-explanatory. It may arise 
 visual error, language prior, prompt compliance, answer-space constraint, parsing
 artefact, or local image ambiguity. Prior work on visual question answering, language
 priors, hallucination, multimodal conflict, and attribute binding has made these risks
-visible [Goyal2017VQAv2; Agrawal2018DontAssume; Li2023POPE; Guan2023HallusionBench;
-Lee2024VLindBench; Liang2025ColorBench; Yuksekgonul2023ARO; Thrush2022Winoground]. Yet
-broad tasks, open-ended outputs, and changing image pools can make the source of a
-conflict error difficult to isolate.
+visible [6-13]. Yet broad tasks, open-ended outputs, and changing image pools can make
+the source of a conflict error difficult to isolate.
 
-This paper examines a smaller question with a shorter evidence chain. We ask whether a
+This paper examines a smaller question with a shorter evidence chain. The central
+question is whether a
 false textual colour cue can move a model away from image evidence when the visual
 attribute is simple, the answer space is fixed, and the same image is evaluated under
 neutral and conflict prompts. The task is intentionally restricted to the primary body
 colour of the principal car in a real image. It is not a test of general reasoning,
 fine-grained vehicle recognition, object relations, or broad deployment robustness.
 
-We evaluate three fixed VLM checkpoints on a balanced 300-image, six-colour car-image
-set. The primary protocol compares a neutral C0 prompt with four single-turn conflict
+The evaluation uses three fixed VLM checkpoints on a balanced 300-image, six-colour
+car-image set. The primary protocol compares a neutral C0 prompt with four single-turn conflict
 conditions, C1-C4. Each model sees the same images in each condition. This design makes
 the key evidence unit a paired flip: the model answers faithfully under C0 on an image,
 then follows the false prompt colour for the same image under a conflict condition.
@@ -72,11 +71,6 @@ prompt and the false-colour C3 prompt, and the parsed answer changes from the tr
 colour to the embedded false cue. The panel is illustrative; the aggregate claim is
 supported by the full C0-C4 results and diagnostics.
 
-**Argument map. Narrative structure of the manuscript.** This guide summarises the
-paper's logic from question, paired evidence, and observed shift to diagnostics,
-validity checks, and a bounded claim. It is included to orient the reader before the
-quantitative figures.
-
 **Figure 1. Evidence chain for same-image conflict-following analysis.** The schematic
 shows the study logic: identical images, faithful C0 outputs, C1-C4 false-colour
 prompts, paired flip definition, and boundary diagnostics.
@@ -87,19 +81,18 @@ prompts, paired flip definition, and boundary diagnostics.
 
 Multimodal hallucination and conflict benchmarks test whether model outputs remain
 grounded when visual evidence, textual context, or world knowledge are unreliable
-[Li2023POPE; Guan2023HallusionBench; Lee2024VLindBench]. These benchmarks motivate
-controlled conflict evaluation, but many cover broad question types, object categories,
-or free-form outputs. Our study differs by narrowing the task to one visual attribute
+[8-10]. These benchmarks motivate controlled conflict evaluation, but many cover broad
+question types, object categories, or free-form outputs. The present study differs by narrowing the task to one visual attribute
 and by treating same-image paired flips as the primary evidence unit.
 
 ### Language priors and diagnostic separation
 
 Language priors can produce plausible answers without adequate visual grounding
-[Goyal2017VQAv2; Agrawal2018DontAssume]. However, a false-text-aligned answer is not
+[6,7]. However, a false-text-aligned answer is not
 automatically a pure language-prior effect. It can also reflect image visibility,
 ambiguous labels, prompt format, or parser behaviour. Recent diagnostic work has
 therefore emphasised separating perception, knowledge, bias, and response-format effects
-[Lee2024VLindBench]. We adopt this separation as an evaluation principle, without
+[10]. This separation is adopted here as an evaluation principle, without
 assigning broad model-level blindness or bias scores.
 
 ### Colour, attributes, and object grounding
@@ -107,7 +100,7 @@ assigning broad model-level blindness or bias scores.
 Colour is interpretable, but it is not a trivial probe. Benchmarks on colour
 understanding, compositionality, and attribute binding show that VLM behaviour can vary
 with object category, colour distribution, visual ambiguity, and prompt form
-[Liang2025ColorBench; Yuksekgonul2023ARO; Thrush2022Winoground]. We use car-body colour
+[11-13]. Car-body colour is used
 as a controlled observation window rather than as a claim about general colour
 perception.
 
@@ -128,10 +121,10 @@ keeps the interpretation tied to identical visual evidence.
 ### 3.2 Evaluation set
 
 The main evaluation set contains 300 real car images, balanced across six true colours
-with 50 images per class. It combines 93 StanfordCars images and 207 VCoR images. Source
-identity is retained for provenance, sanity checks, and limitations, but it is not a
-primary experimental factor. Both sources are used as real vehicle-image inputs after
-cropping.
+with 50 images per class. It combines 93 StanfordCars images and 207 VCoR images
+[14,15]. Source identity is retained for provenance, sanity checks, and limitations, but
+it is not a primary experimental factor. Both sources are used as real vehicle-image
+inputs after cropping.
 
 **Table 1. Evaluation set composition.** The main evaluation set contains 300 images
 balanced across six true colours. Source identity is retained for provenance and sanity
@@ -149,11 +142,10 @@ checks, not as a primary comparison axis.
 
 ### 3.3 Models
 
-We evaluate LLaVA-1.5-7B, Qwen2-VL-7B-Instruct, and InternVL2-8B. These citations
-identify the model families and reports, but they are not evidence for the robustness
-claims in this paper [Liu2023VisualInstruction; Liu2023Improved; Wang2024Qwen2VL;
-Chen2023InternVL; Chen2024InternVL2]. The comparison is local to these checkpoints,
-prompts, and images.
+The evaluated checkpoints are LLaVA-1.5-7B, Qwen2-VL-7B-Instruct, and InternVL2-8B.
+These citations identify the model families and reports, but they are not evidence for
+the robustness claims in this paper [4,5,16-18]. The comparison is local to these
+checkpoints, prompts, and images.
 
 ### 3.4 Prompt conditions and metrics
 
@@ -364,10 +356,10 @@ Target flip rows were mostly inspectable, but local confounds were more common a
 flips than controls. The current evidence supports a text-related shift in specific
 cases. It does not show that every flip is free of visual ambiguity.
 
-Finally, the bibliography is still a first-pass conference scaffold. Before submission,
-references should be converted to the target venue style, checked for official
-proceedings versions where available, and trimmed so that each citation supports a
-specific local claim.
+The evaluation set is also modest in size. The balanced design helps isolate paired
+prompt effects, but it cannot estimate performance across all vehicle domains, camera
+conditions, or colour distributions. Larger preregistered image sets would be needed to
+turn the present behavioural pattern into a broader benchmark claim.
 
 ## 7. Conclusion
 
@@ -411,11 +403,40 @@ conference-figure script is `scripts/make_conference_figures.py`. Model weights 
 redistributed by this repository and should be obtained from their respective model
 providers.
 
-## Polishing Notes
+## References
 
-- This polished draft is derived from `docs/conference_manuscript_main_draft.md`.
-- It removes internal scaffolding such as title candidates, claim maps, and planning
-  notes from the manuscript flow.
-- Table bodies still need final venue-format rendering.
-- The GitHub repository URL should be replaced with a DOI-bearing archived release
-  before submission.
+[1] A. Radford et al., "Learning Transferable Visual Models From Natural Language Supervision," in Proc. ICML, 2021.
+
+[2] J.-B. Alayrac et al., "Flamingo: a Visual Language Model for Few-Shot Learning," arXiv:2204.14198, 2022.
+
+[3] J. Li, D. Li, S. Savarese, and S. Hoi, "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models," in Proc. ICML, 2023.
+
+[4] H. Liu, C. Li, Q. Wu, and Y. J. Lee, "Visual Instruction Tuning," arXiv:2304.08485, 2023.
+
+[5] H. Liu, C. Li, Y. Li, and Y. J. Lee, "Improved Baselines with Visual Instruction Tuning," arXiv:2310.03744, 2023.
+
+[6] Y. Goyal, T. Khot, D. Summers-Stay, D. Batra, and D. Parikh, "Making the V in VQA Matter: Elevating the Role of Image Understanding in Visual Question Answering," in Proc. CVPR, 2017.
+
+[7] A. Agrawal, D. Batra, D. Parikh, and A. Kembhavi, "Don't Just Assume; Look and Answer: Overcoming Priors for Visual Question Answering," in Proc. CVPR, 2018.
+
+[8] Y. Li, Y. Du, K. Zhou, J. Wang, W. X. Zhao, and J.-R. Wen, "Evaluating Object Hallucination in Large Vision-Language Models," arXiv:2305.10355, 2023.
+
+[9] T. Guan et al., "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models," arXiv:2310.14566, 2023.
+
+[10] K.-i. Lee, M. Kim, S. Yoon, M. Kim, D. Lee, H. Koh, and K. Jung, "VLind-Bench: Measuring Language Priors in Large Vision-Language Models," arXiv:2406.08702, 2024.
+
+[11] Y. Liang et al., "ColorBench: Can VLMs See and Understand the Colorful World? A Comprehensive Benchmark for Color Perception, Reasoning, and Robustness," arXiv:2504.10514, 2025.
+
+[12] M. Yuksekgonul, F. Bianchi, P. Kalluri, D. Jurafsky, and J. Zou, "When and Why Vision-Language Models Behave Like Bags-of-Words, and What to Do About It?," in Proc. ICLR, 2023.
+
+[13] T. Thrush et al., "Winoground: Probing Vision and Language Models for Visio-Linguistic Compositionality," in Proc. CVPR, 2022.
+
+[14] J. Krause, M. Stark, J. Deng, and L. Fei-Fei, "3D Object Representations for Fine-Grained Categorization," in Proc. 4th International IEEE Workshop on 3D Representation and Recognition, 2013.
+
+[15] K. Panetta, L. Kezebou, V. Oludare, J. Intriligator, and S. Agaian, "Artificial Intelligence for Text-Based Vehicle Search, Recognition, and Continuous Localization in Traffic Videos," AI, vol. 2, no. 4, pp. 684-704, 2021.
+
+[16] P. Wang et al., "Qwen2-VL: Enhancing Vision-Language Model's Perception of the World at Any Resolution," arXiv:2409.12191, 2024.
+
+[17] Z. Chen et al., "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks," arXiv:2312.14238, 2023.
+
+[18] Z. Chen et al., "How Far Are We to GPT-4V? Closing the Gap to Commercial Multimodal Models with Open-Source Suites," arXiv:2404.16821, 2024.

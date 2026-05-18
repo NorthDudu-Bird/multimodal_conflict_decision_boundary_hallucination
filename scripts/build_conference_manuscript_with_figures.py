@@ -37,15 +37,50 @@ NARRATIVE_FIGURES = {
         "png": ROOT / "figures" / "conference_narrative" / "graphical_abstract_real_case.png",
         "alt": "Graphical overview. Real-prompt paired workflow for one LLaVA example.",
     },
-    "Argument map": {
-        "png": ROOT / "figures" / "conference_narrative" / "manuscript_argument_roadmap.png",
-        "alt": "Argument map. Hand-drawn narrative structure of the manuscript.",
-    },
     "Claim-boundary guide": {
         "png": ROOT / "figures" / "conference_narrative" / "claim_boundary_summary.png",
         "alt": "Claim-boundary guide. Supported, bounded, and not-claimed conclusions.",
     },
 }
+
+REFERENCES_MD = """## References
+
+[1] A. Radford et al., "Learning Transferable Visual Models From Natural Language Supervision," in Proc. ICML, 2021.
+
+[2] J.-B. Alayrac et al., "Flamingo: a Visual Language Model for Few-Shot Learning," arXiv:2204.14198, 2022.
+
+[3] J. Li, D. Li, S. Savarese, and S. Hoi, "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models," in Proc. ICML, 2023.
+
+[4] H. Liu, C. Li, Q. Wu, and Y. J. Lee, "Visual Instruction Tuning," arXiv:2304.08485, 2023.
+
+[5] H. Liu, C. Li, Y. Li, and Y. J. Lee, "Improved Baselines with Visual Instruction Tuning," arXiv:2310.03744, 2023.
+
+[6] Y. Goyal, T. Khot, D. Summers-Stay, D. Batra, and D. Parikh, "Making the V in VQA Matter: Elevating the Role of Image Understanding in Visual Question Answering," in Proc. CVPR, 2017.
+
+[7] A. Agrawal, D. Batra, D. Parikh, and A. Kembhavi, "Don't Just Assume; Look and Answer: Overcoming Priors for Visual Question Answering," in Proc. CVPR, 2018.
+
+[8] Y. Li, Y. Du, K. Zhou, J. Wang, W. X. Zhao, and J.-R. Wen, "Evaluating Object Hallucination in Large Vision-Language Models," arXiv:2305.10355, 2023.
+
+[9] T. Guan et al., "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models," arXiv:2310.14566, 2023.
+
+[10] K.-i. Lee, M. Kim, S. Yoon, M. Kim, D. Lee, H. Koh, and K. Jung, "VLind-Bench: Measuring Language Priors in Large Vision-Language Models," arXiv:2406.08702, 2024.
+
+[11] Y. Liang et al., "ColorBench: Can VLMs See and Understand the Colorful World? A Comprehensive Benchmark for Color Perception, Reasoning, and Robustness," arXiv:2504.10514, 2025.
+
+[12] M. Yuksekgonul, F. Bianchi, P. Kalluri, D. Jurafsky, and J. Zou, "When and Why Vision-Language Models Behave Like Bags-of-Words, and What to Do About It?," in Proc. ICLR, 2023.
+
+[13] T. Thrush et al., "Winoground: Probing Vision and Language Models for Visio-Linguistic Compositionality," in Proc. CVPR, 2022.
+
+[14] J. Krause, M. Stark, J. Deng, and L. Fei-Fei, "3D Object Representations for Fine-Grained Categorization," in Proc. 4th International IEEE Workshop on 3D Representation and Recognition, 2013.
+
+[15] K. Panetta, L. Kezebou, V. Oludare, J. Intriligator, and S. Agaian, "Artificial Intelligence for Text-Based Vehicle Search, Recognition, and Continuous Localization in Traffic Videos," AI, vol. 2, no. 4, pp. 684-704, 2021.
+
+[16] P. Wang et al., "Qwen2-VL: Enhancing Vision-Language Model's Perception of the World at Any Resolution," arXiv:2409.12191, 2024.
+
+[17] Z. Chen et al., "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks," arXiv:2312.14238, 2023.
+
+[18] Z. Chen et al., "How Far Are We to GPT-4V? Closing the Gap to Commercial Multimodal Models with Open-Source Suites," arXiv:2404.16821, 2024.
+"""
 
 
 def strip_working_notes(text: str) -> str:
@@ -53,6 +88,14 @@ def strip_working_notes(text: str) -> str:
     if marker in text:
         return text.split(marker, 1)[0].rstrip() + "\n"
     return text
+
+
+def insert_references(text: str) -> str:
+    text = text.rstrip()
+    references = REFERENCES_MD.rstrip() + "\n"
+    if "\n## References\n" in text:
+        return re.sub(r"\n## References\n[\s\S]*\Z", "\n\n" + references, text)
+    return text + "\n\n" + references
 
 
 def copy_figures() -> None:
@@ -199,6 +242,7 @@ def main() -> None:
     text = insert_tables(text)
     text = insert_narrative_figures(text)
     text = insert_figures(text)
+    text = insert_references(text)
     out_md = OUT_DIR / "conference_manuscript_with_figures.md"
     out_md.write_text(text, encoding="utf-8", newline="\n")
     build_with_pandoc(out_md)
