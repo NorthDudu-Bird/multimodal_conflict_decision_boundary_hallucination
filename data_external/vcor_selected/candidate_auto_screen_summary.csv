@@ -1,0 +1,7 @@
+﻿color,core_count,target_per_color,needed_vcor,screened_candidates,auto_recommended
+red,40,50,10,80,10
+blue,12,50,38,228,38
+green,2,50,48,288,48
+yellow,2,50,48,288,48
+black,23,50,27,162,27
+white,14,50,36,216,36

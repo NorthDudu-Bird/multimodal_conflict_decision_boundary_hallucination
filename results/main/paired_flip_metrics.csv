@@ -1,0 +1,13 @@
+﻿model_key,model,reference_condition,condition_name,condition,n_pairs,c0_faithful_n,current_faithful_n,faithful_to_faithful_n,faithful_to_conflict_aligned_n,faithful_to_other_wrong_n,faithful_to_refusal_n,faithful_to_parse_error_n,answer_flip_n,answer_flip_rate,faithful_retention_rate,conflict_following_rate,current_conflict_aligned_n,c0_conflict_aligned_n,net_conflict_shift_n,net_conflict_shift,paired_discordant_current_only,paired_discordant_c0_only,p_value_exact_mcnemar
+qwen2vl7b,Qwen2-VL-7B-Instruct,C0_neutral,C1_weak_suggestion,C1,300,300,300,300,0,0,0,0,0,0.0,1.0,0.0,0,0,0,0.0,0,0,1.0
+qwen2vl7b,Qwen2-VL-7B-Instruct,C0_neutral,C2_false_assertion_open,C2,300,300,300,300,0,0,0,0,0,0.0,1.0,0.0,0,0,0,0.0,0,0,1.0
+qwen2vl7b,Qwen2-VL-7B-Instruct,C0_neutral,C3_presupposition_correction_allowed,C3,300,300,299,299,1,0,0,0,1,0.0033333333333333335,0.9966666666666667,0.0033333333333333335,1,0,1,0.0033333333333333335,1,0,1.0
+qwen2vl7b,Qwen2-VL-7B-Instruct,C0_neutral,C4_stronger_open_conflict,C4,300,300,299,299,1,0,0,0,1,0.0033333333333333335,0.9966666666666667,0.0033333333333333335,1,0,1,0.0033333333333333335,1,0,1.0
+llava15_7b,LLaVA-1.5-7B,C0_neutral,C1_weak_suggestion,C1,300,300,299,299,1,0,0,0,1,0.0033333333333333335,0.9966666666666667,0.0033333333333333335,1,0,1,0.0033333333333333335,1,0,1.0
+llava15_7b,LLaVA-1.5-7B,C0_neutral,C2_false_assertion_open,C2,300,300,297,297,3,0,0,0,3,0.01,0.99,0.01,3,0,3,0.01,3,0,0.25
+llava15_7b,LLaVA-1.5-7B,C0_neutral,C3_presupposition_correction_allowed,C3,300,300,273,273,27,0,0,0,27,0.09,0.91,0.09,27,0,27,0.09,27,0,1.4901161193847656e-08
+llava15_7b,LLaVA-1.5-7B,C0_neutral,C4_stronger_open_conflict,C4,300,300,290,290,10,0,0,0,10,0.03333333333333333,0.9666666666666667,0.03333333333333333,10,0,10,0.03333333333333333,10,0,0.001953125
+internvl2_8b,InternVL2-8B,C0_neutral,C1_weak_suggestion,C1,300,300,300,300,0,0,0,0,0,0.0,1.0,0.0,0,0,0,0.0,0,0,1.0
+internvl2_8b,InternVL2-8B,C0_neutral,C2_false_assertion_open,C2,300,300,300,300,0,0,0,0,0,0.0,1.0,0.0,0,0,0,0.0,0,0,1.0
+internvl2_8b,InternVL2-8B,C0_neutral,C3_presupposition_correction_allowed,C3,300,300,300,300,0,0,0,0,0,0.0,1.0,0.0,0,0,0,0.0,0,0,1.0
+internvl2_8b,InternVL2-8B,C0_neutral,C4_stronger_open_conflict,C4,300,300,300,300,0,0,0,0,0,0.0,1.0,0.0,0,0,0,0.0,0,0,1.0

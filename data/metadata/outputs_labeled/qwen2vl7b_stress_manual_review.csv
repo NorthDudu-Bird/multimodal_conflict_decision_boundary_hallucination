@@ -1,0 +1,1 @@
+﻿sample_id,image_id,file_name,image_path,width,height,contains_dog,num_annotations,experiment_type,prompt_level,prompt_code,conflict_strength,prompt_text,expected_answer,model_name,model_output,label,language_consistent,vision_consistent,ambiguous,notes,raw_output,status,error,auto_label_confidence

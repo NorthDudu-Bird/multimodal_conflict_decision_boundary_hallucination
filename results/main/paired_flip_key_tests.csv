@@ -1,0 +1,13 @@
+﻿comparison_family,model_key,model,comparison_label,reference_condition,condition_name,condition,metric,n_pairs,current_rate,c0_rate,rate_diff_current_minus_c0,current_only,c0_only,p_value_raw,p_value_holm,significant_holm
+within_model_vs_C0_all_conditions,qwen2vl7b,Qwen2-VL-7B-Instruct,Qwen2-VL-7B-Instruct: C0 vs C1,C0_neutral,C1_weak_suggestion,C1,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+within_model_vs_C0_all_conditions,qwen2vl7b,Qwen2-VL-7B-Instruct,Qwen2-VL-7B-Instruct: C0 vs C2,C0_neutral,C2_false_assertion_open,C2,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+within_model_vs_C0_all_conditions,qwen2vl7b,Qwen2-VL-7B-Instruct,Qwen2-VL-7B-Instruct: C0 vs C3,C0_neutral,C3_presupposition_correction_allowed,C3,conflict_aligned,300,0.0033333333333333335,0.0,0.0033333333333333335,1,0,1.0,1.0,False
+within_model_vs_C0_all_conditions,qwen2vl7b,Qwen2-VL-7B-Instruct,Qwen2-VL-7B-Instruct: C0 vs C4,C0_neutral,C4_stronger_open_conflict,C4,conflict_aligned,300,0.0033333333333333335,0.0,0.0033333333333333335,1,0,1.0,1.0,False
+within_model_vs_C0_all_conditions,llava15_7b,LLaVA-1.5-7B,LLaVA-1.5-7B: C0 vs C1,C0_neutral,C1_weak_suggestion,C1,conflict_aligned,300,0.0033333333333333335,0.0,0.0033333333333333335,1,0,1.0,1.0,False
+within_model_vs_C0_all_conditions,llava15_7b,LLaVA-1.5-7B,LLaVA-1.5-7B: C0 vs C2,C0_neutral,C2_false_assertion_open,C2,conflict_aligned,300,0.01,0.0,0.01,3,0,0.25,1.0,False
+within_model_vs_C0_all_conditions,llava15_7b,LLaVA-1.5-7B,LLaVA-1.5-7B: C0 vs C3,C0_neutral,C3_presupposition_correction_allowed,C3,conflict_aligned,300,0.09,0.0,0.09,27,0,1.4901161193847656e-08,1.7881393432617188e-07,True
+within_model_vs_C0_all_conditions,llava15_7b,LLaVA-1.5-7B,LLaVA-1.5-7B: C0 vs C4,C0_neutral,C4_stronger_open_conflict,C4,conflict_aligned,300,0.03333333333333333,0.0,0.03333333333333333,10,0,0.001953125,0.021484375,True
+within_model_vs_C0_all_conditions,internvl2_8b,InternVL2-8B,InternVL2-8B: C0 vs C1,C0_neutral,C1_weak_suggestion,C1,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+within_model_vs_C0_all_conditions,internvl2_8b,InternVL2-8B,InternVL2-8B: C0 vs C2,C0_neutral,C2_false_assertion_open,C2,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+within_model_vs_C0_all_conditions,internvl2_8b,InternVL2-8B,InternVL2-8B: C0 vs C3,C0_neutral,C3_presupposition_correction_allowed,C3,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+within_model_vs_C0_all_conditions,internvl2_8b,InternVL2-8B,InternVL2-8B: C0 vs C4,C0_neutral,C4_stronger_open_conflict,C4,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False

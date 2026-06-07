@@ -1,0 +1,9 @@
+{
+  "mode": "baseline",
+  "combined_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\baseline\\baseline_combined_parsed_results.csv",
+  "metrics_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\baseline\\baseline_condition_metrics.csv",
+  "tests_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\baseline\\baseline_exact_tests.csv",
+  "cases_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\baseline\\baseline_representative_cases.csv",
+  "summary_md": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\baseline\\baseline_summary.md",
+  "rows": 900
+}

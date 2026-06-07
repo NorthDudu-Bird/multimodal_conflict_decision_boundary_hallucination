@@ -1,0 +1,21 @@
+﻿image_id,exclude_from_subset,reason,notes
+test_00365,1,watermark_or_banner_overlay,top banner text
+test_01069,1,watermark_or_banner_overlay,bottom-right watermark text
+test_01311,1,darkened_text_overlay,full-image darkening with overlaid text
+test_03489,1,watermark_or_banner_overlay,bottom watermark URL
+test_04523,1,watermark_or_banner_overlay,bottom-left watermark text
+test_07735,1,watermark_or_banner_overlay,large wholesale text overlay
+test_07869,1,text_overlay,SOLD overlay across image
+train_00114,1,text_overlay,SOLD overlay across image and duplicate cluster member
+train_00890,1,text_overlay,large Shoe? overlay
+train_01253,1,darkened_text_overlay,full-image darkening with overlaid text
+train_04760,1,darkened_text_overlay,full-image darkening with overlaid text
+train_05268,1,watermark_or_banner_overlay,large site watermark on image
+train_08061,1,watermark_or_banner_overlay,top-right site watermark
+test_04562,1,watermark_or_banner_overlay,bottom-left watermark text
+test_07432,1,watermark_or_banner_overlay,bottom-right watermark text
+test_07590,1,watermark_or_banner_overlay,bottom-right badge and site text
+test_07949,1,watermark_or_banner_overlay,top promotional labels
+train_06339,1,watermark_or_banner_overlay,bottom-right watermark text
+train_08880,1,watermark_or_banner_overlay,bottom-left watermark text
+train_07306,1,overlay_or_two_tone,watermark text and unstable body color appearance

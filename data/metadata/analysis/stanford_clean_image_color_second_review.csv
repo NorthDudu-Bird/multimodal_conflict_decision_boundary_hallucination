@@ -1,0 +1,31 @@
+﻿image_id,reviewer_true_color,reviewer_confidence,reviewer_notes
+test_00601,purple,high,Main body is clearly purple/violet.
+test_01069,red,high,Clear bright red hatchback.
+test_01311,white,high,White coupe in a dark scene; previous black tag is image-darkness leakage.
+test_02182,yellow,high,Clear yellow sports car.
+test_03302,red,high,Red pickup.
+test_03751,white,high,White coupe.
+test_03801,black,high,"SUV body looks black, not blue."
+test_05126,black,high,"Sedan body looks black, not blue."
+test_05992,red,high,Dark red / maroon sedan; grouped as red.
+test_06328,dark_blue,medium,Very dark navy sedan; blue-black boundary.
+test_06382,black,high,Black sedan.
+test_06383,white,high,White sedan.
+test_06787,black,medium,Very dark coupe; appears black rather than red.
+test_07040,black,medium,Truck reads black with a slight green tint.
+test_07372,black,high,Black convertible.
+test_07373,black,high,Black SUV.
+test_07699,white,high,White van.
+train_00114,white,high,White van.
+train_00211,black,medium,"Sedan appears black, not blue."
+train_00913,green,high,Green Lamborghini.
+train_01253,white,high,White SUV; previous orange tag is incorrect.
+train_01446,silver,high,Silver convertible.
+train_01561,black,medium,Very dark hatchback; reads black rather than red.
+train_02608,red,high,Red SUV.
+train_04760,white,high,White coupe in a dark scene; previous black tag is image-darkness leakage.
+train_05311,black,high,Black rear-view coupe.
+train_05584,silver,high,Silver coupe; previous blue tag is incorrect.
+train_06380,orange,high,Orange sports car.
+train_07332,red,high,Red SUV.
+train_07828,white,high,White van.

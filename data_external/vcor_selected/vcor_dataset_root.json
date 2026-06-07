@@ -1,0 +1,8 @@
+{
+  "dataset_handle": "landrykezebou/vcor-vehicle-color-recognition-dataset",
+  "download_mode": "local_zip",
+  "raw_dir": "data_external/vcor_raw",
+  "dataset_root": "data_external/vcor_raw/vcor_extracted",
+  "inventory_csv": "data_external/vcor_selected/vcor_inventory.csv",
+  "inventory_rows": 10373
+}

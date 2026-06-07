@@ -1,0 +1,80 @@
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments and local configuration
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+*.local
+
+# Credentials and private keys
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.*
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+~$*
+
+# Manuscripts, submissions, private notes, and packaged deliverables
+*.doc
+*.docx
+*.pdf
+*.ppt
+*.pptx
+*.tex
+*.zip
+*.7z
+*.rar
+deliverables/
+submission/
+submissions/
+manuscript/
+manuscripts/
+private/
+notes_private/
+论文工具包新/
+
+# Large source data, model weights, and generated caches
+data/raw/
+data/coco/
+data/selected_images/
+data/previews/
+data_external/vcor_raw/
+data_external/vcor_selected/candidate_pool/
+models/
+vendor/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+
+# Runtime and temporary output
+logs/
+*.log
+tmp/
+temp/
+tmp_*/
+clean/
+.ars_spreadsheet/
+.git_codex_stage_paths.txt
+
+# Locally generated or deprecated artifacts
+prompts/robustness/c3_prompt_variants.csv
+*** End Patch

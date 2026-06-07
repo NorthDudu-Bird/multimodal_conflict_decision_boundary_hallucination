@@ -1,0 +1,3 @@
+﻿review_id,field,human_value,analysis_value,reason
+VC-029,specular_reflection,none_minor,moderate,Duplicate source image had discordant ratings; use the more conservative human rating.
+VC-069,specular_reflection,moderate,moderate,Duplicate source image had discordant ratings; use the more conservative human rating.

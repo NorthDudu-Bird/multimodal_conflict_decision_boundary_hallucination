@@ -1,0 +1,28 @@
+﻿sample_id,model,condition,raw_output,normalized_output,parsed_label,manual_check,note
+test_07040_A1_forced_choice_red_family,Qwen2-VL-7B-Instruct,A1_forced_choice_red_family,off-white,off white,white,pass,Auxiliary family alias; collapsing to white is semantically appropriate.
+train_01561_A2_counterfactual_assumption,Qwen2-VL-7B-Instruct,A2_counterfactual_assumption,off-white,off white,white,pass,Auxiliary family alias; collapsing to white is semantically appropriate.
+vcor_test_black_cf9bcb7b0b_A2_counterfactual_assumption,Qwen2-VL-7B-Instruct,A2_counterfactual_assumption,off-white,off white,white,pass,Auxiliary family alias; collapsing to white is semantically appropriate.
+test_03234_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,bright white,bright white,white,pass,Auxiliary family alias; collapsing to white preserves the intended restricted answer family.
+test_06382_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,bright white,bright white,white,pass,Auxiliary family alias; collapsing to white preserves the intended restricted answer family.
+test_07372_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,bright white,bright white,white,pass,Auxiliary family alias; collapsing to white preserves the intended restricted answer family.
+test_03891_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,light red,light red,red,pass,Auxiliary family alias; collapsing to red keeps the color family while removing intensity.
+test_05003_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,light red,light red,red,pass,Auxiliary family alias; collapsing to red keeps the color family while removing intensity.
+test_05228_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,light red,light red,red,pass,Auxiliary family alias; collapsing to red keeps the color family while removing intensity.
+test_04242_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark red,dark red,red,pass,Auxiliary family alias; collapsing to red keeps the color family while removing intensity.
+test_07222_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark red,dark red,red,pass,Auxiliary family alias; collapsing to red keeps the color family while removing intensity.
+test_08030_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark red,dark red,red,pass,Auxiliary family alias; collapsing to red keeps the color family while removing intensity.
+test_03590_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,light blue,light blue,blue,pass,Auxiliary family alias; collapsing to blue keeps the color family while removing intensity.
+vcor_test_red_80491fc745_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,light blue,light blue,blue,pass,Auxiliary family alias; collapsing to blue keeps the color family while removing intensity.
+vcor_test_red_77bb096381_A2_counterfactual_assumption,InternVL2-8B,A2_counterfactual_assumption,light blue,light blue,blue,pass,Auxiliary family alias; collapsing to blue keeps the color family while removing intensity.
+test_00516_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark blue,dark blue,blue,pass,Auxiliary family alias; collapsing to blue keeps the color family while removing intensity.
+test_01561_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark blue,dark blue,blue,pass,Auxiliary family alias; collapsing to blue keeps the color family while removing intensity.
+test_01593_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark blue,dark blue,blue,pass,Auxiliary family alias; collapsing to blue keeps the color family while removing intensity.
+test_00667_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,light yellow,light yellow,yellow,pass,Auxiliary family alias; collapsing to yellow keeps the color family while removing intensity.
+train_00913_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,light yellow,light yellow,yellow,pass,Auxiliary family alias; collapsing to yellow keeps the color family while removing intensity.
+vcor_test_green_0b5c800dd8_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,light yellow,light yellow,yellow,pass,Auxiliary family alias; collapsing to yellow keeps the color family while removing intensity.
+vcor_test_green_1d7f565673_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark yellow,dark yellow,yellow,pass,Auxiliary family alias; collapsing to yellow keeps the color family while removing intensity.
+vcor_test_green_4628d52721_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark yellow,dark yellow,yellow,pass,Auxiliary family alias; collapsing to yellow keeps the color family while removing intensity.
+vcor_test_green_650c865454_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark yellow,dark yellow,yellow,pass,Auxiliary family alias; collapsing to yellow keeps the color family while removing intensity.
+test_03865_A1_forced_choice_red_family,InternVL2-8B,A1_forced_choice_red_family,dark black,dark black,black,pass,Auxiliary family alias; collapsing to black keeps the color family while removing intensity.
+test_00209_A2_counterfactual_assumption,InternVL2-8B,A2_counterfactual_assumption,dark black,dark black,black,pass,Auxiliary family alias; collapsing to black keeps the color family while removing intensity.
+test_01993_A2_counterfactual_assumption,InternVL2-8B,A2_counterfactual_assumption,dark black,dark black,black,pass,Auxiliary family alias; collapsing to black keeps the color family while removing intensity.

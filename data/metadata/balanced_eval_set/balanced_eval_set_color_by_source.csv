@@ -1,0 +1,13 @@
+﻿true_color,source_dataset,count
+black,StanfordCars,23
+black,VCoR,27
+blue,StanfordCars,12
+blue,VCoR,38
+green,StanfordCars,2
+green,VCoR,48
+red,StanfordCars,40
+red,VCoR,10
+white,StanfordCars,14
+white,VCoR,36
+yellow,StanfordCars,2
+yellow,VCoR,48

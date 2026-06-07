@@ -1,0 +1,16 @@
+﻿comparison_family,comparison_label,model_key,left_model,right_model,left_variant,right_variant,metric,n_pairs,left_rate,right_rate,rate_diff_left_minus_right,left_only,right_only,p_value_raw,p_value_holm,significant_holm
+within_model_vs_original_c3,Qwen2-VL-7B-Instruct: C3-v2 vs Original C3,qwen2vl7b,qwen2vl7b,qwen2vl7b,C3_v2,C3_original,conflict_aligned,300,0.0,0.0033333333333333335,-0.0033333333333333335,0,1,1.0,1.0,False
+within_model_vs_original_c3,Qwen2-VL-7B-Instruct: C3-v3 vs Original C3,qwen2vl7b,qwen2vl7b,qwen2vl7b,C3_v3,C3_original,conflict_aligned,300,0.0,0.0033333333333333335,-0.0033333333333333335,0,1,1.0,1.0,False
+within_model_vs_original_c3,LLaVA-1.5-7B: C3-v2 vs Original C3,llava15_7b,llava15_7b,llava15_7b,C3_v2,C3_original,conflict_aligned,300,0.016666666666666666,0.09,-0.07333333333333333,0,22,4.76837158203125e-07,2.384185791015625e-06,True
+within_model_vs_original_c3,LLaVA-1.5-7B: C3-v3 vs Original C3,llava15_7b,llava15_7b,llava15_7b,C3_v3,C3_original,conflict_aligned,300,0.0,0.09,-0.09,0,27,1.4901161193847656e-08,8.940696716308594e-08,True
+within_model_vs_original_c3,InternVL2-8B: C3-v2 vs Original C3,internvl2_8b,internvl2_8b,internvl2_8b,C3_v2,C3_original,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+within_model_vs_original_c3,InternVL2-8B: C3-v3 vs Original C3,internvl2_8b,internvl2_8b,internvl2_8b,C3_v3,C3_original,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+cross_model_same_variant,Original C3: LLaVA-1.5-7B vs Qwen2-VL-7B-Instruct,,llava15_7b,qwen2vl7b,C3_original,C3_original,conflict_aligned,300,0.09,0.0033333333333333335,0.08666666666666667,27,1,2.1606683731079102e-07,1.080334186553955e-06,True
+cross_model_same_variant,Original C3: LLaVA-1.5-7B vs InternVL2-8B,,llava15_7b,internvl2_8b,C3_original,C3_original,conflict_aligned,300,0.09,0.0,0.09,27,0,1.4901161193847656e-08,8.940696716308594e-08,True
+cross_model_same_variant,C3-v2: LLaVA-1.5-7B vs Qwen2-VL-7B-Instruct,,llava15_7b,qwen2vl7b,C3_v2,C3_v2,conflict_aligned,300,0.016666666666666666,0.0,0.016666666666666666,5,0,0.0625,0.25,False
+cross_model_same_variant,C3-v2: LLaVA-1.5-7B vs InternVL2-8B,,llava15_7b,internvl2_8b,C3_v2,C3_v2,conflict_aligned,300,0.016666666666666666,0.0,0.016666666666666666,5,0,0.0625,0.25,False
+cross_model_same_variant,C3-v3: LLaVA-1.5-7B vs Qwen2-VL-7B-Instruct,,llava15_7b,qwen2vl7b,C3_v3,C3_v3,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+cross_model_same_variant,C3-v3: LLaVA-1.5-7B vs InternVL2-8B,,llava15_7b,internvl2_8b,C3_v3,C3_v3,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False
+llava_variant_vs_c0,LLaVA-1.5-7B: Original C3 vs C0,llava15_7b,llava15_7b,llava15_7b,C3_original,C0_neutral,conflict_aligned,300,0.09,0.0,0.09,27,0,1.4901161193847656e-08,4.470348358154297e-08,True
+llava_variant_vs_c0,LLaVA-1.5-7B: C3-v2 vs C0,llava15_7b,llava15_7b,llava15_7b,C3_v2,C0_neutral,conflict_aligned,300,0.016666666666666666,0.0,0.016666666666666666,5,0,0.0625,0.125,False
+llava_variant_vs_c0,LLaVA-1.5-7B: C3-v3 vs C0,llava15_7b,llava15_7b,llava15_7b,C3_v3,C0_neutral,conflict_aligned,300,0.0,0.0,0.0,0,0,1.0,1.0,False

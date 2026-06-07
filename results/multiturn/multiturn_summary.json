@@ -1,0 +1,8 @@
+{
+  "combined": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\multiturn\\multiturn_combined_parsed_results.csv",
+  "metrics": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\multiturn\\multiturn_metrics.csv",
+  "key_tests": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\multiturn\\multiturn_key_tests.csv",
+  "summary": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\multiturn\\multiturn_summary.md",
+  "figure": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\multiturn\\figure_multiturn_effects.png",
+  "rows": 5400
+}

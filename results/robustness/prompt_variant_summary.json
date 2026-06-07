@@ -1,0 +1,7 @@
+{
+  "combined_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\robustness\\prompt_variant_combined_parsed_results.csv",
+  "metrics_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\robustness\\prompt_variant_metrics.csv",
+  "tests_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\robustness\\prompt_variant_exact_tests.csv",
+  "summary_md": "D:\\multimodal_conflict_decision_boundary_hallucination\\results\\robustness\\prompt_variant_summary.md",
+  "rows": 2700
+}

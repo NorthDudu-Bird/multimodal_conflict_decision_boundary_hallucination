@@ -1,0 +1,8 @@
+{
+  "prompt_csv": "D:\\multimodal_conflict_decision_boundary_hallucination\\prompts\\robustness\\c3_prompt_variants.csv",
+  "prompt_rows": 600,
+  "variants": [
+    "C3_v2",
+    "C3_v3"
+  ]
+}

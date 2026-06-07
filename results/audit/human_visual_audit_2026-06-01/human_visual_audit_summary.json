@@ -1,0 +1,63 @@
+{
+  "source_workbook": "D:\\multimodal_conflict_decision_boundary_hallucination\\deliverables\\pending review\\A2_human_visual_audit_REVIEWER_ONLY_2026-06-01\\A2_visual_audit_manual_review_completed.xlsx",
+  "source_workbook_sha256": "d1e9bfc6cfc3a16598558bca5122f3e0a27c195a9e249e83bfd1876dcbf16635",
+  "row_level_reviewer_initials": {
+    "Yutong Liu": 84
+  },
+  "protocol_metadata": {
+    "reviewer_id": "",
+    "reviewer_role": "",
+    "review_date": "2026-06-01 00:00:00",
+    "review_type": "",
+    "workbook_status": "frozen_complete",
+    "notes": ""
+  },
+  "target_raw": {
+    "n": 42,
+    "visual_clarity": {
+      "clear": 24,
+      "moderate": 18
+    },
+    "body_color_visible": {
+      "yes": 38,
+      "partly": 4
+    },
+    "inclusion": {
+      "include": 42
+    },
+    "strict_confound_any": 9
+  },
+  "control_raw": {
+    "n": 42,
+    "visual_clarity": {
+      "clear": 29,
+      "moderate": 12,
+      "low": 1
+    },
+    "body_color_visible": {
+      "yes": 37,
+      "partly": 5
+    },
+    "inclusion": {
+      "include": 41,
+      "unsure": 1
+    },
+    "strict_confound_any": 6
+  },
+  "adjudications": [
+    {
+      "review_id": "VC-029",
+      "field": "specular_reflection",
+      "human_value": "none_minor",
+      "analysis_value": "moderate",
+      "reason": "Duplicate source image had discordant ratings; use the more conservative human rating."
+    },
+    {
+      "review_id": "VC-069",
+      "field": "specular_reflection",
+      "human_value": "moderate",
+      "analysis_value": "moderate",
+      "reason": "Duplicate source image had discordant ratings; use the more conservative human rating."
+    }
+  ]
+}

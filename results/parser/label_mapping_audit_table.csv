@@ -1,0 +1,10 @@
+﻿term,normalized,parser_result,main_exact_count,aux_exact_count,risk_note
+silver,silver,silver,0,0,Recognized as a nonstandard standalone label; if emitted under the main prompt it would be parsed as `silver` and counted as non-faithful because the final evaluation set does not use `silver` as a ground-truth class.
+gray,gray,gray,0,0,"Recognized as a nonstandard standalone label; treated like `silver`, but it did not appear in the strengthened main results."
+grey,grey,gray,0,0,Normalized to `gray`; same risk profile as `gray`.
+white,white,white,727,245,Exact canonical label with no ambiguity in the current six-color task.
+off-white,off white,white,0,5,Family alias that is deterministically collapsed to `white`; used in auxiliary prompts and sampled for audit.
+beige,beige,other,0,0,Canonicalized to `other`; would not inflate `conflict_aligned` because it remains outside the six target labels.
+dark,dark,(no exact alias),0,0,No standalone mapping. The parser only uses `dark` when it is part of a known family alias such as `dark red` or `dark blue`.
+metallic,metallic,(no exact alias),0,0,"No standalone mapping. A phrase such as `metallic blue` could still match the embedded color token `blue` through mention detection, so this remains a boundary case to document."
+bluish black,bluish black,(no exact alias),0,0,"No exact alias. Mention detection would likely recover `black` from the trailing token, so this is documented as a potential composite-phrase edge case."
